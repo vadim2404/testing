@@ -1,3 +1,7 @@
 bstu_testing_homepage:
     pattern:  /hello/{name}
     defaults: { _controller: BstuTestingBundle:Default:index }
+
+bstu_testing:
+    resource: "@BstuTestingBundle/Controller"
+    type: annotation
