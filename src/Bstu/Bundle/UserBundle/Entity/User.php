@@ -37,10 +37,10 @@ class User extends BaseUser
     /**
      * Middle Name
      *
-     * @ORM\Column(name="middle_name", type="string", length=255)
+     * @ORM\Column(name="middle_name", type="string", length=255, nullable=true)
      * @var string $middleName
      */
-    private $middleName = '';
+    private $middleName;
 
     /**
      * Pulpit
