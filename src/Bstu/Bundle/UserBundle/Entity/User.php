@@ -24,7 +24,7 @@ class User extends BaseUser
      * @ORM\Column(name="first_name", type="string", length=255)
      * @var string $firstName
      */
-    private $firstName;
+    private $firstName = '';
 
     /**
      * Last Name
@@ -32,7 +32,7 @@ class User extends BaseUser
      * @ORM\Column(name="last_name", type="string", length=255)
      * @var string $lastName
      */
-    private $lastName;
+    private $lastName = '';
 
     /**
      * Middle Name
@@ -40,7 +40,7 @@ class User extends BaseUser
      * @ORM\Column(name="middle_name", type="string", length=255)
      * @var string $middleName
      */
-    private $middleName;
+    private $middleName = '';
 
     /**
      * Pulpit
