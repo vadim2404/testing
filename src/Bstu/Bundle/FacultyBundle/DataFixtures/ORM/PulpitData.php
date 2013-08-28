@@ -11,7 +11,7 @@ class PulpitData extends AbstractFixture implements OrderedFixtureInterface
 {
     const ORDER = 2;
 
-    static $pulpits = [
+    private static $pulpits = [
         1 => [
             'Кафедра лесоводства',
             'Кафедра охотоведения',

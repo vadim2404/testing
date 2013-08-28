@@ -69,3 +69,8 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: Bstu\Bundle\UserBundle\Entity\User
+    group:
+        group_class: Bstu\Bundle\UserBundle\Entity\Group
+    registration:
+        form:
+            type: bstu_bundle_userbundle_user

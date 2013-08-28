@@ -16,7 +16,7 @@ class FacultyData extends AbstractFixture implements OrderedFixtureInterface
      *
      * @var staticvar $faculties
      */
-    static $faculties = [
+    private static $faculties = [
         1 => 'Лесохозяйственный факультет',
         2 => 'Факультет технологии и техники лесной промышленности	',
         3 => 'Факультет технологии органических веществ',

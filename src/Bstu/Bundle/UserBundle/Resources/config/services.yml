@@ -2,6 +2,8 @@ parameters:
 #    bstu_user.example.class: Bstu\Bundle\UserBundle\Example
 
 services:
-#    bstu_user.example:
-#        class: %bstu_user.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+   bstu_user.registration.form.type:
+        class: Bstu\Bundle\UserBundle\Form\UserType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: bstu_bundle_userbundle_user }
