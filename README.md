@@ -10,19 +10,21 @@ Installation
 
 Popuplate fields for db connection and email sendind
 
-2) Apply migration
+2) Create directories app/cache and app/logs with chmod 0777
+
+3) Apply migration
 
     php app/console doctrine:migrations:migrate
 
-3) Populate database with initial data
+4) Populate database with initial data
 
     php app/console doctrine:fixtures:load
 
-4) Install assets
+5) Install assets
 
     php app/console assets:install web
 
-5) Create a super administrator
+6) Create a super administrator
 
     php app/console fos:user:create --super-admin username email password
 
