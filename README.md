@@ -8,7 +8,7 @@ Installation
 
 1) Rename app/config/parameters.yml.dist to app/config/parameters.yml and
 
-Popuplate fields for db connection and email sendind
+Popuplate fields for db connection and email sending
 
 2) Create directories app/cache and app/logs with chmod 0777
 
