@@ -1,0 +1,7 @@
+parameters:
+#    bstu_faculty.example.class: Bstu\Bundle\FacultyBundle\Example
+
+services:
+#    bstu_faculty.example:
+#        class: %bstu_faculty.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

@@ -1,0 +1,3 @@
+bstu_faculty:
+    resource: "@BstuFacultyBundle/Controller"
+    type: annotation

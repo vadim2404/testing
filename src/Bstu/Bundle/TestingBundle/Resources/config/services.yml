@@ -1,7 +1,0 @@
-parameters:
-#    bstu_testing.example.class: Bstu\Bundle\TestingBundle\Example
-
-services:
-#    bstu_testing.example:
-#        class: %bstu_testing.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
