@@ -3,6 +3,8 @@
 namespace Bstu\Bundle\TestOrganizationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * Subject
@@ -12,6 +14,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Subject
 {
+    public function __construct()
+    {
+        $this->themes = new ArrayCollection();
+    }
+
     /**
      * @var integer
      *
@@ -34,6 +41,38 @@ class Subject
      * @var \Bstu\Bundle\UserBundle\Entity\User $teacher
     */
     private $teacher;
+
+    /**
+     * Themes that relates to this subject
+     *
+     * @ORM\OneToMany(targetEntity="Theme", mappedBy="subject", cascade={"all"})
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $themes;
+
+    /**
+     * Get themes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getThemes()
+    {
+        return $this->themes;
+    }
+
+    /**
+     * Set themes
+     *
+     * @param \Doctrine\Common\Collections\Collection $themes
+     * @return \Bstu\Bundle\TestOrganizationBundle\Entity\Subject
+     */
+    public function setThemes(Collection $themes)
+    {
+        $this->themes = $themes;
+
+        return $this;
+    }
+
 
     /**
      * Set teacher
