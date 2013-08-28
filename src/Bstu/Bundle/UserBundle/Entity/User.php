@@ -4,6 +4,8 @@ namespace Bstu\Bundle\UserBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * @ORM\Entity
@@ -11,6 +13,13 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class User extends BaseUser
 {
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->subjects = new ArrayCollection();
+    }
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -49,6 +58,48 @@ class User extends BaseUser
      * @var \Bstu\Bundle\FacultyBundle\Entity\Pulpit $pulpit
      */
     private $pulpit;
+
+     /**
+      * Subjects. (For users with teacher role)
+      *
+      * @ORM\OneToMany(targetEntity="\Bstu\Bundle\TestOrganizationBundle\Entity\Subject", mappedBy="teacher", cascade={"all"})
+      * @var \Doctrine\Common\Collections\Collection
+      */
+    private $subjects;
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Get subjects
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSubjects()
+    {
+        return $this->subjects;
+    }
+
+    /**
+     * Set subjects
+     *
+     * @param \Doctrine\Common\Collections\Collection $subjects
+     * @return \Bstu\Bundle\UserBundle\Entity\User
+     */
+    public function setSubjects(Collection $subjects)
+    {
+        $this->subjects = $subjects;
+
+        return $this;
+    }
+
 
     /**
      * Get first name
@@ -174,4 +225,19 @@ class User extends BaseUser
         return $this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public function getGroups()
+    {
+        return $this->group ? new ArrayCollection([$this->group]) : new ArrayCollection();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getGroupNames()
+    {
+        return $this->group ? new ArrayCollection([$this->group->getName()]) : new ArrayCollection();
+    }
 }

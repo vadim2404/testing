@@ -1,7 +1,11 @@
+bstu_test_organization:
+    resource: "@BstuTestOrganizationBundle/Resources/config/routing.yml"
+    prefix:   /teacher/
+
 bstu_user:
     resource: "@BstuUserBundle/Resources/config/routing.yml"
     prefix:   /
 
 bstu_faculty:
     resource: "@BstuFacultyBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /admin/

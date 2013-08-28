@@ -1,0 +1,7 @@
+parameters:
+#    bstu_test_organization.example.class: Bstu\Bundle\TestOrganizationBundle\Example
+
+services:
+#    bstu_test_organization.example:
+#        class: %bstu_test_organization.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

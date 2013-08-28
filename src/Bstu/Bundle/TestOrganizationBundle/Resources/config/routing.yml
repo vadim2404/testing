@@ -1,0 +1,3 @@
+bstu_testingorganization:
+    resource: "@BstuTestOrganizationBundle/Controller"
+    type: annotation

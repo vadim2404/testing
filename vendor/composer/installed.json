@@ -1437,12 +1437,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
-            "reference": "3b8643c573b93ab2a5d2c0cab893cb0fedcac757"
+            "reference": "e536e8b87db29854cacc214dff5d41fbcf188674"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/3b8643c573b93ab2a5d2c0cab893cb0fedcac757",
-            "reference": "3b8643c573b93ab2a5d2c0cab893cb0fedcac757",
+            "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/e536e8b87db29854cacc214dff5d41fbcf188674",
+            "reference": "e536e8b87db29854cacc214dff5d41fbcf188674",
             "shasum": ""
         },
         "require": {
@@ -1462,7 +1462,7 @@
         "suggest": {
             "willdurand/propel-typehintable-behavior": "Needed when using the propel implementation"
         },
-        "time": "2013-08-27 13:19:17",
+        "time": "2013-08-28 08:24:11",
         "type": "symfony-bundle",
         "extra": {
             "branch-alias": {
