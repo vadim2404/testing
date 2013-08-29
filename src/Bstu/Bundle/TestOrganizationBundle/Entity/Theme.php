@@ -3,6 +3,8 @@
 namespace Bstu\Bundle\TestOrganizationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * Theme
@@ -12,6 +14,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Theme
 {
+    public function __construct()
+    {
+        $this->questions = new ArrayCollection();
+    }
+
+
     /**
      * @var integer
      *
@@ -35,6 +43,14 @@ class Theme
      * @var \Bstu\Bundle\TestOrganizationBundle\Entity\Subject $subject
      */
     private $subject;
+
+    /**
+     * Questions
+     *
+     * @ORM\OneToMany(targetEntity="Question", mappedBy="theme", cascade={"all"})
+     * @var \Doctrine\Common\Collections\Collection $questions
+     */
+    private $questions;
 
     /**
      * Get subject
@@ -102,4 +118,28 @@ class Theme
     {
         return $this->name;
     }
+
+    /**
+     * Get questions
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getQuestions()
+    {
+        return $this->questions;
+    }
+
+    /**
+     * Set questions
+     *
+     * @param \Doctrine\Common\Collections\Collection $questions
+     * @return \Bstu\Bundle\TestOrganizationBundle\Entity\Theme
+     */
+    public function setQuestions(Collection $questions)
+    {
+        $this->questions = $questions;
+
+        return $this;
+    }
+
 }

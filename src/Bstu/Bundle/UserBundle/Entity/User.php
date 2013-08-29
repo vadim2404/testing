@@ -18,6 +18,7 @@ class User extends BaseUser
         parent::__construct();
 
         $this->subjects = new ArrayCollection();
+        $this->questions = new ArrayCollection();
     }
 
     /**
@@ -66,6 +67,14 @@ class User extends BaseUser
       * @var \Doctrine\Common\Collections\Collection
       */
     private $subjects;
+    
+    /**
+     * Questions
+     *
+     * @ORM\OneToMany(targetEntity="\Bstu\Bundle\TestOrganizationBundle\Entity\Question", mappedBy="teacher", cascade={"all"})
+     * @var \Doctrine\Common\Collections\Collection $questions
+     */
+    private $questions;
 
     /**
      * Get id
@@ -240,4 +249,28 @@ class User extends BaseUser
     {
         return $this->group ? new ArrayCollection([$this->group->getName()]) : new ArrayCollection();
     }
+    
+    /**
+     * Get questions
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getQuestions()
+    {
+        return $this->questions;
+    }
+
+    /**
+     * Set questions
+     *
+     * @param \Doctrine\Common\Collections\Collection $questions
+     * @return \Bstu\Bundle\UserBundle\Entity\User
+     */
+    public function setQuestions(Collection $questions)
+    {
+        $this->questions = $questions;
+
+        return $this;
+    }
+
 }
