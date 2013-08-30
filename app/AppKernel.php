@@ -22,6 +22,8 @@ class AppKernel extends Kernel
             new Bstu\Bundle\FacultyBundle\BstuFacultyBundle(),
             new Bstu\Bundle\UserBundle\BstuUserBundle(),
             new Bstu\Bundle\TestOrganizationBundle\BstuTestOrganizationBundle(),
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
