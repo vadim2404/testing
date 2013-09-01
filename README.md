@@ -24,7 +24,11 @@ Popuplate fields for db connection and email sending
 
     php app/console assets:install web
 
-6) Create a super administrator
+6) Clear cache
+
+    php app/console cache:clear --env=prod
+
+7) Create a super administrator
 
     php app/console fos:user:create --super-admin username email password
 

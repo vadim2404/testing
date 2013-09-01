@@ -30,7 +30,14 @@ twig:
 assetic:
     debug:          %kernel.debug%
     use_controller: false
-    bundles:        [ ]
+    assets:
+      jsJquery:
+        inputs:
+          - '%kernel.root_dir%/Resources/public/js/jquery.js'
+          - '%kernel.root_dir%/Resources/public/js/jquery-ui.js'
+      cssJquery:
+        inputs:
+          - '%kernel.root_dir%/Resources/public/css/jquery-ui.css'
     #java: /usr/bin/java
     filters:
         cssrewrite: ~
