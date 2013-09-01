@@ -85,13 +85,13 @@ class QuestionController extends Controller
     /**
      * Displays a form to create a new Question entity.
      *
-     * @Route("/new", name="question_new")
+     * @Route("/new/{questionType}", name="question_new", defaults={"questionType" = "1"}, requirements={"questionType" = "\d+"})
      * @Method("GET")
      * @Template()
      */
-    public function newAction()
+    public function newAction($questionType)
     {
-        $entity = new Question();
+        $entity = (new Question())->setType(intval($questionType));
         $form   = $this->createCreateForm($entity);
 
         return array(

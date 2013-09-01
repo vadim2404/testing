@@ -3,6 +3,8 @@
 namespace Bstu\Bundle\TestOrganizationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use \ReflectionObject;
 
 /**
  * Question
@@ -76,6 +78,17 @@ class Question
      * @var \Bstu\Bundle\UserBundle\Entity\User $teacher
      */
     private $teacher;
+
+    /**
+     * Check question type
+     *
+     * @Assert\True(message="Не правильный тип вопроса")
+     * @return boolean
+     */
+    public function isQuestionTypeLegal()
+    {
+        return in_array($this->type, (new ReflectionObject($this))->getConstants());
+    }
 
     /**
      * Get id

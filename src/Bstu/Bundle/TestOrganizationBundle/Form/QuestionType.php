@@ -38,6 +38,7 @@ class QuestionType extends AbstractType
             ->add('question')
             ->add('answer')
             ->add('rate')
+            ->add('type', 'hidden')
             ->add('theme', null, [
                 'required' => true,
                 'property' => 'name',
