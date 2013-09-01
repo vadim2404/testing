@@ -37,7 +37,16 @@ class QuestionType extends AbstractType
         $builder
             ->add('question')
             ->add('answer')
-            ->add('rate')
+            ->add('rate', 'choice', [
+                'choices' => [
+                    1 => 'Простой',
+                    2 => 'Средний',
+                    3 => 'Сложный',
+                ],
+                'multiple' => false,
+                'expanded' => false,
+                'required' => true,
+            ])
             ->add('type', 'hidden')
             ->add('theme', null, [
                 'required' => true,
