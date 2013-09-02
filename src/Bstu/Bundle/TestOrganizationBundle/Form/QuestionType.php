@@ -36,7 +36,6 @@ class QuestionType extends AbstractType
         $user = $this->user;
         $builder
             ->add('question')
-            ->add('answer')
             ->add('rate', 'choice', [
                 'choices' => [
                     1 => 'Простой',

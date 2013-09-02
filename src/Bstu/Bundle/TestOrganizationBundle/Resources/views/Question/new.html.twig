@@ -3,7 +3,20 @@
 {% block body -%}
     <h1>Question creation</h1>
 
-    {{ form(form) }}
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+    {% if form.variants is defined %}
+        <ul id="variants-field-list" data-prototype="{{ form_widget(form.variants.vars.prototype) | e }}">
+        {% for variant in form.variants %}
+            <li>
+                {{ form_errors(variant) }}
+                {{ form_widget(variant) }}
+            </li>
+        {% endfor %}
+        </ul>
+        <a href="#" id="add-another-variant">Add another variant</a>
+    {% endif %}
+    {{ form_end(form) }}
 
         <ul class="record_actions">
     <li>
@@ -12,4 +25,18 @@
         </a>
     </li>
 </ul>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts '@BstuTestOrganizationBundle/Resources/public/js/question-type.js' %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets '@BstuTestOrganizationBundle/Resources/public/css/question-type.css' filter='cssrewrite' %}
+        <link rel="stylesheet" type="text/css" href="{{ asset_url }}" />
+    {% endstylesheets %}
 {% endblock %}

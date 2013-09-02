@@ -2,8 +2,19 @@
 
 {% block body -%}
     <h1>Question edit</h1>
-
-    {{ form(edit_form) }}
+    {{ form_start(edit_form) }}
+        {% if edit_form.variants is defined %}
+        <ul id="variants-field-list" data-prototype="{{ form_widget(edit_form.variants.vars.prototype) | e }}">
+        {% for variant in edit_form.variants %}
+            <li>
+                {{ form_errors(variant) }}
+                {{ form_widget(variant) }}
+            </li>
+        {% endfor %}
+        </ul>
+        <a href="#" id="add-another-variant">Add another variant</a>
+    {% endif %}
+    {{ form_end(edit_form) }}
 
         <ul class="record_actions">
     <li>
@@ -13,4 +24,18 @@
     </li>
     <li>{{ form(delete_form) }}</li>
 </ul>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts '@BstuTestOrganizationBundle/Resources/public/js/question-type.js' %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets '@BstuTestOrganizationBundle/Resources/public/css/question-type.css' filter='cssrewrite' %}
+        <link rel="stylesheet" type="text/css" href="{{ asset_url }}" />
+    {% endstylesheets %}
 {% endblock %}

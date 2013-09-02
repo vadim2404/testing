@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "14b5b710ae1da9b6bf28db58a6d61b96",
+    "hash": "a6e00e382938567ba8367ad94b58d494",
     "packages": [
         {
             "name": "doctrine/common",
@@ -1647,7 +1647,7 @@
         "knplabs/knp-paginator-bundle": 20
     },
     "platform": {
-        "php": ">=5.3.3"
+        "php": ">=5.4.4"
     },
     "platform-dev": [
 

@@ -44,7 +44,7 @@ class QuestionController extends Controller
      */
     public function createAction(Request $request)
     {
-        $entity = new Question();
+        $entity = (new Question())->setType($request->request->get('bstu_bundle_testorganizationbundle_question')['type']);
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 

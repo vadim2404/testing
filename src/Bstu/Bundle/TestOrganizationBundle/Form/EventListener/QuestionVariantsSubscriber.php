@@ -20,9 +20,17 @@ class QuestionVariantsSubscriber implements EventSubscriberInterface
     {
         $data = $event->getData();
         $form = $event->getForm();
-        
+
         if ($data && !in_array($data->getType(), [Question::QUESTION_TEXT, Question::QUESTION_TEXTAREA])) {
-            $form->add('variants');
+            $form->add('variants', 'collection', [
+                    'required' => true,
+                    'allow_delete' => true,
+                    'allow_add' => true,
+                ])
+                ->add('answer', 'hidden')
+            ;
+        } else {
+            $form->add('answer');
         }
     }
 }
