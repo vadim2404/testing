@@ -33,12 +33,10 @@ class FacultyData extends AbstractFixture implements OrderedFixtureInterface
     {
         foreach (self::$faculties as $fixtureId => $name) {
             $faculty = (new Faculty())->setName($name);
-
             $manager->persist($faculty);
-            $manager->flush();
-
             $this->addReference('faculty-' . $fixtureId, $faculty);
         }
+        $manager->flush();
     }
 
     /**
