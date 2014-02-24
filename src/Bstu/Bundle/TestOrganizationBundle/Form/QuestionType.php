@@ -33,9 +33,17 @@ class QuestionType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $constants = array_map(function ($item) {
+            return strtolower(preg_replace('/^QUESTION_/', '', $item));
+        }, array_flip((new \ReflectionClass('Bstu\Bundle\TestOrganizationBundle\Entity\Question'))
+            ->getConstants()
+        ));
+        
         $user = $this->user;
         $builder
-            ->add('question')
+            ->add('question', null, [
+                'required' => true,
+            ])
             ->add('rate', 'choice', [
                 'choices' => [
                     1 => 'Простой',
@@ -46,7 +54,15 @@ class QuestionType extends AbstractType
                 'expanded' => false,
                 'required' => true,
             ])
-            ->add('type', 'hidden')
+            ->add('type', 'choice', [
+                'multiple' => false,
+                'expanded' => true,
+                'required' => true,
+                'choices' => $constants,
+                'attr' => [
+                    'onchange' => 'rerenderCreateForm()',
+                ],
+            ])
             ->add('theme', null, [
                 'required' => true,
                 'property' => 'name',

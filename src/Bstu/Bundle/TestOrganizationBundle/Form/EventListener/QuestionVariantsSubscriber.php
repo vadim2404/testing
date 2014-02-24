@@ -27,10 +27,14 @@ class QuestionVariantsSubscriber implements EventSubscriberInterface
                     'allow_delete' => true,
                     'allow_add' => true,
                 ])
-                ->add('answer', 'hidden')
+                ->add('answer', 'hidden', [
+                    'required' => true,
+                ])
             ;
         } else {
-            $form->add('answer');
+            $form->add('answer', null, [
+                'required' => true,
+            ]);
         }
     }
 }

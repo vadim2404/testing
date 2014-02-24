@@ -43,11 +43,15 @@ class QuestionController extends Controller
      * @Template("BstuTestOrganizationBundle:Question:new.html.twig")
      */
     public function createAction(Request $request)
-    {
-        $entity = (new Question())->setType($request->request->get('bstu_bundle_testorganizationbundle_question')['type']);
+    {        
+        $entity = new Question();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
-
+        
+        if ($request->isXmlHttpRequest()) {
+            return $this->render('BstuTestOrganizationBundle:Question:form.html.twig', ['form' => $form->createView()]);
+        }
+        
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $entity->setTeacher($this->getUser());
@@ -56,7 +60,7 @@ class QuestionController extends Controller
 
             return $this->redirect($this->generateUrl('question_show', array('id' => $entity->getId())));
         }
-
+        
         return array(
             'entity' => $entity,
             'form'   => $form->createView(),
@@ -166,7 +170,8 @@ class QuestionController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', 'submit', array('label' => 'Update'))
+            ->remove('type');
 
         return $form;
     }

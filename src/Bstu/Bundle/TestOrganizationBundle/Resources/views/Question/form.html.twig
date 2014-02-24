@@ -1,0 +1,14 @@
+{{ form_start(form) }}
+{{ form_errors(form) }}
+{% if form.variants is defined %}
+    <ul id="variants-field-list" data-prototype="{{ form_widget(form.variants.vars.prototype) | e }}">
+    {% for variant in form.variants %}
+        <li>
+            {{ form_errors(variant) }}
+            {{ form_widget(variant) }}
+        </li>
+    {% endfor %}
+    </ul>
+    <a href="#" id="add-another-variant">Add another variant</a>
+{% endif %}
+{{ form_end(form) }}
