@@ -5,6 +5,7 @@ namespace Bstu\Bundle\FacultyBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Faculty
@@ -31,6 +32,8 @@ class Faculty
     /**
      * @var string
      *
+     * @Assert\NotBlank(message="Название должно обязательно быть заполненным")
+     * @Assert\Length(min="0", max="255", maxMessage="Название не может быть больше 255 символов")
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;

@@ -6,6 +6,7 @@ use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -31,6 +32,8 @@ class User extends BaseUser
     /**
      * First Name
      *
+     * @Assert\NotBlank(message="Поле 'имя' должно обязательно быть заполненным")
+     * @Assert\Length(min="0", max="255", maxMessage="Имя не может быть больше 255 символов")
      * @ORM\Column(name="first_name", type="string", length=255)
      * @var string $firstName
      */
@@ -39,6 +42,8 @@ class User extends BaseUser
     /**
      * Last Name
      *
+     * @Assert\NotBlank(message="Поле 'фамилия' должно обязательно быть заполненным")
+     * @Assert\Length(min="0", max="255", maxMessage="Фамилия не может быть больше 255 символов")
      * @ORM\Column(name="last_name", type="string", length=255)
      * @var string $lastName
      */
@@ -47,6 +52,7 @@ class User extends BaseUser
     /**
      * Middle Name
      *
+     * @Assert\Length(min="0", max="255", maxMessage="Отчество не может быть больше 255 символов")
      * @ORM\Column(name="middle_name", type="string", length=255, nullable=true)
      * @var string $middleName
      */
