@@ -28,6 +28,7 @@ class Test
         $this->questions = new ArrayCollection();
         $this->themes = new ArrayCollection();
         $this->variants = new ArrayCollection();
+        $this->plans = new ArrayCollection();
     }
     
     /**
@@ -90,6 +91,13 @@ class Test
      * @ORM\Column(name="max_questions", type="integer")
      */
     private $maxQuestions = 0;
+    
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     * 
+     * @ORM\OneToMany(targetEntity="Plan", mappedBy="test")
+     */
+    private $plans;
 
     /**
      * Get id
@@ -258,6 +266,29 @@ class Test
     public function setMaxQuestions($maxQuestions)
     {
         $this->maxQuestions = $maxQuestions;
+        
+        return $this;
+    }
+      
+    /**
+     * Get plans
+     * 
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPlans()
+    {
+        return $this->plans;
+    }
+
+    /**
+     * Set plans
+     * 
+     * @param \Doctrine\Common\Collections\Collection $plans
+     * @return \Bstu\Bundle\TestOrganizationBundle\Entity\Test
+     */
+    public function setPlans(Collection $plans)
+    {
+        $this->plans = $plans;
         
         return $this;
     }
