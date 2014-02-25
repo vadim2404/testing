@@ -5,6 +5,7 @@ namespace Bstu\Bundle\TestOrganizationBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Subject
@@ -17,6 +18,7 @@ class Subject
     public function __construct()
     {
         $this->themes = new ArrayCollection();
+        $this->tests = new ArrayCollection();
     }
 
     /**
@@ -31,6 +33,8 @@ class Subject
     /**
      * @var string
      *
+     * @Assert\NotBlank(message="Название предмета не может быть пустым")
+     * @Assert\Length(min="0", max="255", maxMessage="Название предмета не может превышать 255 символов")
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
@@ -49,6 +53,13 @@ class Subject
      * @var \Doctrine\Common\Collections\Collection
      */
     private $themes;
+    
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     * 
+     * @ORM\OneToMany(targetEntity="Test", mappedBy="subject", cascade={"all"})
+     */
+    private $tests;
 
     /**
      * Get themes
@@ -72,7 +83,29 @@ class Subject
 
         return $this;
     }
+    
+    /**
+     * Get tests
+     * 
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTests() 
+    {
+        return $this->tests;
+    }
 
+    /**
+     * Set tests
+     * 
+     * @param \Doctrine\Common\Collections\Collection $tests
+     * @return \Bstu\Bundle\TestOrganizationBundle\Entity\Subject
+     */
+    public function setTests(Collection $tests) 
+    {
+        $this->tests = $tests;
+        
+        return $this;
+    }
 
     /**
      * Set teacher

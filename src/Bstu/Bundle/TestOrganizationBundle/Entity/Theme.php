@@ -5,6 +5,7 @@ namespace Bstu\Bundle\TestOrganizationBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Theme
@@ -14,9 +15,13 @@ use Doctrine\Common\Collections\Collection;
  */
 class Theme
 {
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->questions = new ArrayCollection();
+        $this->tests = new ArrayCollection();
     }
 
 
@@ -32,6 +37,8 @@ class Theme
     /**
      * @var string
      *
+     * @Assert\NotBlank(message="Название темы не может быть пустым")
+     * @Assert\Length(min="0", max="255", maxMessage="Название не может быть больше 255 символов")
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
@@ -51,6 +58,14 @@ class Theme
      * @var \Doctrine\Common\Collections\Collection $questions
      */
     private $questions;
+    
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     * 
+     * @ORM\ManyToMany(targetEntity="Test", inversedBy="themes")
+     * @ORM\JoinTable(name="test_theme")
+     */
+    private $tests;
 
     /**
      * Get subject
@@ -142,4 +157,26 @@ class Theme
         return $this;
     }
 
+    /**
+     * Get tests
+     * 
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTests() 
+    {
+        return $this->tests;
+    }
+
+    /**
+     * Set tests
+     * 
+     * @param \Doctrine\Common\Collections\Collection $tests
+     * @return \Bstu\Bundle\TestOrganizationBundle\Entity\Theme
+     */
+    public function setTests(Collection $tests) 
+    {
+        $this->tests = $tests;
+        
+        return $this;
+    }
 }

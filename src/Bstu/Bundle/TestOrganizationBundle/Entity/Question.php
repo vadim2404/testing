@@ -2,6 +2,8 @@
 
 namespace Bstu\Bundle\TestOrganizationBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use \ReflectionObject;
@@ -20,6 +22,14 @@ class Question
     const QUESTION_RADIO = 4;
 
     /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->tests = new ArrayCollection();
+    }
+    
+    /**
      * @var integer
      *
      * @ORM\Column(name="id", type="integer")
@@ -32,6 +42,7 @@ class Question
      * @var string
      *
      * @ORM\Column(name="question", type="text")
+     * @Assert\NotBlank(message="Название вопроса не может быть пустым")
      */
     private $question;
 
@@ -78,11 +89,19 @@ class Question
      * @var \Bstu\Bundle\UserBundle\Entity\User $teacher
      */
     private $teacher;
+    
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     * 
+     * @ORM\ManyToMany(targetEntity="Test", inversedBy="questions")
+     * @ORM\JoinTable(name="test_question")
+     */
+    private $tests;
 
     /**
      * Check question type
      *
-     * @Assert\True(message="Не правильный тип вопроса")
+     * @Assert\True(message="Неправильный тип вопроса")
      * @return boolean
      */
     public function isQuestionTypeLegal()
@@ -261,5 +280,27 @@ class Question
 
         return $this;
     }
+    
+    /**
+     * Get tests
+     * 
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTests() 
+    {
+        return $this->tests;
+    }
 
+    /**
+     * Set tests
+     * 
+     * @param \Doctrine\Common\Collections\Collection $tests
+     * @return \Bstu\Bundle\TestOrganizationBundle\Entity\Question
+     */
+    public function setTests(Collection $tests) 
+    {
+        $this->tests = $tests;
+        
+        return $this;
+    }
 }
