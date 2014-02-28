@@ -89,14 +89,6 @@ class Question
      * @var \Bstu\Bundle\UserBundle\Entity\User $teacher
      */
     private $teacher;
-    
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     * 
-     * @ORM\ManyToMany(targetEntity="Test", inversedBy="questions")
-     * @ORM\JoinTable(name="test_question")
-     */
-    private $tests;
 
     /**
      * Check question type
@@ -278,29 +270,6 @@ class Question
     {
         $this->type = $type;
 
-        return $this;
-    }
-    
-    /**
-     * Get tests
-     * 
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getTests() 
-    {
-        return $this->tests;
-    }
-
-    /**
-     * Set tests
-     * 
-     * @param \Doctrine\Common\Collections\Collection $tests
-     * @return \Bstu\Bundle\TestOrganizationBundle\Entity\Question
-     */
-    public function setTests(Collection $tests) 
-    {
-        $this->tests = $tests;
-        
         return $this;
     }
 }

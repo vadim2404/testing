@@ -25,7 +25,6 @@ class Test
      */
     public function __construct()
     {
-        $this->questions = new ArrayCollection();
         $this->themes = new ArrayCollection();
         $this->variants = new ArrayCollection();
         $this->plans = new ArrayCollection();
@@ -62,13 +61,6 @@ class Test
      * @ORM\ManyToOne(targetEntity="Subject", inversedBy="tests")
      */
     private $subject;
-    
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     * 
-     * @ORM\ManyToMany(targetEntity="Question", mappedBy="tests")
-     */
-    private $questions;
     
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -174,29 +166,6 @@ class Test
     public function setSubject(Subject $subject) 
     {
         $this->subject = $subject;
-        
-        return $this;
-    }
-    
-    /**
-     * Get questions
-     * 
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getQuestions()
-    {
-        return $this->questions;
-    }
-
-    /**
-     * Set questions
-     * 
-     * @param \Doctrine\Common\Collections\Collection $questions
-     * @return \Bstu\Bundle\TestOrganizationBundle\Entity\Test
-     */
-    public function setQuestions(Collection $questions)
-    {
-        $this->questions = $questions;
         
         return $this;
     }
