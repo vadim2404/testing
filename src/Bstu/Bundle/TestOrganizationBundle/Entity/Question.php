@@ -2,8 +2,6 @@
 
 namespace Bstu\Bundle\TestOrganizationBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use \ReflectionObject;
@@ -24,14 +22,6 @@ class Question
     const COMPLEXITY_EASY = 1;
     const COMPLEXITY_MEDIUM = 2;
     const COMPLEXITY_HARD = 3;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->tests = new ArrayCollection();
-    }
     
     /**
      * @var integer

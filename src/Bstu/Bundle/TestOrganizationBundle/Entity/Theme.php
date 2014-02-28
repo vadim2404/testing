@@ -21,9 +21,7 @@ class Theme
     public function __construct()
     {
         $this->questions = new ArrayCollection();
-        $this->tests = new ArrayCollection();
     }
-
 
     /**
      * @var integer
@@ -58,14 +56,6 @@ class Theme
      * @var \Doctrine\Common\Collections\Collection $questions
      */
     private $questions;
-    
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     * 
-     * @ORM\ManyToMany(targetEntity="Test", inversedBy="themes")
-     * @ORM\JoinTable(name="test_theme")
-     */
-    private $tests;
 
     /**
      * Get subject
@@ -154,29 +144,6 @@ class Theme
     {
         $this->questions = $questions;
 
-        return $this;
-    }
-
-    /**
-     * Get tests
-     * 
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getTests() 
-    {
-        return $this->tests;
-    }
-
-    /**
-     * Set tests
-     * 
-     * @param \Doctrine\Common\Collections\Collection $tests
-     * @return \Bstu\Bundle\TestOrganizationBundle\Entity\Theme
-     */
-    public function setTests(Collection $tests) 
-    {
-        $this->tests = $tests;
-        
         return $this;
     }
 }

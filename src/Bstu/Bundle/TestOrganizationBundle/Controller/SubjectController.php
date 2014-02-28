@@ -2,11 +2,15 @@
 
 namespace Bstu\Bundle\TestOrganizationBundle\Controller;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\PropertyAccess\PropertyAccess;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Bstu\Bundle\TestOrganizationBundle\Entity\Subject;
 use Bstu\Bundle\TestOrganizationBundle\Form\SubjectType;
 
@@ -242,5 +246,41 @@ class SubjectController extends Controller
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
         ;
+    }
+    
+    /**
+     * Ajax method. Get themes by subjects
+     * 
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \Bstu\Bundle\TestOrganizationBundle\Entity\Subject $subject
+     * @Route("/{id}/themes", name="subject_themes", options={"expose" = true})
+     * @Method({"GET"})
+     * @ParamConverter("subject", class="BstuTestOrganizationBundle:Subject")
+     */
+    public function themesAction(Request $request, Subject $subject)
+    {
+        if (!$request->isXmlHttpRequest()) {
+            throw $this->createNotFoundException();
+        }
+        $selected = new ArrayCollection();
+        if ($testId = $request->query->getInt('test')) {
+            $test = $this->getDoctrine()->getManager()->getRepository('BstuTestOrganizationBundle:Test')->find($testId);
+            if ($test) {
+                $selected = $test->getThemes();
+            }
+        }
+        $themes = $subject->getThemes();
+        $json = [];
+        $fields = ['id', 'name'];
+        $accessor = PropertyAccess::createPropertyAccessor();
+        foreach ($themes as $theme) {
+            $entity = [];
+            foreach ($fields as $field) {
+                $entity[$field] = $accessor->getValue($theme, $field);
+            }
+            $entity['selected'] = $selected->contains($theme);
+            $json[] = $entity;
+        }
+        return new JsonResponse($json);
     }
 }

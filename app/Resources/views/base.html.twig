@@ -13,9 +13,15 @@
     <body>
     {% block body %}{% endblock %}
     {% block javascripts %}
-      {% javascripts '@jsJquery' %}
-        <script src="{{ asset_url }}"></script>
-      {% endjavascripts %}
+        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+        {% if 'prod' == app.environment %}
+            <script src="{{ asset('js/fos_js_routes.js') }}"></script>
+        {% else %}
+            <script src="{{ path('fos_js_routing_js', { "callback" : "fos.Router.setData" }) }}"></script>
+        {% endif %}
+        {% javascripts '@jsJquery' %}
+          <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
     {% endblock %}
     </body>
 </html>

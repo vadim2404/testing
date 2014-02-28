@@ -20,6 +20,7 @@ class User extends BaseUser
 
         $this->subjects = new ArrayCollection();
         $this->questions = new ArrayCollection();
+        $this->tests = new ArrayCollection();
     }
 
     /**
@@ -81,6 +82,14 @@ class User extends BaseUser
      * @var \Doctrine\Common\Collections\Collection $questions
      */
     private $questions;
+    
+    /**
+     * Tests
+     *
+     * @ORM\OneToMany(targetEntity="\Bstu\Bundle\TestOrganizationBundle\Entity\Test", mappedBy="teacher")
+     * @var \Doctrine\Common\Collections\Collection $tests
+     */
+    private $tests;
 
     /**
      * Get id
@@ -278,5 +287,27 @@ class User extends BaseUser
 
         return $this;
     }
+    
+    /**
+     * Get tests
+     * 
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTests()
+    {
+        return $this->tests;
+    }
 
+    /**
+     * Set tests
+     * 
+     * @param \Doctrine\Common\Collections\Collection $tests
+     * @return \Bstu\Bundle\UserBundle\Entity\User
+     */
+    public function setTests(Collection $tests)
+    {
+        $this->tests = $tests;
+        
+        return $this;
+    }
 }

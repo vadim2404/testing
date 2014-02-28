@@ -1,7 +1,10 @@
 parameters:
-#    bstu_test_organization.example.class: Bstu\Bundle\TestOrganizationBundle\Example
+    bstu_test_organization.testtype.class: Bstu\Bundle\TestOrganizationBundle\Form\TestType
 
 services:
-#    bstu_test_organization.example:
-#        class: %bstu_test_organization.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    bstu_test_organization.testtype:
+        class: %bstu_test_organization.testtype.class%
+        arguments:
+            - '@security.context'
+        tags:
+            - { name: form.type, alias: bstu_bundle_testorganizationbundle_test }

@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Bstu\Bundle\UserBundle\Entity\User;
 
 /**
  * Test
@@ -64,7 +65,8 @@ class Test
     /**
      * @var \Doctrine\Common\Collections\Collection
      * 
-     * @ORM\ManyToMany(targetEntity="Theme", mappedBy="tests")
+     * @ORM\ManyToMany(targetEntity="Theme")
+     * @ORM\JoinTable(name="test_theme")
      */
     private $themes;
     
@@ -97,6 +99,13 @@ class Test
      * @ORM\OneToMany(targetEntity="Plan", mappedBy="test")
      */
     private $plans;
+    
+    /**
+     * @var \Bstu\Bundle\UserBundle\Entity\User $teacher
+     * 
+     * @ORM\ManyToOne(targetEntity="\Bstu\Bundle\UserBundle\Entity\User", inversedBy="tests")
+     */
+    private $teacher;
 
     /**
      * Get id
@@ -293,6 +302,30 @@ class Test
     }
     
     /**
+     * Get teacher
+     * 
+     * @return \Bstu\Bundle\UserBundle\Entity\User
+     */
+    public function getTeacher() 
+    {
+        return $this->teacher;
+    }
+
+    /**
+     * Set teacher
+     * 
+     * @param \Bstu\Bundle\UserBundle\Entity\User $teacher
+     * @return \Bstu\Bundle\TestOrganizationBundle\Entity\Test
+     */
+    public function setTeacher(User $teacher)
+    {
+        $this->teacher = $teacher;
+        
+        return $this;
+    }
+
+        
+    /**
      * Check test complexity
      * 
      * @Assert\True(message="Неверная общая сложность теста")
@@ -305,5 +338,16 @@ class Test
                 $this->type !== self::TYPE_RANDOM_WITH_COMPLEXITY || 
                 Question::COMPLEXITY_EASY * $this->maxQuestions <= $this->complexity
             );
+    }
+    
+    /**
+     * One or greater themes must be selected
+     * 
+     * @Assert\True(message="Не выбраны темы")
+     * @return boolean
+     */
+    public function isThemesSelected()
+    {
+        return !$this->themes->isEmpty();
     }
 }
