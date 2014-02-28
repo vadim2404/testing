@@ -17,8 +17,7 @@ class Test
 {      
     const TYPE_VARIANT = 1;
     const TYPE_RANDOM = 2;
-    const TYPE_RANDOM_VARIANT = 3;
-    const TYPE_RANDOM_BY_THEME = 4;
+    const TYPE_RANDOM_WITH_COMPLEXITY = 3;
     
     /**
      * Constructor
@@ -83,6 +82,13 @@ class Test
      * @ORM\Column(name="max_questions", type="integer")
      */
     private $maxQuestions = 0;
+    
+    /**
+     * @var integer
+     * 
+     * @ORM\Column(name="complexity", type="integer")
+     */
+    private $complexity = 0;
     
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -225,7 +231,30 @@ class Test
     {
         return $this->maxQuestions;
     }
+    
+    /**
+     * Get complexity
+     * 
+     * @return integer
+     */
+    public function getComplexity()
+    {
+        return $this->complexity;
+    }
 
+    /**
+     * Set Complexity
+     * 
+     * @param integer $complexity
+     * @return \Bstu\Bundle\TestOrganizationBundle\Entity\Test
+     */
+    public function setComplexity($complexity)
+    {
+        $this->complexity = $complexity;
+        
+        return $this;
+    }
+    
     /**
      * Set Max Questions
      * 
@@ -260,5 +289,16 @@ class Test
         $this->plans = $plans;
         
         return $this;
+    }
+    
+    /**
+     * Check test complexity
+     * 
+     * @Assert\True(message="Общая сложность теста превосходит максимально возможную")
+     * @return boolean
+     */
+    public function isTestComplexityValid()
+    {
+        return Question::COMPLEXITY_HARD * $this->maxQuestions >= $this->complexity;
     }
 }

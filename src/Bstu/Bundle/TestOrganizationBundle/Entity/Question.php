@@ -16,10 +16,14 @@ use \ReflectionObject;
  */
 class Question
 {
-    const QUESTION_TEXT = 1;
-    const QUESTION_TEXTAREA = 2;
-    const QUESTION_CHECKBOX = 3;
-    const QUESTION_RADIO = 4;
+    const TYPE_TEXT = 1;
+    const TYPE_TEXTAREA = 2;
+    const TYPE_CHECKBOX = 3;
+    const TYPE_RADIO = 4;
+    
+    const COMPLEXITY_EASY = 1;
+    const COMPLEXITY_MEDIUM = 2;
+    const COMPLEXITY_HARD = 3;
 
     /**
      * Constructor

@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Doctrine\ORM\EntityRepository;
+use Bstu\Bundle\TestOrganizationBundle\Entity\Question;
 use Bstu\Bundle\TestOrganizationBundle\Form\EventListener\QuestionVariantsSubscriber;
 
 class QuestionType extends AbstractType
@@ -34,7 +35,7 @@ class QuestionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $constants = array_map(function ($item) {
-            return strtolower(preg_replace('/^QUESTION_/', '', $item));
+            return strtolower(preg_replace('/^TYPE_/', '', $item));
         }, array_flip((new \ReflectionClass('Bstu\Bundle\TestOrganizationBundle\Entity\Question'))
             ->getConstants()
         ));
@@ -46,9 +47,9 @@ class QuestionType extends AbstractType
             ])
             ->add('rate', 'choice', [
                 'choices' => [
-                    1 => 'Простой',
-                    2 => 'Средний',
-                    3 => 'Сложный',
+                    Question::COMPLEXITY_EASY => 'Простой',
+                    Question::COMPLEXITY_MEDIUM => 'Средний',
+                    Question::COMPLEXITY_HARD => 'Сложный',
                 ],
                 'multiple' => false,
                 'expanded' => false,
