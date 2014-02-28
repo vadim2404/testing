@@ -28,7 +28,7 @@ class TestController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('BstuTestOrganizationBundle:Test')->findAll();
+        $entities = $em->getRepository('BstuTestOrganizationBundle:Test')->findByTeacher($this->getUser());
 
         return array(
             'entities' => $entities,
@@ -112,7 +112,7 @@ class TestController extends Controller
 
         $entity = $em->getRepository('BstuTestOrganizationBundle:Test')->find($id);
 
-        if (!$entity) {
+        if (!$entity || $entity->getTeacher() !== $this->getUser()) {
             throw $this->createNotFoundException('Unable to find Test entity.');
         }
 
@@ -137,7 +137,7 @@ class TestController extends Controller
 
         $entity = $em->getRepository('BstuTestOrganizationBundle:Test')->find($id);
 
-        if (!$entity) {
+        if (!$entity || $entity->getTeacher() !== $this->getUser()) {
             throw $this->createNotFoundException('Unable to find Test entity.');
         }
 
@@ -182,7 +182,7 @@ class TestController extends Controller
 
         $entity = $em->getRepository('BstuTestOrganizationBundle:Test')->find($id);
 
-        if (!$entity) {
+        if (!$entity || $entity->getTeacher() !== $this->getUser()) {
             throw $this->createNotFoundException('Unable to find Test entity.');
         }
 
@@ -217,7 +217,7 @@ class TestController extends Controller
             $em = $this->getDoctrine()->getManager();
             $entity = $em->getRepository('BstuTestOrganizationBundle:Test')->find($id);
 
-            if (!$entity) {
+            if (!$entity || $entity->getTeacher() !== $this->getUser()) {
                 throw $this->createNotFoundException('Unable to find Test entity.');
             }
 
