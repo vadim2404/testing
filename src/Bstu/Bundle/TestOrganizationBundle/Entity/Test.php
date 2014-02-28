@@ -86,6 +86,7 @@ class Test
     /**
      * @var integer
      * 
+     * @Assert\GreaterThanOrEqual(value="0", message="Максимальная сложность теста не должна быть отрицательным числом")
      * @ORM\Column(name="complexity", type="integer")
      */
     private $complexity = 0;
@@ -294,11 +295,15 @@ class Test
     /**
      * Check test complexity
      * 
-     * @Assert\True(message="Общая сложность теста превосходит максимально возможную")
+     * @Assert\True(message="Неверная общая сложность теста")
      * @return boolean
      */
     public function isTestComplexityValid()
     {
-        return Question::COMPLEXITY_HARD * $this->maxQuestions >= $this->complexity;
+        return Question::COMPLEXITY_HARD * $this->maxQuestions >= $this->complexity && 
+            (
+                $this->type !== self::TYPE_RANDOM_WITH_COMPLEXITY || 
+                Question::COMPLEXITY_EASY * $this->maxQuestions <= $this->complexity
+            );
     }
 }
