@@ -22,6 +22,7 @@ class AppKernel extends Kernel
             new Bstu\Bundle\FacultyBundle\BstuFacultyBundle(),
             new Bstu\Bundle\UserBundle\BstuUserBundle(),
             new Bstu\Bundle\TestOrganizationBundle\BstuTestOrganizationBundle(),
+            new Bstu\Bundle\PlanBundle\BstuTestOrganizationBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
         );
