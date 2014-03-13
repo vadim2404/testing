@@ -1,3 +1,16 @@
 parameters:
+    bstu_plan.doctrine.entity_listener_resolver.class: Bstu\Bundle\PlanBundle\Doctrine\EntityListenerResolver
+    bstu_plan.listener.plan_listener.class: Bstu\Bundle\PlanBundle\Listener\PlanListener
 
 services:
+    bstu_plan.doctrine.entity_listener_resolver:
+        class: %bstu_plan.doctrine.entity_listener_resolver.class%
+        arguments:
+            - '@service_container'
+            
+    bstu_plan.listener.plan_listener:
+        class: %bstu_plan.listener.plan_listener.class%
+        arguments:
+            - '@security.context'
+        tags:
+            - { name: doctrine.entity_listener, event: prePersist }
