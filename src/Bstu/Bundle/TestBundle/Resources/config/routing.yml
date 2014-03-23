@@ -1,2 +1,3 @@
-## YAML Template.
----
+bstu_faculty:
+    resource: "@BstuTestBundle/Controller"
+    type: annotation

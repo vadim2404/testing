@@ -1,0 +1,29 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+<h1>Plans</h1>
+{% for plan in plans %}
+   <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Test</th>
+                <th>Started at</th>
+                <th>Period</th>
+                <th>Link</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in plans %}
+            <tr>
+                <td>{{ plan.id }}</td>
+                <td>{{ plan.test.title }}</td>
+                <td>{{ plan.start|date('Y-m-d H:i:s') }}</td>
+                <td>{{ plan.period }}</td>
+                <td><a href="{{ path('student_write_test', { 'id' : plan.id }) }}">Write test</a>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endfor %}
+{% endblock %}
