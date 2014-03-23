@@ -21,7 +21,7 @@ class DefaultController extends Controller
         $plans = $this->getDoctrine()
             ->getManager()
             ->getRepository('BstuPlanBundle:Plan')
-            ->findAll()
+            ->findUnstartedPlans()
         ;
 
         return [

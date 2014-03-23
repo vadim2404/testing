@@ -31,11 +31,29 @@ class PlanController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('BstuPlanBundle:Plan')->findAll();
+        $entities = $em->getRepository('BstuPlanBundle:Plan')->findUnstartedPlans();
 
         return array(
             'entities' => $entities,
         );
+    }
+
+    /**
+     * List all Test entities.
+     *
+     * @Route("/test", name="plan_test")
+     * @Method({"GET"})
+     * @Template()
+     */
+    public function testAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $tests = $em->getRepository('BstuTestOrganizationBundle:Test')->findAll();
+
+        return [
+            'tests' => $tests,
+        ];
     }
 
     /**

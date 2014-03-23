@@ -1,0 +1,34 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+
+    <h1>All tests</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Test</th>
+                <th>Teacher</th>
+                <th>Subject</th>
+                <th>Faculty</th>
+                <th>Pulpit</th>
+                <th>Plan</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for test in tests %}
+            <tr>
+                <td>{{ test.id }}</td>
+                <td>{{ test.title }}</td>
+                <td>{{ test.teacher.name }}</td>
+                <td>{{ test.subject.name }}</td>
+                <td>{{ test.teacher.pulpit.faculty.name }}</td>
+                <td>{{ test.teacher.pulpit.name }}</td>
+                <td><a href="{{ path('plan_new', { 'testId' : test.id }) }}">Plan it</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

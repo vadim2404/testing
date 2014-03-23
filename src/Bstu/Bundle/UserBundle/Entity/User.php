@@ -195,6 +195,19 @@ class User extends BaseUser
     }
 
     /**
+     * Get name for user entity
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return ucfirst($this->firstName) . ' ' .
+            strtoupper($this->lastName[0]) . '. ' .
+            ($this->middleName ? strtoupper($this->middleName[0]) . '.' : '')
+        ;
+    }
+
+    /**
      * Get pulpit
      *
      * @return \Bstu\Bundle\FacultyBundle\Entity\Pulpit
