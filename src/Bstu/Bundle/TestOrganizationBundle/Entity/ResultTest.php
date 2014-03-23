@@ -5,6 +5,7 @@ namespace Bstu\Bundle\TestOrganizationBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Bstu\Bundle\UserBundle\Entity\User;
+use Bstu\Bundle\PlanBundle\Entity\Plan;
 
 /**
  * ResultTest
@@ -34,7 +35,7 @@ class ResultTest
     /**
      * @var \Doctrine\Common\Collections\Collection $resultQuestions
      *
-     * @ORM\OneToMany(targetEntity="ResultQuestion", mappedBy="resultTest")
+     * @ORM\OneToMany(targetEntity="ResultQuestion", mappedBy="resultTest", cascade={"persist"})
      * @ORM\JoinColumn(name="id", referencedColumnName="result_test_id")
      */
     private $resultQuestions;
@@ -46,6 +47,14 @@ class ResultTest
      * @ORM\JoinColumn(name="test_id", referencedColumnName="id")
      */
     private $test;
+
+    /**
+     * @var \Bstu\Bundle\PlanBundle\Entity\Plan
+     *
+     * @ORM\ManyToOne(targetEntity="\Bstu\Bundle\PlanBundle\Entity\Plan")
+     * @ORM\JoinColumn(name="plan_id", referencedColumnName="id")
+     */
+    private $plan;
 
     /**
      * @var \Bstu\Bundle\UserBundle\Entity\User $student
@@ -144,5 +153,28 @@ class ResultTest
     public function getStudent()
     {
         return $this->student;
+    }
+    
+    /**
+     * Set plan
+     *
+     * @param \Bstu\Bundle\PlanBundle\Entity\Plan $plan
+     * @return ResultTest
+     */
+    public function setPlan(Plan $plan = null)
+    {
+        $this->plan = $plan;
+
+        return $this;
+    }
+
+    /**
+     * Get plan
+     *
+     * @return \Bstu\Bundle\PlanBundle\Entity\Plan 
+     */
+    public function getPlan()
+    {
+        return $this->plan;
     }
 }

@@ -24,7 +24,7 @@ class ResultQuestion
     /**
      * @var string
      *
-     * @ORM\Column(name="answer", type="text")
+     * @ORM\Column(name="answer", type="text", nullable=true)
      */
     private $answer;
 

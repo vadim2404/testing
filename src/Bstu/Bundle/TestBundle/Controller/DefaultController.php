@@ -44,6 +44,20 @@ class DefaultController extends Controller
         if ($plan->getStart()->add(new \DateInterval(sprintf('PT%dM', $plan->getPeriod()))) < $now) {
             throw $this->createNotFoundException('Test has been finished');
         }
+
+        $em = $this->getDoctrine()
+            ->getManager()
+        ;
+
+        $result = $em->getRepository('BstuTestOrganizationBundle:ResultTest')
+            ->findOneByPlan($plan)
+        ;
+
+        if (!$result) {
+            $result = $this->get('bstu_test.question_shuffle')->shuffle($plan);
+        }
+
+        var_dump($result->getResultQuestions()->getValues());
         
         return [];
     }

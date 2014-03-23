@@ -1,3 +1,9 @@
 parameters:
+    bstu_test.question_shuffle.class: Bstu\Bundle\TestBundle\Shuffle\QuestionShuffle
 
 services:
+    bstu_test.question_shuffle:
+        class: %bstu_test.question_shuffle.class%
+        arguments:
+            - '@security.context'
+            - '@doctrine.orm.entity_manager'
