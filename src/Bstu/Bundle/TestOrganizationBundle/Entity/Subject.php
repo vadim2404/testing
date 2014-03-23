@@ -163,4 +163,50 @@ class Subject
     {
         return $this->name;
     }
+
+    /**
+     * Add themes
+     *
+     * @param \Bstu\Bundle\TestOrganizationBundle\Entity\Theme $theme
+     * @return Subject
+     */
+    public function addTheme(Theme $theme)
+    {
+        $this->themes[] = $theme;
+
+        return $this;
+    }
+
+    /**
+     * Remove themes
+     *
+     * @param \Bstu\Bundle\TestOrganizationBundle\Entity\Theme $theme
+     */
+    public function removeTheme(Theme $theme)
+    {
+        $this->themes->removeElement($theme);
+    }
+
+    /**
+     * Add tests
+     *
+     * @param \Bstu\Bundle\TestOrganizationBundle\Entity\Test $test
+     * @return Subject
+     */
+    public function addTest(Test $test)
+    {
+        $this->tests[] = $test;
+
+        return $this;
+    }
+
+    /**
+     * Remove tests
+     *
+     * @param \Bstu\Bundle\TestOrganizationBundle\Entity\Test $test
+     */
+    public function removeTest(Test $test)
+    {
+        $this->tests->removeElement($test);
+    }
 }

@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Bstu\Bundle\UserBundle\Entity\User;
+use Bstu\Bundle\PlanBundle\Entity\Plan;
 
 /**
  * Test
@@ -349,5 +350,74 @@ class Test
     public function isThemesSelected()
     {
         return !$this->themes->isEmpty();
+    }
+
+    /**
+     * Add themes
+     *
+     * @param \Bstu\Bundle\TestOrganizationBundle\Entity\Theme $theme
+     * @return Test
+     */
+    public function addTheme(\Bstu\Bundle\TestOrganizationBundle\Entity\Theme $theme)
+    {
+        $this->themes[] = $theme;
+
+        return $this;
+    }
+
+    /**
+     * Remove themes
+     *
+     * @param \Bstu\Bundle\TestOrganizationBundle\Entity\Theme $theme
+     */
+    public function removeTheme(Theme $theme)
+    {
+        $this->themes->removeElement($theme);
+    }
+
+    /**
+     * Add variants
+     *
+     * @param \Bstu\Bundle\TestOrganizationBundle\Entity\Variant $variant
+     * @return Test
+     */
+    public function addVariant(\Bstu\Bundle\TestOrganizationBundle\Entity\Variant $variant)
+    {
+        $this->variants[] = $variant;
+
+        return $this;
+    }
+
+    /**
+     * Remove variants
+     *
+     * @param \Bstu\Bundle\TestOrganizationBundle\Entity\Variant $variant
+     */
+    public function removeVariant(Variant $variant)
+    {
+        $this->variants->removeElement($variant);
+    }
+
+    /**
+     * Add plans
+     *
+     * @param \Bstu\Bundle\PlanBundle\Entity\Plan $plan
+     * @return Test
+     */
+    public function addPlan(Plan $plan)
+    {
+        $this->plans[] = $plan;
+
+        return $this;
+    }
+
+    /**
+     * Remove plans
+     *
+     * @param \Bstu\Bundle\PlanBundle\Entity\Plan $plans
+     */
+    public function removePlan(Plan $plan)
+    {
+        $this->plans->removeElement($plan);
     }
 }

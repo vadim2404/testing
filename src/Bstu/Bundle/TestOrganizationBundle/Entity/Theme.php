@@ -146,4 +146,27 @@ class Theme
 
         return $this;
     }
+
+    /**
+     * Add questions
+     *
+     * @param \Bstu\Bundle\TestOrganizationBundle\Entity\Question $question
+     * @return Theme
+     */
+    public function addQuestion(Question $question)
+    {
+        $this->questions[] = $question;
+
+        return $this;
+    }
+
+    /**
+     * Remove questions
+     *
+     * @param \Bstu\Bundle\TestOrganizationBundle\Entity\Question $question
+     */
+    public function removeQuestion(Question $question)
+    {
+        $this->questions->removeElement($question);
+    }
 }
