@@ -96,7 +96,7 @@ class Test
     /**
      * @var \Doctrine\Common\Collections\Collection
      * 
-     * @ORM\OneToMany(targetEntity="Plan", mappedBy="test")
+     * @ORM\OneToMany(targetEntity="\Bstu\Bundle\PlanBundle\Entity\Plan", mappedBy="test")
      */
     private $plans;
     
