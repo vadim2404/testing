@@ -34,11 +34,13 @@ class QuestionType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $constants = array_map(function ($item) {
-            return strtolower(preg_replace('/^TYPE_/', '', $item));
-        }, array_flip((new \ReflectionClass('Bstu\Bundle\TestOrganizationBundle\Entity\Question'))
-            ->getConstants()
-        ));
+        $classConstants = (new \ReflectionClass('Bstu\Bundle\TestOrganizationBundle\Entity\Question'))->getConstants();
+        $constants = [];
+        foreach ($classConstants as $name => $value) {
+            if (preg_match('/^TYPE_/', $name)) {
+                $constants[$value] = strtolower(preg_replace('/^TYPE_/', '', $name));
+            }
+        }
         
         $user = $this->user;
         $builder
