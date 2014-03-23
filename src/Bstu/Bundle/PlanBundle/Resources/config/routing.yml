@@ -1,0 +1,3 @@
+bstu_plan:
+    resource: "@BstuPlanBundle/Controller"
+    type: annotation
