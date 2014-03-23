@@ -16,6 +16,8 @@ app/console fos:js-routing:dump
 app/console assetic:dump --force
 app/console cache:clear --env=prod
 app/console cache:warmup --env=prod
+sudo setfacl -Rn -m u:"www-data":rwX -m u:`whoami`:rwX app/cache app/logs
+sudo setfacl -dRn -m u:"www-data":rwX -m u:`whoami`:rwX app/cache app/logs
 ```
 Nginx 
 -----
