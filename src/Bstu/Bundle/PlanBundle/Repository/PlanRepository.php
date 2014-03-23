@@ -14,7 +14,7 @@ class PlanRepository extends EntityRepository
     public function findUnstartedPlans()
     {
         return $this->createQueryBuilder('plan')
-            ->where('plan.start < :now')
+            ->where('plan.start > :now')
             ->setParameter('now', new \DateTime('now'))
             ->getQuery()
             ->execute()

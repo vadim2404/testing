@@ -51,7 +51,7 @@ class Plan
     /**
      * @var \Bstu\Bundle\UserBundle\Entity\User
      * 
-     * @ORM\OneToOne(targetEntity="\Bstu\Bundle\UserBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="\Bstu\Bundle\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="planedby_id", referencedColumnName="id")
      */
     private $planedBy;
