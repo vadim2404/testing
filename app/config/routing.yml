@@ -1,3 +1,7 @@
+bstu_test:
+    resource: "@BstuTestBundle/Resources/config/routing.yml"
+    prefix:   /student/
+
 bstu_plan:
     resource: "@BstuPlanBundle/Resources/config/routing.yml"
     prefix:   /operator/
