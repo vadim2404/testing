@@ -157,4 +157,14 @@ class Plan
     {
         return $this->planedBy;
     }
+
+    /**
+     * Is test finished?
+     *
+     * @return bool
+     */
+    public function isFinished()
+    {
+        return $this->getStart()->add(new \DateInterval('PT' . $this->getPeriod() . 'M')) < new \DateTime('now');
+    }
 }

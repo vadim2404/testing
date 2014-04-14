@@ -15,7 +15,9 @@ class PlanType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('start', 'datetime')
+            ->add('start', 'datetime', [
+                'data' => new \DateTime('now'),
+            ])
             ->add('period')
         ;
     }

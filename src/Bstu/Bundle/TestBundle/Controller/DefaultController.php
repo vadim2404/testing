@@ -3,11 +3,15 @@
 namespace Bstu\Bundle\TestBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Bstu\Bundle\PlanBundle\Entity\Plan;
+use Bstu\Bundle\TestOrganizationBundle\Entity\ResultTest;
+use Bstu\Bundle\TestBundle\Form\ResultTestType;
 
 class DefaultController extends Controller
 {
@@ -21,7 +25,7 @@ class DefaultController extends Controller
         $plans = $this->getDoctrine()
             ->getManager()
             ->getRepository('BstuPlanBundle:Plan')
-            ->findUnstartedPlans()
+            ->findUnfinishedPlans()
         ;
 
         return [
@@ -57,9 +61,53 @@ class DefaultController extends Controller
             $result = $this->get('bstu_test.question_shuffle')->shuffle($plan);
         }
 
-        var_dump($result->getResultQuestions()->getValues());
+        $form = $this->createResultForm($result);
         
-        return [];
+        return [
+            'form' => $form->createView(),
+        ];
     }
 
+    /**
+     * @Route("/catch/{id}", name="student_catch_answer", requirements={ "result_test_id" = "\d+" })
+     * @Method({"POST"})
+     */
+    public function catchAnswerAction(Request $request, ResultTest $resultTest)
+    {
+        if (!$request->isXmlHttpRequest()) {
+            throw $this->createNotFoundException('Undefined method');
+        }
+
+        if ($resultTest->getPlan()->isFinished()) {
+            throw $this->createNotFoundException('Test has been finished');
+        }
+
+        $form = $this->createResultForm($resultTest);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()
+                ->getManager()
+            ;
+
+            $em->persist($resultTest);
+            $em->flush();
+        }
+
+        return new Response('', Response::HTTP_NO_CONTENT);
+    }
+
+    /**
+     * Create result form
+     *
+     * @param \Bstu\Bundle\TestOrganizationBundle\Entity\ResultTest $result
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    protected function createResultForm(ResultTest $result)
+    {
+        return $this->createForm(new ResultTestType(), $result, [
+            'action' => $this->generateUrl('student_catch_answer', ['id' => $result->getId()]),
+            'method' => 'POST',
+        ]);
+    }
 }

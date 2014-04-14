@@ -1,5 +1,6 @@
 parameters:
     bstu_test.question_shuffle.class: Bstu\Bundle\TestBundle\Shuffle\QuestionShuffle
+    bstu_test.form.result_question_type.class: Bstu\Bundle\TestBundle\Form\ResultQuestionType
 
 services:
     bstu_test.question_shuffle:
@@ -7,3 +8,8 @@ services:
         arguments:
             - '@security.context'
             - '@doctrine.orm.entity_manager'
+
+    bstu_test.form.result_question_type:
+        class: %bstu_test.form.result_question_type.class%
+        tags:
+            - { name: form.type, alias: bstu_bundle_testorganizationbundle_resultquestion }

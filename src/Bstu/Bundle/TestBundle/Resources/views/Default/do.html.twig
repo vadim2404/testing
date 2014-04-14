@@ -4,4 +4,13 @@
 
 {% block body %}
 <h1>Welcome to the Default:do page</h1>
+
+{{ form(form) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts '@BstuTestBundle/Resources/public/js/main.js' %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
 {% endblock %}

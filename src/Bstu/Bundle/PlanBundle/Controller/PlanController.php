@@ -31,7 +31,7 @@ class PlanController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('BstuPlanBundle:Plan')->findUnstartedPlans();
+        $entities = $em->getRepository('BstuPlanBundle:Plan')->findUnfinishedPlans();
 
         return array(
             'entities' => $entities,
