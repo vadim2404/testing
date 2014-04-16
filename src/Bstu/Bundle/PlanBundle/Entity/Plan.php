@@ -36,10 +36,10 @@ class Plan
     /**
      * @var integer
      *
-     * @Assert\Range(min="15", max="90", minMessage="Тест не может быть меньше 15 минут", maxMessage="Тест не может быть больше 90 минут")
-     * @ORM\Column(name="period", type="smallint")
+     * @Assert\DateTime(message="Дата и время заданы в неверном формате")
+     * @ORM\Column(name="end", type="datetime")
      */
-    private $period;
+    private $end;
 
     /**
      * @var \Bstu\Bundle\TestOrganizationBundle\Entity\Test
@@ -90,26 +90,26 @@ class Plan
     }
 
     /**
-     * Set period
+     * Set end
      *
-     * @param integer $period
+     * @param \DateTime $end
      * @return Plan
      */
-    public function setPeriod($period)
+    public function setEnd($end)
     {
-        $this->period = $period;
+        $this->end = $end;
 
         return $this;
     }
 
     /**
-     * Get period
+     * Get end
      *
-     * @return integer 
+     * @return \DateTime
      */
-    public function getPeriod()
+    public function getEnd()
     {
-        return $this->period;
+        return $this->end;
     }
     
     /**
@@ -165,6 +165,26 @@ class Plan
      */
     public function isFinished()
     {
-        return $this->getStart()->add(new \DateInterval('PT' . $this->getPeriod() . 'M')) < new \DateTime('now');
+        return $this->end < new \DateTime('now');
+    }
+
+    /**
+     * @Assert\Callback(message="Дата окончания теста должна быть больше даты начала теста минимум на 15 минут")
+     *
+     * @return bool
+     */
+    public function endGteStartAbove15()
+    {
+        return 15 <= $this->end->diff($this->start)->i;
+    }
+
+    /**
+     * @Assert\Callback(message="Дата окончания теста должна быть больше даты начала теста максимум на 1,5 часа")
+     *
+     * @return bool
+     */
+    public function endGteStartBelow90()
+    {
+        return 90 >= $this->end->diff($this->start)->i;
     }
 }

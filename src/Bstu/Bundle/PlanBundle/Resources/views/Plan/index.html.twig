@@ -8,7 +8,7 @@
             <tr>
                 <th>Id</th>
                 <th>Start</th>
-                <th>Period</th>
+                <th>End</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -17,7 +17,7 @@
             <tr>
                 <td><a href="{{ path('plan_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{% if entity.start %}{{ entity.start|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ entity.period }}</td>
+                <td>{% if entity.end %}{{ entity.end|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>
                 <ul>
                     <li>

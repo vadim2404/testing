@@ -45,7 +45,7 @@ class DefaultController extends Controller
         if ($plan->getStart() > $now) {
             throw $this->createNotFoundException('Test will start at future');
         }
-        if ($plan->getStart()->add(new \DateInterval(sprintf('PT%dM', $plan->getPeriod()))) < $now) {
+        if ($plan->isFinished()) {
             throw $this->createNotFoundException('Test has been finished');
         }
 

@@ -18,7 +18,9 @@ class PlanType extends AbstractType
             ->add('start', 'datetime', [
                 'data' => new \DateTime('now'),
             ])
-            ->add('period')
+            ->add('end', 'datetime', [
+                'data' => (new \DateTime('now'))->modify('+15 minute')
+            ])
         ;
     }
     
