@@ -64,6 +64,19 @@ class ResultTest
      */
     private $student;
 
+    /**
+     * @var float $rating
+     *
+     * @ORM\Column(name="rating", type="float")
+     */
+    private $rating = 0.0;
+
+    /**
+     * @var bool $verified
+     *
+     * @ORM\Column(name="verified", type="boolean")
+     */
+    private $verified = false;
 
     /**
      * Get id
@@ -176,5 +189,51 @@ class ResultTest
     public function getPlan()
     {
         return $this->plan;
+    }
+
+    /**
+     * Set rating
+     *
+     * @param float $rating
+     * @return ResultTest
+     */
+    public function setRating($rating)
+    {
+        $this->rating = $rating;
+
+        return $this;
+    }
+
+    /**
+     * Get rating
+     *
+     * @return float 
+     */
+    public function getRating()
+    {
+        return round($this->rating, 2);
+    }
+
+    /**
+     * Set verified
+     *
+     * @param bool $verified
+     * @return ResultTest
+     */
+    public function setVerified($verified)
+    {
+        $this->verified = $verified;
+
+        return $this;
+    }
+
+    /**
+     * Get verified
+     *
+     * @return bool
+     */
+    public function getVerified()
+    {
+        return $this->verified;
     }
 }

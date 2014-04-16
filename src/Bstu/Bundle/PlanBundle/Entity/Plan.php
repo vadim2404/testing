@@ -10,7 +10,12 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Plan
  *
- * @ORM\Table(name="plan")
+ * @ORM\Table(
+ *   name="plan",
+ *   indexes = {
+ *     @ORM\Index(name="plan_end", columns = { "end" })
+ *  }
+ * )
  * @ORM\Entity(repositoryClass="Bstu\Bundle\PlanBundle\Repository\PlanRepository")
  * @ORM\EntityListeners({ "Bstu\Bundle\PlanBundle\Listener\PlanListener" })
  */
