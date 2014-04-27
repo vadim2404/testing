@@ -4,9 +4,30 @@ namespace Bstu\Bundle\TestOrganizationBundle\Form;
 
 use Symfony\Component\Form\FormBuilderInterface;
 use Bstu\Bundle\TestBundle\Form\ResultQuestionType as BaseResultQuestionType;
+use Bstu\Bundle\TestOrganizationBundle\Verifier\QuestionVerifier;
 
 class ResultQuestionType extends BaseResultQuestionType
 {
+    /**
+     * Question verifier
+     *
+     * @var \Bstu\Bundle\TestOrganizationBundle\Verifier\QuestionVerifier $verifier
+     */
+    protected $verifier;
+    
+    /**
+     * Constructor
+     * 
+     * @param \Bstu\Bundle\TestOrganizationBundle\Verifier\QuestionVerifier $verifier
+     */
+    public function __construct(QuestionVerifier $verifier)
+    {
+        parent::__construct();
+        
+        $this->verifier = $verifier;
+    }
+
+    
     /**
      * {@inheritDoc}
      */
@@ -16,7 +37,7 @@ class ResultQuestionType extends BaseResultQuestionType
         $builder
             ->add('result', 'percent', [
                 'precision' => 2,
-                'data' => $item->getQuestion()->verify($item->getAnswer()),
+                'data' => $this->verifier->verify($item),
             ])
         ;
     }
