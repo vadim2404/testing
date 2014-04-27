@@ -2,7 +2,7 @@
 
 namespace Bstu\Bundle\TestOrganizationBundle\Distance;
 
-class DamerauLevenshteinDistance
+class DamerauLevenshteinDistance implements DistanceCalculatorInterface
 {
     /**
      * Calculate damerau levenshtein distance
@@ -11,7 +11,7 @@ class DamerauLevenshteinDistance
      * @param string $str2
      * @return integer
      */
-    public function calculcate($str1, $str2)
+    public function calculate($str1, $str2)
     {
         $lenStr1 = strlen($str1); 
         $lenStr2 = strlen($str2);
