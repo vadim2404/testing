@@ -1,4 +1,4 @@
-(function ($, window) {           
+(function ($, window, Routing) {           
     var init = function () {
             var TYPE_CHECKBOX = 3,
                 TYPE_RADIO = 4,
@@ -14,7 +14,7 @@
             if ($list.length) {
                 node = $list.data('prototype');
                 counter = $list.find('li').each(appendLink).length;
-                type = +$('#bstu_bundle_testorganizationbundle_question_type').val();
+                type = +$(':radio[name="bstu_bundle_testorganizationbundle_question[type]"]:checked').val();
                 $answer = $('#bstu_bundle_testorganizationbundle_question_answer');
                 if (type === TYPE_CHECKBOX || type === TYPE_RADIO) {
                     $list.selectable({
@@ -46,15 +46,18 @@
                     return false;
                 });
             }
-        },
-        $form = $('form');
+        };
     
     init();
     
     window.rerenderCreateForm = function () {
-        $.post($form.attr('action'), $form.serialize(), function (data) {
-            $form.replaceWith(data);
-            init();
+        $.ajax({
+            url: Routing.generate('question_new', { questionType: +$(':radio[name="bstu_bundle_testorganizationbundle_question[type]"]:checked').val() }),
+            success: function (data) {
+                $('form').replaceWith(data);                
+                init();
+            },
+            dataType: 'html'
         });
     };
-}(jQuery, window));
+}(jQuery, window, Routing));

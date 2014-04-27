@@ -7,7 +7,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Doctrine\ORM\EntityRepository;
 use Bstu\Bundle\TestOrganizationBundle\Entity\Question;
-use Bstu\Bundle\TestOrganizationBundle\Form\EventListener\QuestionVariantsSubscriber;
 
 class QuestionType extends AbstractType
 {
@@ -44,6 +43,15 @@ class QuestionType extends AbstractType
         
         $user = $this->user;
         $builder
+            ->add('type', 'choice', [
+                'multiple' => false,
+                'expanded' => true,
+                'required' => true,
+                'choices' => $constants,
+                'attr' => [
+                    'onchange' => 'rerenderCreateForm()',
+                ],
+            ])
             ->add('question', null, [
                 'required' => true,
             ])
@@ -56,15 +64,6 @@ class QuestionType extends AbstractType
                 'multiple' => false,
                 'expanded' => false,
                 'required' => true,
-            ])
-            ->add('type', 'choice', [
-                'multiple' => false,
-                'expanded' => true,
-                'required' => true,
-                'choices' => $constants,
-                'attr' => [
-                    'onchange' => 'rerenderCreateForm()',
-                ],
             ])
             ->add('theme', null, [
                 'required' => true,
@@ -79,7 +78,21 @@ class QuestionType extends AbstractType
             ])
         ;
 
-        $builder->addEventSubscriber(new QuestionVariantsSubscriber());
+        if (!in_array($options['data']->getType(), [Question::TYPE_TEXT, Question::TYPE_TEXTAREA])) {
+            $builder->add('variants', 'collection', [
+                    'required' => true,
+                    'allow_delete' => true,
+                    'allow_add' => true,
+                ])
+                ->add('answer', 'hidden', [
+                    'required' => true,
+                ])
+            ;
+        } else {
+            $builder->add('answer', null, [
+                'required' => true,
+            ]);
+        }
     }
     
     /**
@@ -87,9 +100,11 @@ class QuestionType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'Bstu\Bundle\TestOrganizationBundle\Entity\Question'
-        ));
+        $resolver->setDefaults([
+            'data_class' => 'Bstu\Bundle\TestOrganizationBundle\Entity\Question',
+        ])->setRequired([
+            'data',
+        ]);
     }
 
     /**

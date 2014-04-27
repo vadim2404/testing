@@ -89,19 +89,25 @@ class QuestionController extends Controller
     /**
      * Displays a form to create a new Question entity.
      *
-     * @Route("/new/{questionType}", name="question_new", defaults={"questionType" = "1"}, requirements={"questionType" = "\d+"})
+     * @Route("/new/{questionType}", name="question_new", defaults={"questionType" = "1"}, requirements={"questionType" = "\d+"}, options={"expose" = true})
      * @Method("GET")
      * @Template()
      */
-    public function newAction($questionType)
+    public function newAction(Request $request, $questionType)
     {
         $entity = (new Question())->setType(intval($questionType));
-        $form   = $this->createCreateForm($entity);
-
-        return array(
+        $form   = $this->createCreateForm($entity)->createView();
+        
+        $templateParams = [
             'entity' => $entity,
-            'form'   => $form->createView(),
-        );
+            'form'   => $form,
+        ];
+
+        if (!$request->isXmlHttpRequest()) {
+            return $templateParams;
+        }
+        
+        return $this->render('BstuTestOrganizationBundle:Question:form.html.twig', $templateParams);
     }
 
     /**
