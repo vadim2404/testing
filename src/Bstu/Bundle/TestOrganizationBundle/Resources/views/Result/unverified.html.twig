@@ -1,7 +1,9 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}BstuTestOrganizationBundle:Result:unverified{% endblock %}
-
 {% block body %}
-<h1>Welcome to the Result:unverified page</h1>
+    <ul>
+    {% for result in results %}
+        <li><a href="{{ path('teacher_result_verify_test', { 'id' : result.id }) }}">{{ result.test.title }} - {{ result.student.firstName }} {{ result.student.lastName }} {{ result.student.middleName|default('') }}</a></li>
+    {% endfor %}
+    <ul>
 {% endblock %}

@@ -10,14 +10,35 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 class ResultQuestionType extends AbstractType
 {
+    protected $accessor;
+    
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->accessor = new PropertyAccessor();
+    }
+    
+    /**
+     * Get Result question
+     * 
+     * @param array $options
+     * @return \Bstu\Bundle\TestOrganizationBundle\Entity\ResultQuestion
+     */
+    protected function getItem(array $options)
+    {
+        return $this->accessor->getValue($options['items'], $options['property_path']);
+    }
+    
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $accessor = new PropertyAccessor();
-        $item = $accessor->getValue($options['items'], $options['property_path']);
+        
+        $item = $this->getItem($options);
         $builder
             ->add('answer', null, [
                 'label' => $item->getQuestion()->getQuestion(),
@@ -51,6 +72,6 @@ class ResultQuestionType extends AbstractType
      */
     public function getName()
     {
-        return 'bstu_bundle_testorganizationbundle_resultquestion';
+        return 'bstu_bundle_testbundle_resultquestion';
     }
 }

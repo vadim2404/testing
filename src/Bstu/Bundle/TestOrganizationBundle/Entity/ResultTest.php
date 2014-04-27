@@ -4,6 +4,7 @@ namespace Bstu\Bundle\TestOrganizationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 use Bstu\Bundle\UserBundle\Entity\User;
 use Bstu\Bundle\PlanBundle\Entity\Plan;
 
@@ -66,7 +67,11 @@ class ResultTest
 
     /**
      * @var float $rating
-     *
+     * 
+     * @Assert\Range(
+     *  min = 0,
+     *  max = 1
+     * )
      * @ORM\Column(name="rating", type="float")
      */
     private $rating = 0.0;

@@ -21,7 +21,7 @@ class ResultTestRepository extends EntityRepository
             ->join('rt.plan', 'p')
             ->where('t.teacher = :teacher')
             ->andWhere('rt.verified = :verified')
-            ->andWhere('p.end > :now')
+            ->andWhere('p.end < :now')
             ->getQuery()
             ->setParameters([
                 'teacher' => $user,

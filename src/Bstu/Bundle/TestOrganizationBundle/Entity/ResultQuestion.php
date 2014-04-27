@@ -2,6 +2,7 @@
 
 namespace Bstu\Bundle\TestOrganizationBundle\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -31,6 +32,10 @@ class ResultQuestion
     /**
      * @var float
      *
+     * @Assert\Range(
+     *  min = 0,
+     *  max = 1
+     * )
      * @ORM\Column(name="result", type="float")
      */
     private $result = 0.0;

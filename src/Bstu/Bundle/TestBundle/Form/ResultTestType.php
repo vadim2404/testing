@@ -8,6 +8,8 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class ResultTestType extends AbstractType
 {
+    const RESULT_QUESTIONT_TYPE = 'bstu_bundle_testbundle_resultquestion';
+    
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
@@ -16,7 +18,7 @@ class ResultTestType extends AbstractType
     {
         $builder
             ->add('resultQuestions', 'collection', [
-                'type' => 'bstu_bundle_testorganizationbundle_resultquestion',
+                'type' => static::RESULT_QUESTIONT_TYPE,
                 'options' => [
                     'items' => $options['data']->getResultQuestions(),
                 ],
@@ -44,6 +46,6 @@ class ResultTestType extends AbstractType
      */
     public function getName()
     {
-        return 'bstu_bundle_testorganizationbundle_resulttest';
+        return 'bstu_bundle_testbundle_resulttest';
     }
 }

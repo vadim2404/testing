@@ -12,4 +12,4 @@ services:
     bstu_test.form.result_question_type:
         class: %bstu_test.form.result_question_type.class%
         tags:
-            - { name: form.type, alias: bstu_bundle_testorganizationbundle_resultquestion }
+            - { name: form.type, alias: bstu_bundle_testbundle_resultquestion }

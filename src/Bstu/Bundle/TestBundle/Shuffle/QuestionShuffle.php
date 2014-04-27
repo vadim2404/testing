@@ -49,7 +49,7 @@ class QuestionShuffle
     public function shuffle(Plan $plan)
     {
         if (!$this->securityContext->isGranted('ROLE_STUDENT')) {
-            throw new AccessDeniedException('Only students users with student role can use question shuffle');
+            throw new AccessDeniedException('Only students can use question shuffle');
         }
 
         $test = $plan->getTest();

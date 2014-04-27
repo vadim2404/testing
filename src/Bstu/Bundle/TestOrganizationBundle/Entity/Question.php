@@ -266,4 +266,20 @@ class Question
 
         return $this;
     }
+    
+    /**
+     * Result
+     * 
+     * @param mixed $answer
+     * @return real
+     */
+    public function verify($answer)
+    {
+        switch ($this->type) {
+            case self::TYPE_TEXT:
+                return $answer === $this->getAnswer() ? 1.0 : 0.05;
+        }
+        
+        return 0.0;
+    }
 }
