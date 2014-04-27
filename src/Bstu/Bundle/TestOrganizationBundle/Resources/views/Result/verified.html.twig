@@ -1,7 +1,29 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}BstuTestOrganizationBundle:Result:verified{% endblock %}
-
 {% block body %}
-<h1>Welcome to the Result:verified page</h1>
+    <a href="{{ path('teacher_result_unverified') }}">Unverified tests</a>
+    <table border="1" cellspacing="0" cellpadding="0">
+        <tr><th>Student</th><th>Test</th><th>Result</th><th>Details</th><th>Actions</th></tr>
+    {% for result in results %}
+        <tr>
+            <td>{{ result.student.firstName }} {{ result.student.lastName }} {{ result.student.middleName|default('') }}</td>
+            <td>{{ result.test.title }}</td>
+            <td>{{ result.rating|number_format(2) }}</td>
+            <td>
+                <table border="1" cellspacing="0" cellpadding="0">
+                    <tr><th>Question</th><th>Correct Answer</th><th>Student answer</th><th>Result</th></tr>
+                    {% for resultQuestion in result.resultQuestions %}
+                        <tr>
+                            <td>{{ resultQuestion.question.question }}</td>
+                            <td>{{ resultQuestion.question.answer }}</td>
+                            <td>{{ resultQuestion.answer }}</td>
+                            <td>{{ resultQuestion.result|number_format(2) }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </td>
+            <td><a href="{{ path('teacher_result_unverify_test', { 'id' : result.id }) }}">Re-verify</a></td>
+        </tr>
+    {% endfor %}
+    </table>
 {% endblock %}

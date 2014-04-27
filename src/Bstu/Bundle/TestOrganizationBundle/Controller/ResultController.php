@@ -43,6 +43,10 @@ class ResultController extends Controller
     {
         $this->checkAccess($resultTest);
         
+        if ($resultTest->getVerified()) {
+            throw new AccessDeniedException('Result is also verified');
+        }   
+        
         return [
             'form' => $this->createForm('bstu_bundle_testorganizationbundle_resulttest', $resultTest)->createView(),
         ];
@@ -60,6 +64,10 @@ class ResultController extends Controller
     {
         $this->checkAccess($resultTest);
         
+        if ($resultTest->getVerified()) {
+            throw new AccessDeniedException('Result is also verified');
+        }   
+        
         $form = $this->createForm('bstu_bundle_testorganizationbundle_resulttest', $resultTest);
         $form->handleRequest($request);
         
@@ -69,7 +77,7 @@ class ResultController extends Controller
             $em->persist($resultTest);
             $em->flush();
             
-            $this->redirect($this->generateUrl('teacher_result_unverified'));
+            return $this->redirect($this->generateUrl('teacher_result_unverified'));
         }
         
         return [
@@ -87,15 +95,11 @@ class ResultController extends Controller
     {
         if ($resultTest->getTest()->getTeacher() !== $this->getUser()) {
             throw new AccessDeniedException('This test is not created by you');
-        }
-        
-        if ($resultTest->getVerified()) {
-            throw new AccessDeniedException('Result is also verified');
-        }    
+        } 
     }
     
     /**
-     * @Route("/verified", name="teache_result_verified")
+     * @Route("/verified", name="teacher_result_verified")
      * @Method({"GET"})
      * @Template()
      */
@@ -106,11 +110,35 @@ class ResultController extends Controller
             ->getRepository('BstuTestOrganizationBundle:ResultTest')
         ;
 
-        $results = $repo->findVerfiedTestsByTeacher($this->getUser());
+        $results = $repo->findVerifiedTestsByTeacher($this->getUser());
 
         return [
             'results' => $results,
         ];
+    }
+    
+    /**
+     * @Route("/unverify/{id}", name="teacher_result_unverify_test")
+     * @Method("GET")
+     * @Template()
+     * 
+     * @param \Bstu\Bundle\TestOrganizationBundle\Entity\ResultTest $resultTest
+     */
+    public function markAsUnverifiedAction(ResultTest $resultTest)
+    {
+        $this->checkAccess($resultTest);
+        
+        if ($resultTest->getVerified()) {
+            $resultTest->setVerified(false);
+            
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($resultTest);
+            $em->flush();
+        }
+        
+        return $this->redirect($this->generateUrl('teacher_result_verify_test', [
+            'id' => $resultTest->getId(),
+        ]));
     }
 
 }

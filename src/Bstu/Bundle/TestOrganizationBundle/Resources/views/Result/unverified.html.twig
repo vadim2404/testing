@@ -1,9 +1,15 @@
 {% extends "::base.html.twig" %}
 
 {% block body %}
-    <ul>
-    {% for result in results %}
-        <li><a href="{{ path('teacher_result_verify_test', { 'id' : result.id }) }}">{{ result.test.title }} - {{ result.student.firstName }} {{ result.student.lastName }} {{ result.student.middleName|default('') }}</a></li>
-    {% endfor %}
-    <ul>
+    <a href="{{ path('teacher_result_verified') }}">Verified tests</a>
+    
+    {% if results|length %}
+        <ul>
+        {% for result in results %}
+            <li><a href="{{ path('teacher_result_verify_test', { 'id' : result.id }) }}">{{ result.test.title }} - {{ result.student.firstName }} {{ result.student.lastName }} {{ result.student.middleName|default('') }}</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>All tests is verified</p>
+    {% endif %}
 {% endblock %}

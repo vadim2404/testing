@@ -277,7 +277,7 @@ class Question
     {
         switch ($this->type) {
             case self::TYPE_TEXT:
-                return $answer === $this->getAnswer() ? 1.0 : 0.05;
+                return $answer === $this->getAnswer() ? 1.0 : 0.0;
         }
         
         return 0.0;
