@@ -12,6 +12,8 @@ use Bstu\Bundle\TestOrganizationBundle\Entity\ResultQuestion;
 
 class QuestionShuffle
 {
+    const COMPLEXITY_ITERATIONS = 10;
+    
     /**
      * Security context
      *
@@ -66,15 +68,40 @@ class QuestionShuffle
             ->setPlan($plan)
         ;
 
-        if (Test::TYPE_RANDOM === $test->getType()) {
-            shuffle($questions);
-            for ($i = 0; $i < $test->getMaxQuestions(); ++$i) {
-                $resultQuestion = new ResultQuestion();
-                $resultQuestion->setQuestion($questions[$i])
-                    ->setResultTest($result)
-                ;
-                $result->addResultQuestion($resultQuestion);
-            }
+        switch ($test->getType()) {
+            case Test::TYPE_RANDOM:
+                shuffle($questions);
+                for ($i = 0; $i < $test->getMaxQuestions(); ++$i) {
+                    $resultQuestion = new ResultQuestion();
+                    $resultQuestion->setQuestion($questions[$i])
+                        ->setResultTest($result)
+                    ;
+                    $result->addResultQuestion($resultQuestion);
+                }
+                break;
+                
+            case Test::TYPE_RANDOM_WITH_COMPLEXITY:
+                $heap = new \SplMinHeap();
+                $saved = [];
+                for ($iteration = 0; $iteration < self::COMPLEXITY_ITERATIONS; ++$iteration) {
+                    shuffle($questions);
+                    $complexity = 0;
+                    $saved[$iteration] = [];
+                    for ($i = 0; $i < $test->getMaxQuestions(); ++$i) {
+                        $complexity += $questions[$i]->getRate();
+                        $saved[$iteration][] = $questions[$i];
+                    }
+                    $heap->insert([abs($test->getComplexity() - $complexity), $iteration]);
+                }
+                $minNode = $heap->extract();
+                foreach ($saved[$minNode[1]] as $question) {
+                    $resultQuestion = new ResultQuestion();
+                    $resultQuestion->setQuestion($question)
+                        ->setResultTest($result)
+                    ;
+                    $result->addResultQuestion($resultQuestion);
+                }
+                break;
         }
 
         $this->em->persist($result);
