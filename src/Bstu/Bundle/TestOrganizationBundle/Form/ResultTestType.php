@@ -41,12 +41,13 @@ class ResultTestType extends BaseResultTestType
             ])
             ->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
                 $resultTest = $event->getData();
-                $sum = 0;
-                $resultQuestions = $resultTest->getResultQuestions();
-                foreach ($resultQuestions as $resultQuestion) {
-                    $sum += $resultQuestion->getResult();
+                $sum = $cnt = 0;
+                foreach ($resultTest->getResultQuestions() as $resultQuestion) {
+                    $rate = $resultQuestion->getQuestion()->getRate();
+                    $sum += $rate * $resultQuestion->getResult();
+                    $cnt += $rate;
                 }
-                $resultTest->setRating($sum / $resultQuestions->count());
+                $resultTest->setRating($sum / $cnt);
                 $resultTest->setVerified(true);
             })
         ;
