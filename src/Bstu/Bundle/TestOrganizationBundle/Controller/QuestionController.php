@@ -38,7 +38,7 @@ class QuestionController extends Controller
     /**
      * Creates a new Question entity.
      *
-     * @Route("/{questionType}", name="question_create")
+     * @Route("/{questionType}", name="question_create", requirements={"questionType" = "\d+"})
      * @Method("POST")
      * @Template("BstuTestOrganizationBundle:Question:new.html.twig")
      */
