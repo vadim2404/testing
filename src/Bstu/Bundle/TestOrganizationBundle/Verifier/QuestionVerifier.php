@@ -46,6 +46,14 @@ class QuestionVerifier
                 }
                 return 0.0;
                 
+            case Question::TYPE_LOGIC_SEQUENCE:
+                $result = 0;
+                $variants = array_values($question->getVariants());
+                foreach (json_decode($studentAnswer) as $id => $answer) {
+                    $result += intval($answer === $variants[$id]);
+                }
+                return $result / intval($realAnswer);
+                
             case Question::TYPE_CHECKBOX:
                 $realAnswerArray = explode(',', $question->getAnswer());
                 $studentAnswerArray = explode(',', $question->getAnswer());

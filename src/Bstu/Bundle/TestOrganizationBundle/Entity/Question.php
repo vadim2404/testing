@@ -18,6 +18,7 @@ class Question
     const TYPE_TEXTAREA = 2;
     const TYPE_CHECKBOX = 3;
     const TYPE_RADIO = 4;
+    const TYPE_LOGIC_SEQUENCE = 5;
     
     const COMPLEXITY_EASY = 1;
     const COMPLEXITY_MEDIUM = 2;

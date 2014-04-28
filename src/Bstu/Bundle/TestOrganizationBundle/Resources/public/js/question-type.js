@@ -2,6 +2,7 @@
     var init = function () {
             var TYPE_CHECKBOX = 3,
                 TYPE_RADIO = 4,
+                TYPE_LOGIC_SEQUENCE = 5,
                 $list = $('#variants-field-list'),
                 node,
                 counter,
@@ -39,10 +40,16 @@
                     var $newNode = $('<li/>').html(node.replace(/__name__/g, counter++));
                     appendLink.call($newNode);
                     $newNode.appendTo($list);
+                    if (type === TYPE_LOGIC_SEQUENCE) {
+                        $answer.val($list.find('li').length);
+                    }
                     return false;
                 });
                 $list.on('click', '.variants-field-delete', function () {
                     $(this).closest('li').remove();
+                    if (type === TYPE_LOGIC_SEQUENCE) {
+                        $answer.val($list.find('li').length);
+                    }
                     return false;
                 });
             }

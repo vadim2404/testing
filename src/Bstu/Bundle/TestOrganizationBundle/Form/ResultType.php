@@ -18,6 +18,7 @@ class ResultType extends AbstractType
             'question',
             'real_answer',
             'student_answer',
+            'question_type',
         ])->setOptional([
             'variants',
         ])->setAllowedTypes([
@@ -25,6 +26,7 @@ class ResultType extends AbstractType
             'real_answer' => 'string',
             'student_answer' => 'string',
             'variants' => ['null', 'array'],
+            'question_type' => 'integer',
         ])->setDefaults([
             'variants' => null,
         ]);
@@ -39,6 +41,7 @@ class ResultType extends AbstractType
         $view->vars['real_answer'] = $options['real_answer'];
         $view->vars['student_answer'] = $options['student_answer'];
         $view->vars['variants'] = $options['variants'];
+        $view->vars['question_type'] = $options['question_type'];
     }
     
     /**

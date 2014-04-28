@@ -15,7 +15,7 @@
                     {% for resultQuestion in result.resultQuestions %}
                         <tr>
                             <td>{{ resultQuestion.question.question }}</td>
-                            {% if resultQuestion.question.variants|length %}
+                            {% if resultQuestion.question.type in [constant('Bstu\\Bundle\\TestOrganizationBundle\\Entity\\Question::TYPE_RADIO'), constant('Bstu\\Bundle\\TestOrganizationBundle\\Entity\\Question::TYPE_CHECKBOX')] %}
                                 <td>
                                     <ul>
                                     {% set splitedRealAnswer = resultQuestion.question.answer|split(',') %}
@@ -38,9 +38,25 @@
                                     {% endfor %}
                                     </ul>
                                 </td>
-                            {% else %}
+                            {% elseif resultQuestion.question.type in [constant('Bstu\\Bundle\\TestOrganizationBundle\\Entity\\Question::TYPE_TEXT'), constant('Bstu\\Bundle\\TestOrganizationBundle\\Entity\\Question::TYPE_TEXTAREA')] %}
                                 <td>{{ resultQuestion.question.answer }}</td>
                                 <td>{{ resultQuestion.answer }}</td>
+                            {% elseif resultQuestion.question.type == constant('Bstu\\Bundle\\TestOrganizationBundle\\Entity\\Question::TYPE_LOGIC_SEQUENCE') %}
+                                <td>
+                                    <ul>
+                                    {% for variant in resultQuestion.question.variants %}
+                                        <li>{{ variant }}</li>
+                                    {% endfor %}
+                                    </ul>
+                                </td>
+                                {% set studentDecode = resultQuestion.answer|json_decode %}
+                                <td>
+                                    <ul>
+                                        {% for answer in studentDecode %}
+                                            <li>{{ answer }}</li>
+                                        {% endfor %}
+                                    </ul
+                                </td>
                             {% endif %}
                             <td>{{ resultQuestion.result|number_format(2) }}</td>
                         </tr>

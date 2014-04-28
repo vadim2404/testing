@@ -72,6 +72,18 @@ class ResultQuestionType extends AbstractType
                     'expanded' => true,
                 ]);
                 break;
+            
+            case Question::TYPE_LOGIC_SEQUENCE:
+                $items = $question->getVariants();
+                shuffle($items);
+                $builder->add('answer', 'text', [
+                    'label' => $question->getQuestion(),
+                    'data' => $item->getAnswer() ? $item->getAnswer() : json_encode($items),
+                    'attr' => [
+                        'class' => 'js-logic-sequence',
+                    ],
+                ]);
+                break;
         }         
         
         $builder ->add('send', 'button', [

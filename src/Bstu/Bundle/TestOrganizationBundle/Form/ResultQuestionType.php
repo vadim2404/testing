@@ -40,6 +40,7 @@ class ResultQuestionType extends BaseResultQuestionType
                 'question' => $question->getQuestion(),
                 'real_answer' => $question->getAnswer(),
                 'variants' => empty($question->getVariants()) ? null : $question->getVariants(),
+                'question_type' => $question->getType(),
                 'student_answer' => $item->getAnswer(),
                 'precision' => 2,
                 'data' => $this->verifier->verify($item),

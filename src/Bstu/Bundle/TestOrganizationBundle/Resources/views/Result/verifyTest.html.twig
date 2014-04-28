@@ -8,7 +8,7 @@
             <th>Question</th>
             <td>{{ question }}</td>
         </tr>
-        {% if not variants is null%}
+        {% if question_type in [constant('Bstu\\Bundle\\TestOrganizationBundle\\Entity\\Question::TYPE_RADIO'), constant('Bstu\\Bundle\\TestOrganizationBundle\\Entity\\Question::TYPE_CHECKBOX')] %}
         <tr>
             <th>Real answer</th>
             <td>
@@ -37,7 +37,7 @@
                 </ul>
             </td>
         </tr>
-        {% else %}
+        {% elseif question_type in [constant('Bstu\\Bundle\\TestOrganizationBundle\\Entity\\Question::TYPE_TEXT'), constant('Bstu\\Bundle\\TestOrganizationBundle\\Entity\\Question::TYPE_TEXTAREA')] %}
         <tr>
             <th>Real answer</th>
             <td>{{ real_answer }}</td>
@@ -46,6 +46,28 @@
             <th>Student answer</th>
             <td>{{ student_answer }}</td>
         </tr>
+        {% elseif question_type == constant('Bstu\\Bundle\\TestOrganizationBundle\\Entity\\Question::TYPE_LOGIC_SEQUENCE') %}
+        <tr>
+            <th>Real answer</th>
+            <td>
+                <ul>
+                {% for variant in variants %}
+                    <li>{{ variant }}</li>
+                {% endfor %}
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <th>Student answer</th>
+            {% set studentDecode = student_answer|json_decode %}
+            <td>
+                <ul>
+                    {% for answer in studentDecode %}
+                        <li>{{ answer }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr> 
         {% endif %}
     </table>
     {{ block('percent_widget') }}

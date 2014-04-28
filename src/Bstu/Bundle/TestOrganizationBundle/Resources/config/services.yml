@@ -5,6 +5,7 @@ parameters:
     bstu_test_organization.resulttype.class: Bstu\Bundle\TestOrganizationBundle\Form\ResultType
     bstu_test_organization.distance.dld.class: Bstu\Bundle\TestOrganizationBundle\Distance\DamerauLevenshteinDistance
     bstu_test_organization.verifier.question_verifier.class: Bstu\Bundle\TestOrganizationBundle\Verifier\QuestionVerifier
+    bstu_test_organization.twig.json_decode.class: Bstu\Bundle\TestOrganizationBundle\Twig\Extension\JsonDecodeExtension
     
 services:
     bstu_test_organization.testtype:
@@ -40,3 +41,8 @@ services:
             - '@router'
         tags:
             - { name: form.type, alias: bstu_bundle_testorganizationbundle_resulttest }
+            
+    bstu_test_organization.twig.json_decode:
+        class: %bstu_test_organization.twig.json_decode.class%
+        tags:
+            - { name: twig.extension }
