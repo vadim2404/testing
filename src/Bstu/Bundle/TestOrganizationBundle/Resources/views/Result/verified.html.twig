@@ -15,8 +15,33 @@
                     {% for resultQuestion in result.resultQuestions %}
                         <tr>
                             <td>{{ resultQuestion.question.question }}</td>
-                            <td>{{ resultQuestion.question.answer }}</td>
-                            <td>{{ resultQuestion.answer }}</td>
+                            {% if resultQuestion.question.variants|length %}
+                                <td>
+                                    <ul>
+                                    {% set splitedRealAnswer = resultQuestion.question.answer|split(',') %}
+                                    {% for index, variant in resultQuestion.question.variants %}
+                                        <li>
+                                            {% if index in splitedRealAnswer %}
+                                                <b>{{ variant }}</b>
+                                            {% else %}
+                                                {{ variant}}
+                                            {% endif %}
+                                        </li>
+                                    {% endfor %}
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul>
+                                    {% set splitedStudentAnswer = resultQuestion.answer|split(',') %}
+                                    {% for variant in splitedStudentAnswer %}
+                                        <li>{{ resultQuestion.question.variants[variant] }}</li>
+                                    {% endfor %}
+                                    </ul>
+                                </td>
+                            {% else %}
+                                <td>{{ resultQuestion.question.answer }}</td>
+                                <td>{{ resultQuestion.answer }}</td>
+                            {% endif %}
                             <td>{{ resultQuestion.result|number_format(2) }}</td>
                         </tr>
                     {% endfor %}
