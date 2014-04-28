@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Doctrine\Common\Collections\ArrayCollection;
+use Bstu\Bundle\TestOrganizationBundle\Entity\Question;
 
 class ResultQuestionType extends AbstractType
 {
@@ -37,18 +38,47 @@ class ResultQuestionType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        
         $item = $this->getItem($options);
-        $builder
-            ->add('answer', null, [
-                'label' => $item->getQuestion()->getQuestion(),
-            ])
-            ->add('send', 'button', [
-                'attr' => [
-                    'class' => 'js-answer-button',
-                ]
-            ])
-        ;
+        
+        $question = $item->getQuestion();
+        
+        switch ($question->getType()) {
+            case Question::TYPE_TEXT:
+                $builder->add('answer', 'text', [
+                    'label' => $question->getQuestion(),
+                ]);
+                break;
+            
+            case Question::TYPE_TEXTAREA:
+                $builder->add('answer', 'textarea', [
+                    'label' => $question->getQuestion(),
+                ]);
+                break;
+                
+            case Question::TYPE_CHECKBOX:
+                $builder->add('answer', 'choice', [
+                    'label' => $question->getQuestion(),
+                    'choices' => $question->getVariants(),
+                    'multiple' => true,
+                    'expanded' => true,
+                ]);
+                break;
+            
+            case Question::TYPE_RADIO:
+                $builder->add('answer', 'choice', [
+                    'label' => $question->getQuestion(),
+                    'choices' => $question->getVariants(),
+                    'multiple' => false,
+                    'expanded' => true,
+                ]);
+                break;
+        }         
+        
+        $builder ->add('send', 'button', [
+            'attr' => [
+                'class' => 'js-answer-button',
+            ]
+        ]);
     }
     
     /**

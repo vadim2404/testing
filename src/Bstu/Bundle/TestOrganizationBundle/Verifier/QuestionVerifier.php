@@ -45,6 +45,21 @@ class QuestionVerifier
                     return 1 - $distance / $realAnswerLength;
                 }
                 return 0.0;
+                
+            case Question::TYPE_CHECKBOX:
+                $realAnswerArray = explode(',', $question->getAnswer());
+                $studentAnswerArray = explode(',', $question->getAnswer());
+                if (count($studentAnswerArray) > $cntRealAnswer = count($realAnswerArray)) {
+                    return 0.0;
+                }
+                foreach ($studentAnswer as $ans) {
+                    $idx = array_search($ans, $realAnswerArray, true);
+                    if (false === $idx) {
+                        return 0.0;
+                    }              
+                    unset($realAnswerArray[$idx]);
+                }
+                return ($cntRealAnswer - count($realAnswerArray)) / $cntRealAnswer;
         }
         
         return floatval($studentAnswer === $realAnswer);
