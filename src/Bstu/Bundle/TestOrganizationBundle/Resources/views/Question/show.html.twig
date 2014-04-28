@@ -18,6 +18,18 @@
                 <td>{{ entity.answer }}</td>
             </tr>
             <tr>
+                <th>Variants</th>
+                <td>
+                {% if entity.variants|length %}
+                    <ul>
+                    {% for variant in entity.variants %}
+                        <li>{{ variant }}</li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+                </td>
+            </tr>
+            <tr>
                 <th>Rate</th>
                 <td>{{ entity.rate }}</td>
             </tr>

@@ -38,13 +38,13 @@ class QuestionController extends Controller
     /**
      * Creates a new Question entity.
      *
-     * @Route("/", name="question_create")
+     * @Route("/{questionType}", name="question_create")
      * @Method("POST")
      * @Template("BstuTestOrganizationBundle:Question:new.html.twig")
      */
-    public function createAction(Request $request)
+    public function createAction(Request $request, $questionType)
     {        
-        $entity = new Question();
+        $entity = (new Question())->setType(intval($questionType));
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
         
@@ -77,7 +77,7 @@ class QuestionController extends Controller
     private function createCreateForm(Question $entity)
     {
         $form = $this->createForm(new QuestionType($this->getUser()), $entity, array(
-            'action' => $this->generateUrl('question_create'),
+            'action' => $this->generateUrl('question_create', ['questionType' => $entity->getType()]),
             'method' => 'POST',
         ));
 
