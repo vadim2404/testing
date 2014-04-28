@@ -102,6 +102,18 @@ class QuestionShuffle
                     $result->addResultQuestion($resultQuestion);
                 }
                 break;
+                
+            case Test::TYPE_VARIANT:
+                $variants = $test->getVariants()->toArray();
+                shuffle($variants);
+                foreach ($variants[0]->getQuestions() as $question) {
+                    $resultQuestion = new ResultQuestion();
+                    $resultQuestion->setQuestion($question)
+                        ->setResultTest($result)
+                    ;
+                    $result->addResultQuestion($resultQuestion);
+                }
+                break;
         }
 
         $this->em->persist($result);

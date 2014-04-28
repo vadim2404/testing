@@ -39,6 +39,11 @@
             Edit
         </a>
     </li>
+    {% if entity.isTestByVariants() %}
+    <li>
+        <a href="{{ path('variant', { 'id' : entity.id}) }}">Manage variants</a>
+    </li>
+    {% endif %}
     <li>{{ form(delete_form) }}</li>
 </ul>
 {% endblock %}

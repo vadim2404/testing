@@ -420,4 +420,14 @@ class Test
     {
         $this->plans->removeElement($plan);
     }
+    
+    /**
+     * Test type is equal to variant?
+     * 
+     * @return bool
+     */
+    public function isTestByVariants()
+    {
+        return self::TYPE_VARIANT === $this->type;
+    }
 }
