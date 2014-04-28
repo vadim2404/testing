@@ -53,4 +53,25 @@ class ResultTestRepository extends EntityRepository
     {
         return $this->findTestsByTeacher($user, true);
     }
+    
+    /**
+     * Find verified tests by student
+     * 
+     * @param \Bstu\Bundle\UserBundle\Entity\User $user
+     * @return array
+     */
+    public function findVerifiedTestsByStudent(User $user)
+    {
+        return $this->createQueryBuilder('rt')
+            ->where('rt.verified = :verified')
+            ->andWhere('rt.student = :student')
+            ->orderBy('rt.id', 'desc')
+            ->getQuery()
+            ->setParameters([
+                'verified' => true,
+                'student' => $user,
+            ])
+            ->execute()
+        ;
+    }
 }

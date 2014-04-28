@@ -1,0 +1,32 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <table>
+        <tr>
+            <th>Test</th>
+            <th>Date</th>
+            <th>Details</th>
+            <th>Summary result</th>
+        </tr>
+        {% for result in results %}
+            <tr>
+                <td>{{ result.test.title }}</td>
+                <td>{{ result.plan.start|date('Y-m-d H:i') }}-{{ result.plan.end|date('Y-m-d H:i') }}</td>
+                <td>
+                    <table>
+                        <tr>
+                            <th>Question #</th><th>Result</th>
+                        </tr>
+                        {% for idx, answer in result.resultQuestions %}
+                            <tr>
+                                <td>{{ idx }}</td>
+                                <td>{{ (answer.result * 100)|number_format(2) }} %</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </td>
+                <td>{{ (result.rating * 100)|number_format(2) }} %</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

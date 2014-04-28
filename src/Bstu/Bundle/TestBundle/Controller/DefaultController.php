@@ -110,4 +110,22 @@ class DefaultController extends Controller
             'method' => 'POST',
         ]);
     }
+    
+    /**
+     * @Route("/result")
+     * @Method("GET")
+     * @Template()
+     */
+    public function resultAction()
+    {
+        $results = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('BstuTestOrganizationBundle:ResultTest')
+            ->findVerifiedTestsByStudent($this->getUser())
+        ;
+        
+        return [
+            'results' => $results,
+        ];
+    }
 }
