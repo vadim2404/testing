@@ -49,20 +49,20 @@ assetic:
 # Doctrine Configuration
 doctrine:
     dbal:
-        driver:   %database_driver%
+        driver:   pdo_mysql
         host:     %database_host%
         port:     %database_port%
         dbname:   %database_name%
         user:     %database_user%
         password: %database_password%
         charset:  UTF8
-        # if using pdo_sqlite as your database driver, add the path in parameters.yml
-        # e.g. database_path: %kernel.root_dir%/data/data.db3
-        # path:     %database_path%
 
     orm:
         auto_generate_proxy_classes: %kernel.debug%
         auto_mapping: true
+        metadata_cache_driver: redis
+        result_cache_driver: redis
+        query_cache_driver: redis
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -70,7 +70,9 @@ swiftmailer:
     host:      ~
     username:  ~
     password:  ~
-    spool:     { type: memory }
+    spool:
+        type: service
+        id: snc_redis.swiftmailer.spool
 
 fos_user:
     db_driver: orm
@@ -81,3 +83,28 @@ fos_user:
     registration:
         form:
             type: bstu_bundle_userbundle_user
+            
+snc_redis:
+    clients:
+        default:
+            type: predis
+            alias: default
+            dsn: %redis_dsn%
+            logging: %kernel.debug%
+            options:
+                profile: 2.8
+            
+    session:
+        client: default
+        
+    doctrine:
+        metadata_cache:
+            client: default
+        result_cache:
+            client: default
+        query_cache:
+            client: default
+            
+    swiftmailer:
+        client: default
+        key: swiftmailer
