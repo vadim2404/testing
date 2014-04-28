@@ -19,6 +19,7 @@ class Question
     const TYPE_CHECKBOX = 3;
     const TYPE_RADIO = 4;
     const TYPE_LOGIC_SEQUENCE = 5;
+    const TYPE_PAIRED = 6;
     
     const COMPLEXITY_EASY = 1;
     const COMPLEXITY_MEDIUM = 2;
@@ -266,21 +267,5 @@ class Question
         $this->type = $type;
 
         return $this;
-    }
-    
-    /**
-     * Result
-     * 
-     * @param mixed $answer
-     * @return real
-     */
-    public function verify($answer)
-    {
-        switch ($this->type) {
-            case self::TYPE_TEXT:
-                return $answer === $this->getAnswer() ? 1.0 : 0.0;
-        }
-        
-        return 0.0;
     }
 }

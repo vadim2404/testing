@@ -30,6 +30,6 @@ class JsonDecodeExtension extends \Twig_Extension
      */
     public function jsonDecode($str)
     {
-        return json_decode($str);
+        return json_decode($str, true);
     }
 }

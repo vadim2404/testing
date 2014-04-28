@@ -84,6 +84,29 @@ class ResultQuestionType extends AbstractType
                     ],
                 ]);
                 break;
+            
+            case Question::TYPE_PAIRED:
+                $variants = $question->getVariants();
+                $keys = $values = [];
+                foreach ($variants as $variant) {
+                    $obj = json_decode($variant, true);
+                    $keys[] = key($obj);
+                    $values[] = current($obj);
+                }
+                shuffle($keys);
+                shuffle($values);
+                $items = [
+                    'keys' => $keys,
+                    'values' => $values,
+                ];
+                $builder->add('answer', 'text', [
+                    'label' => $question->getQuestion(),
+                    'data' => $item->getAnswer() ? $item->getAnswer() : json_encode($items),
+                    'attr' => [
+                        'class' => 'js-paired',
+                    ],    
+                ]);
+                break;
         }         
         
         $builder ->add('send', 'button', [

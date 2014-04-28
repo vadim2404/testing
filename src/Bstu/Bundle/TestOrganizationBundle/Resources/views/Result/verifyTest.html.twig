@@ -68,6 +68,31 @@
                 </ul>
             </td>
         </tr> 
+        {% elseif question_type == constant('Bstu\\Bundle\\TestOrganizationBundle\\Entity\\Question::TYPE_PAIRED') %}
+        <tr>
+            <th>Real answer</th>
+            <td>
+                <ul>
+                {% for variant in variants %}
+                    {% set item = variant|json_decode %}
+                    {% for key, value in item %}
+                        <li>{{ key }} - {{ value }}</li>
+                    {% endfor %}
+                {% endfor %}
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <th>Student answer</th>
+            <td>
+                <ul>
+                {% set studentDecode = student_answer|json_decode %}
+                {% for idx, key in studentDecode.keys %}
+                    <li>{{ key }} - {{ studentDecode.values[idx] }}</li>
+                {% endfor %}
+                </ul>
+            </td>
+        </tr>
         {% endif %}
     </table>
     {{ block('percent_widget') }}

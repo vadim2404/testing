@@ -56,7 +56,7 @@ class QuestionVerifier
                 
             case Question::TYPE_CHECKBOX:
                 $realAnswerArray = explode(',', $question->getAnswer());
-                $studentAnswerArray = explode(',', $question->getAnswer());
+                $studentAnswerArray = explode(',', $studentAnswer);
                 if (count($studentAnswerArray) > $cntRealAnswer = count($realAnswerArray)) {
                     return 0.0;
                 }
@@ -68,6 +68,19 @@ class QuestionVerifier
                     unset($realAnswerArray[$idx]);
                 }
                 return ($cntRealAnswer - count($realAnswerArray)) / $cntRealAnswer;
+                
+            case Question::TYPE_PAIRED:
+                $variants = [];
+                foreach ($question->getVariants() as $variant) {
+                    $row = json_decode($variant, true);
+                    $variants[key($row)] = current($row);
+                }
+                $studentAnswerDecoded = json_decode($studentAnswer, true);
+                $result = 0;
+                foreach ($studentAnswerDecoded['keys'] as $idx => $key) {
+                    $result += intval($variants[$key] === $studentAnswerDecoded['values'][$idx]);
+                }
+                return $result / count($variants);
         }
         
         return floatval($studentAnswer === $realAnswer);

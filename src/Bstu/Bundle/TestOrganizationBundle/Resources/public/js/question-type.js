@@ -3,6 +3,7 @@
             var TYPE_CHECKBOX = 3,
                 TYPE_RADIO = 4,
                 TYPE_LOGIC_SEQUENCE = 5,
+                TYPE_PAIRED = 6,
                 $list = $('#variants-field-list'),
                 node,
                 counter,
@@ -36,18 +37,37 @@
                         $list.find('li').eq(+arr[i]).addClass('ui-selected');
                     }
                 }
+                if (type === TYPE_PAIRED) {
+                    $('form').submit(function () {
+                        $list.find('li').each(function () {
+                            var $this = $(this),
+                                $inputs = $this.find('input'),
+                                $first = $inputs.first(),
+                                $last = $inputs.last(),
+                                key = $first.val(),
+                                value = $last.val(),
+                                obj = {};
+                            obj[key] = value;
+                            $first.val(JSON.stringify(obj));
+                            $last.remove();
+                        });
+                    });
+                }
                 $('#add-another-variant').click(function () {
                     var $newNode = $('<li/>').html(node.replace(/__name__/g, counter++));
+                    if (type === TYPE_PAIRED) {
+                        $newNode.find('input').after('<input type="text" required="required"/>');
+                    }
                     appendLink.call($newNode);
                     $newNode.appendTo($list);
-                    if (type === TYPE_LOGIC_SEQUENCE) {
+                    if (type === TYPE_LOGIC_SEQUENCE || type === TYPE_PAIRED) {
                         $answer.val($list.find('li').length);
                     }
                     return false;
                 });
                 $list.on('click', '.variants-field-delete', function () {
                     $(this).closest('li').remove();
-                    if (type === TYPE_LOGIC_SEQUENCE) {
+                    if (type === TYPE_LOGIC_SEQUENCE || type === TYPE_PAIRED) {
                         $answer.val($list.find('li').length);
                     }
                     return false;

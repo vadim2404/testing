@@ -57,6 +57,27 @@
                                         {% endfor %}
                                     </ul
                                 </td>
+                            {% elseif resultQuestion.question.type == constant('Bstu\\Bundle\\TestOrganizationBundle\\Entity\\Question::TYPE_PAIRED') %}
+                                <td>
+                                    <ul>
+                                    {% for variant in resultQuestion.question.variants %}
+                                        {% set item = variant|json_decode %}
+                                        {% for key, value in item %}
+                                            <li>{{ key }} - {{ value }}</li>
+                                        {% endfor %}
+                                    {% endfor %}
+                                    </ul>
+                                </td>
+
+                                <td>
+                                    <ul>
+                                    {% set studentDecode = resultQuestion.answer|json_decode %}
+                                    {% for idx, key in studentDecode.keys %}
+                                        <li>{{ key }} - {{ studentDecode.values[idx] }}</li>
+                                    {% endfor %}
+                                    </ul>
+                                </td>
+                                    
                             {% endif %}
                             <td>{{ resultQuestion.result|number_format(2) }}</td>
                         </tr>
