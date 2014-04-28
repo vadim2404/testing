@@ -34,8 +34,13 @@ class ResultQuestionType extends BaseResultQuestionType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $item = $this->getItem($options);
+        $question = $item->getQuestion();
         $builder
-            ->add('result', 'percent', [
+            ->add('result', 'result', [
+                'question' => $question->getQuestion(),
+                'real_answer' => $question->getAnswer(),
+                'variants' => empty($question->getVariants()) ? null : $question->getVariants(),
+                'student_answer' => $item->getAnswer(),
                 'precision' => 2,
                 'data' => $this->verifier->verify($item),
             ])

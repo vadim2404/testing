@@ -2,6 +2,7 @@ parameters:
     bstu_test_organization.testtype.class: Bstu\Bundle\TestOrganizationBundle\Form\TestType
     bstu_test_organization.resultquestiontype.class: Bstu\Bundle\TestOrganizationBundle\Form\ResultQuestionType
     bstu_test_organization.resulttesttype.class: Bstu\Bundle\TestOrganizationBundle\Form\ResultTestType
+    bstu_test_organization.resulttype.class: Bstu\Bundle\TestOrganizationBundle\Form\ResultType
     bstu_test_organization.distance.dld.class: Bstu\Bundle\TestOrganizationBundle\Distance\DamerauLevenshteinDistance
     bstu_test_organization.verifier.question_verifier.class: Bstu\Bundle\TestOrganizationBundle\Verifier\QuestionVerifier
     
@@ -20,6 +21,11 @@ services:
         class: %bstu_test_organization.verifier.question_verifier.class%
         arguments:
             - '@bstu_test_organization.distance.dld'
+            
+    bstu_test_organization.resulttype:
+        class: %bstu_test_organization.resulttype.class%
+        tags:
+            - { name: form.type, alias: result }
             
     bstu_test_organization.resultquestiontype:
         class: %bstu_test_organization.resultquestiontype.class%

@@ -1,5 +1,56 @@
 {% extends '::base.html.twig' %}
 
+{% form_theme form _self %}
+
+{% block result_widget %}
+    <table>
+        <tr>
+            <th>Question</th>
+            <td>{{ question }}</td>
+        </tr>
+        {% if not variants is null%}
+        <tr>
+            <th>Real answer</th>
+            <td>
+                <ul>
+                {% set splitedRealAnswer = real_answer|split(',') %}
+                {% for index, variant in variants %}
+                    <li>
+                        {% if index in splitedRealAnswer %}
+                            <b>{{ variant }}</b>
+                        {% else %}
+                            {{ variant}}
+                        {% endif %}
+                    </li>
+                {% endfor %}
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <th>Student answer</th>
+            <td>
+                <ul>
+                {% set splitedStudentAnswer = student_answer|split(',') %}
+                {% for variant in splitedStudentAnswer %}
+                    <li>{{ variants[variant] }}</li>
+                {% endfor %}
+                </ul>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <th>Real answer</th>
+            <td>{{ real_answer }}</td>
+        </tr>
+        <tr>
+            <th>Student answer</th>
+            <td>{{ student_answer }}</td>
+        </tr>
+        {% endif %}
+    </table>
+    {{ block('percent_widget') }}
+{% endblock %}
+
 {% block body %}
 {{ form(form) }}
 {% endblock %}
