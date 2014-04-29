@@ -20,14 +20,21 @@ class ResultController extends Controller
      * @Method({"GET"})
      * @Template()
      */
-    public function unverifiedAction()
+    public function unverifiedAction(Request $request)
     {
         $repo = $this->getDoctrine()
             ->getManager()
             ->getRepository('BstuTestOrganizationBundle:ResultTest')
         ;
 
-        $results = $repo->findUnverfiedTestsByTeacher($this->getUser());
+        $query = $repo->findUnverfiedTestsByTeacher($this->getUser());
+        $paginator  = $this->get('knp_paginator');
+        
+        $results = $paginator->paginate(
+            $query,
+            $request->query->get('page', 1),
+            10
+        );
 
         return [
             'results' => $results,
@@ -103,15 +110,22 @@ class ResultController extends Controller
      * @Method({"GET"})
      * @Template()
      */
-    public function verifiedAction()
+    public function verifiedAction(Request $request)
     {
         $repo = $this->getDoctrine()
             ->getManager()
             ->getRepository('BstuTestOrganizationBundle:ResultTest')
         ;
 
-        $results = $repo->findVerifiedTestsByTeacher($this->getUser());
-
+        $query = $repo->findVerifiedTestsByTeacher($this->getUser());
+        $paginator  = $this->get('knp_paginator');
+        
+        $results = $paginator->paginate(
+            $query,
+            $request->query->get('page', 1),
+            10
+        );
+        
         return [
             'results' => $results,
         ];

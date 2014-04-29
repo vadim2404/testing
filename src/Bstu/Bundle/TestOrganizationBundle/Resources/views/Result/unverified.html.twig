@@ -9,6 +9,9 @@
             <li><a href="{{ path('teacher_result_verify_test', { 'id' : result.id }) }}">{{ result.test.title }} - {{ result.student.firstName }} {{ result.student.lastName }} {{ result.student.middleName|default('') }}</a></li>
         {% endfor %}
         </ul>
+        <div class="pagination">
+            {{ knp_pagination_render(results) }}
+        </div>
     {% else %}
         <p>All tests is verified</p>
     {% endif %}

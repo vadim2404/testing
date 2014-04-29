@@ -25,15 +25,22 @@ class FacultyController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('BstuFacultyBundle:Faculty')->findAll();
-
-        return array(
-            'entities' => $entities,
+        $query = $em->getRepository('BstuFacultyBundle:Faculty')->createQueryBuilder('f');
+        $paginator  = $this->get('knp_paginator');
+        
+        $entities = $paginator->paginate(
+            $query,
+            $request->query->get('page', 1),
+            10
         );
+
+        return [
+            'entities' => $entities,
+        ];
     }
     /**
      * Creates a new Faculty entity.

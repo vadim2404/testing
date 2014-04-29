@@ -29,13 +29,21 @@ class SubjectController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        $entities = $this->getUser()->getSubjects();
+        $subjects = $this->getUser()->getSubjects();
 
-        return array(
-            'entities' => $entities,
+        $paginator  = $this->get('knp_paginator');
+        
+        $entities = $paginator->paginate(
+            $subjects,
+            $request->query->get('page', 1),
+            10
         );
+
+        return [
+            'entities' => $entities,
+        ];
     }
     /**
      * Creates a new Subject entity.

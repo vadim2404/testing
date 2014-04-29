@@ -20,14 +20,22 @@ class DefaultController extends Controller
      * @Method({"GET"})
      * @Template()
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        $plans = $this->getDoctrine()
+        $query = $this->getDoctrine()
             ->getManager()
             ->getRepository('BstuPlanBundle:Plan')
             ->findUnfinishedPlans()
         ;
 
+        $paginator  = $this->get('knp_paginator');
+        
+        $plans = $paginator->paginate(
+            $query,
+            $request->query->get('page', 1),
+            10
+        );
+        
         return [
             'plans' => $plans,
         ];
@@ -116,13 +124,21 @@ class DefaultController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function resultAction()
+    public function resultAction(Request $request)
     {
-        $results = $this->getDoctrine()
+        $query = $this->getDoctrine()
             ->getManager()
             ->getRepository('BstuTestOrganizationBundle:ResultTest')
             ->findVerifiedTestsByStudent($this->getUser())
         ;
+        
+        $paginator  = $this->get('knp_paginator');
+        
+        $results = $paginator->paginate(
+            $query,
+            $request->query->get('page', 1),
+            10
+        );
         
         return [
             'results' => $results,

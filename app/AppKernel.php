@@ -19,14 +19,14 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new FOS\UserBundle\FOSUserBundle(),
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new Snc\RedisBundle\SncRedisBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new Bstu\Bundle\FacultyBundle\BstuFacultyBundle(),
             new Bstu\Bundle\UserBundle\BstuUserBundle(),
             new Bstu\Bundle\TestOrganizationBundle\BstuTestOrganizationBundle(),
             new Bstu\Bundle\PlanBundle\BstuPlanBundle(),
-            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
-            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new Bstu\Bundle\TestBundle\BstuTestBundle(),
         ];
 

@@ -24,15 +24,22 @@ class TestController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('BstuTestOrganizationBundle:Test')->findByTeacher($this->getUser());
-
-        return array(
-            'entities' => $entities,
+        $query = $em->getRepository('BstuTestOrganizationBundle:Test')->findByTeacher($this->getUser());
+        $paginator  = $this->get('knp_paginator');
+        
+        $entities = $paginator->paginate(
+            $query,
+            $request->query->get('page', 1),
+            10
         );
+
+        return [
+            'entities' => $entities,
+        ];
     }
     /**
      * Creates a new Test entity.

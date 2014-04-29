@@ -9,7 +9,7 @@ class PlanRepository extends EntityRepository
     /**
      * Find plans that not finished now
      * 
-     * @return array
+     * @return \Doctrine\ORM\Query
      */
     public function findUnfinishedPlans()
     {
@@ -17,7 +17,6 @@ class PlanRepository extends EntityRepository
             ->where('p.end >= :now')
             ->getQuery()
             ->setParameter('now', new \DateTime('now'))
-            ->execute()
         ;
     }
 }

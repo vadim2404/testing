@@ -25,15 +25,22 @@ class PulpitController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('BstuFacultyBundle:Pulpit')->findAll();
+        $query = $em->getRepository('BstuFacultyBundle:Pulpit')->createQueryBuilder('p');
+        $paginator  = $this->get('knp_paginator');
 
-        return array(
-            'entities' => $entities,
+        $entities = $paginator->paginate(
+            $query,
+            $request->query->get('page', 1),
+            10
         );
+
+        return [
+            'entities' => $entities,
+        ];
     }
     /**
      * Creates a new Pulpit entity.

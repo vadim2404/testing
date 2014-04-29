@@ -31,5 +31,10 @@
             </tr>
         {% endfor %}
         </tbody>
-    </table>
-    {% endblock %}
+    </table>       
+        
+<div class="pagination">
+    {{ knp_pagination_render(entities) }}
+</div>
+
+{% endblock %}

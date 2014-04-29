@@ -27,15 +27,22 @@ class PlanController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('BstuPlanBundle:Plan')->findUnfinishedPlans();
+        $query = $em->getRepository('BstuPlanBundle:Plan')->findUnfinishedPlans();
+        $paginator  = $this->get('knp_paginator');
 
-        return array(
-            'entities' => $entities,
+        $entities = $paginator->paginate(
+            $query,
+            $request->query->get('page', 1),
+            10
         );
+
+        return [
+            'entities' => $entities,
+        ];
     }
 
     /**
@@ -45,11 +52,18 @@ class PlanController extends Controller
      * @Method({"GET"})
      * @Template()
      */
-    public function testAction()
+    public function testAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $tests = $em->getRepository('BstuTestOrganizationBundle:Test')->findAll();
+        $query = $em->getRepository('BstuTestOrganizationBundle:Test')->createQueryBuilder('t');
+        $paginator  = $this->get('knp_paginator');
+
+        $tests = $paginator->paginate(
+            $query,
+            $request->query->get('page', 1),
+            10
+        );
 
         return [
             'tests' => $tests,
