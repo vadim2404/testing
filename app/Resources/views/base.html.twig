@@ -4,15 +4,17 @@
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
-            {% stylesheets '@cssJquery' filter='cssrewrite' %}
+            {% stylesheets '@cssJquery' '@cssBootstrap' filter='cssrewrite' %}
                 <link rel="stylesheet" type="text/css" href="{{ asset_url }}" />
             {% endstylesheets %}
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        <nav>
-            {{ knp_menu_render('BstuUserBundle:Builder:mainMenu') }}
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="collapse navbar-collapse">
+                {{ knp_menu_render('BstuUserBundle:Builder:mainMenu') }}
+            </div>
         </nav>
         {% for flashMessage in app.session.flashbag.get('notice') %}
             <div class="flash-notice">
@@ -27,7 +29,7 @@
         {% else %}
             <script src="{{ path('fos_js_routing_js', { "callback" : "fos.Router.setData" }) }}"></script>
         {% endif %}
-        {% javascripts '@jsJquery' %}
+        {% javascripts '@jsJquery' '@jsBootstrap' %}
           <script src="{{ asset_url }}"></script>
         {% endjavascripts %}
     {% endblock %}

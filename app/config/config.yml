@@ -31,13 +31,20 @@ assetic:
     debug:          %kernel.debug%
     use_controller: false
     assets:
-      jsJquery:
-        inputs:
-          - '%kernel.root_dir%/Resources/public/js/jquery.js'
-          - '%kernel.root_dir%/Resources/public/js/jquery-ui.js'
-      cssJquery:
-        inputs:
-          - '%kernel.root_dir%/Resources/public/css/jquery-ui.css'
+        jsJquery:
+            inputs:
+                - '%kernel.root_dir%/Resources/public/js/jquery.js'
+                - '%kernel.root_dir%/Resources/public/js/jquery-ui.js'
+        jsBootstrap:
+            inputs:
+                - '%kernel.root_dir%/Resources/public/js/bootstrap.min.js'
+        cssJquery:
+            inputs:
+                - '%kernel.root_dir%/Resources/public/css/jquery-ui.css'
+        cssBootstrap:
+            inputs:
+                - '%kernel.root_dir%/Resources/public/css/bootstrap.min.css'
+                - '%kernel.root_dir%/Resources/public/css/bootstrap-theme.min.css'
     filters:
         jsminplus: ~
         cssrewrite: ~
@@ -104,3 +111,7 @@ snc_redis:
     swiftmailer:
         client: default
         key: swiftmailer
+        
+knp_menu:
+    twig:
+        template: '::menu.html.twig'
