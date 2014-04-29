@@ -7,6 +7,7 @@ Installation
 ```sh
 mysql -uuser -ppassword -e"CREATE DATABASE portal DEFAULT CHARSET utf8;"
 git clone https://github.com/vadim2404/testing
+cd testing
 curl -sS https://getcomposer.org/installer | php
 ./composer.phar up
 app/console doctrine:migrations:migrate -n
@@ -16,6 +17,7 @@ app/console fos:js-routing:dump
 app/console assetic:dump --force
 app/console cache:clear --env=prod
 app/console cache:warmup --env=prod
+echo "*/1 * * * * `pwd`/app/console swiftmailer:spool:send --env=prod" | crontab
 sudo setfacl -Rn -m u:"www-data":rwX -m u:`whoami`:rwX app/cache app/logs
 sudo setfacl -dRn -m u:"www-data":rwX -m u:`whoami`:rwX app/cache app/logs
 ```
