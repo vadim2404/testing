@@ -86,6 +86,10 @@ class Builder extends ContainerAware
             $menu->addChild('Pulpit', [
                 'route' => 'pulpit',
             ]);
+            
+            $menu->addChild('User', [
+                'route' => 'user',
+            ]);
         }
         
         $menu->addChild('Profile', [

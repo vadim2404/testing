@@ -1,0 +1,35 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>User list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td>{{ entity.id }}</td>
+                <td>{{ entity.username }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('user_reset', { 'id': entity.id }) }}">Reset password</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+        
+<div class="pagination">
+    {{ knp_pagination_render(entities) }}
+</div>
+
+{% endblock %}

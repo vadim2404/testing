@@ -33,8 +33,8 @@ class User extends BaseUser
     /**
      * First Name
      *
-     * @Assert\NotBlank(message="Поле 'имя' должно обязательно быть заполненным")
-     * @Assert\Length(min="0", max="255", maxMessage="Имя не может быть больше 255 символов")
+     * @Assert\NotBlank(message="Поле 'имя' должно обязательно быть заполненным", groups={"Registration"})
+     * @Assert\Length(min="0", max="255", maxMessage="Имя не может быть больше 255 символов", groups={"Registration"})
      * @ORM\Column(name="first_name", type="string", length=255)
      * @var string $firstName
      */
@@ -43,8 +43,8 @@ class User extends BaseUser
     /**
      * Last Name
      *
-     * @Assert\NotBlank(message="Поле 'фамилия' должно обязательно быть заполненным")
-     * @Assert\Length(min="0", max="255", maxMessage="Фамилия не может быть больше 255 символов")
+     * @Assert\NotBlank(message="Поле 'фамилия' должно обязательно быть заполненным", groups={"Registration"})
+     * @Assert\Length(min="0", max="255", maxMessage="Фамилия не может быть больше 255 символов", groups={"Registration"})
      * @ORM\Column(name="last_name", type="string", length=255)
      * @var string $lastName
      */
@@ -53,7 +53,7 @@ class User extends BaseUser
     /**
      * Middle Name
      *
-     * @Assert\Length(min="0", max="255", maxMessage="Отчество не может быть больше 255 символов")
+     * @Assert\Length(min="0", max="255", maxMessage="Отчество не может быть больше 255 символов", groups={"Registration"})
      * @ORM\Column(name="middle_name", type="string", length=255, nullable=true)
      * @var string $middleName
      */
