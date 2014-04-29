@@ -50,7 +50,7 @@ class UserController extends Controller
         
         $this->get('fos_user.user_manager')->updateUser($user);
         
-        $request->getSession()->getFlashBag()->add('notice', 'User password updated to ' . self::DEFAULT_PASSWORD);
+        $request->getSession()->getFlashBag()->add('notice', 'Пароль для пользователя "' . $user->getUsername() . '" стал "' . self::DEFAULT_PASSWORD . '"');
         
         return $this->redirect($this->generateUrl('user'));
     }

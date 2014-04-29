@@ -17,11 +17,13 @@
             </div>
         </nav>
         {% for flashMessage in app.session.flashbag.get('notice') %}
-            <div class="flash-notice">
+            <div class="alert alert-info">
                 {{ flashMessage }}
             </div>
         {% endfor %}
-    {% block body %}{% endblock %}
+    <div class="container">
+        {% block body %}{% endblock %}
+    </div>
     {% block javascripts %}
         <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
         {% if 'prod' == app.environment %}
