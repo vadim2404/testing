@@ -25,6 +25,9 @@ framework:
 twig:
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
+    form:
+        resources:
+            - '::form_layout.html.twig'
 
 # Assetic Configuration
 assetic:
@@ -45,6 +48,9 @@ assetic:
             inputs:
                 - '%kernel.root_dir%/Resources/public/css/bootstrap.min.css'
                 - '%kernel.root_dir%/Resources/public/css/bootstrap-theme.min.css'
+        cssMain:
+            inputs:
+                - '%kernel.root_dir%/Resources/public/css/main.css'
     filters:
         jsminplus: ~
         cssrewrite: ~
@@ -115,3 +121,6 @@ snc_redis:
 knp_menu:
     twig:
         template: '::menu.html.twig'
+
+stfalcon_tinymce:
+   language: ru

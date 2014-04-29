@@ -7,8 +7,12 @@
             {% stylesheets '@cssJquery' '@cssBootstrap' filter='cssrewrite' %}
                 <link rel="stylesheet" type="text/css" href="{{ asset_url }}" />
             {% endstylesheets %}
+            {% stylesheets '@cssMain' filter='cssrewrite' %}
+                <link rel="stylesheet" type="text/css" href="{{ asset_url }}" />
+            {% endstylesheets %}
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        {{ tinymce_init() }}
     </head>
     <body>
         <nav class="navbar navbar-default" role="navigation">

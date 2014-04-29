@@ -89,7 +89,7 @@ class QuestionType extends AbstractType
                 ])
             ;
         } else {
-            $builder->add('answer', null, [
+            $builder->add('answer', 'text', [
                 'required' => true,
             ]);
         }

@@ -54,9 +54,9 @@
                     });
                 }
                 $('#add-another-variant').click(function () {
-                    var $newNode = $('<li/>').html(node.replace(/__name__/g, counter++));
+                    var $newNode = $('<li class="form-group" />').html(node.replace(/__name__/g, counter++));
                     if (type === TYPE_PAIRED) {
-                        $newNode.find('input').after('<input type="text" required="required"/>');
+                        $newNode.find('input').after('<input type="text" class="form-control" required="required"/>');
                     }
                     appendLink.call($newNode);
                     $newNode.appendTo($list);
@@ -83,6 +83,7 @@
             success: function (data) {
                 $('form').replaceWith(data);                
                 init();
+                initTinyMCE();
             },
             dataType: 'html'
         });
