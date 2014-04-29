@@ -9,6 +9,10 @@
     },
     "require": {
         "php": ">=5.5.0",
+        "ext-json": "*",
+        "ext-intl": "*",
+        "ext-pdo_mysql": "*",
+        "ext-PDO": "*",
         "symfony/symfony": "2.4.*",
         "doctrine/orm": "2.4.*",
         "doctrine/doctrine-bundle": "1.2.*",
@@ -31,6 +35,9 @@
         "predis/predis": "0.8.*",
         "knplabs/knp-menu-bundle": "1.1.*",
         "mrclay/minify": "2.2.*"
+    },
+    "suggest": {
+        "ext-twig": "1.15.*"
     },
     "scripts": {
         "post-install-cmd": [
