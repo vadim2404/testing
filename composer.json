@@ -28,7 +28,8 @@
         "knplabs/knp-paginator-bundle": "2.4.*",
         "friendsofsymfony/jsrouting-bundle": "1.5.*",
         "snc/redis-bundle": "1.1.*",
-        "predis/predis": "0.8.*"
+        "predis/predis": "0.8.*",
+        "knplabs/knp-menu-bundle": "1.1.*"
     },
     "scripts": {
         "post-install-cmd": [

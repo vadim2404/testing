@@ -1,6 +1,6 @@
-#bstu_user:
-#    resource: "@BstuUserBundle/Controller"
-#    type: annotation
+bstu_user:
+    resource: "@BstuUserBundle/Controller"
+    type: annotation
     
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
