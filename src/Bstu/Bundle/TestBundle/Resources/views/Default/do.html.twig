@@ -10,7 +10,7 @@
 
 {% block javascripts %}
     {{ parent() }}
-    {% javascripts '@BstuTestBundle/Resources/public/js/main.js' %}
+    {% javascripts '@BstuTestBundle/Resources/public/js/main.js' filter='jsminplus' %}
         <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
 {% endblock %}

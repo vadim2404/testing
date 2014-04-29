@@ -17,7 +17,7 @@
 
 {% block javascripts %}
     {{ parent() }}
-    {% javascripts '@BstuTestOrganizationBundle/Resources/public/js/test-type.js' %}
+    {% javascripts '@BstuTestOrganizationBundle/Resources/public/js/test-type.js'  filter='jsminplus' %}
         <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
 {% endblock %}
