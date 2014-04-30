@@ -1,54 +1,26 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Question</h1>
+    <h1>Вопрос</h1>
 
-    <table class="record_properties">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ entity.id }}</td>
-            </tr>
-            <tr>
-                <th>Question</th>
-                <td>{{ entity.question }}</td>
-            </tr>
-            <tr>
-                <th>Answer</th>
-                <td>{{ entity.answer }}</td>
-            </tr>
-            <tr>
-                <th>Variants</th>
-                <td>
-                {% if entity.variants|length %}
-                    <ul>
-                    {% for variant in entity.variants %}
-                        <li>{{ variant }}</li>
-                    {% endfor %}
-                    </ul>
-                {% endif %}
-                </td>
-            </tr>
-            <tr>
-                <th>Rate</th>
-                <td>{{ entity.rate }}</td>
-            </tr>
-            <tr>
-                <th>Type</th>
-                <td>{{ entity.type }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <dl class="dl-horizontal">
+        <dt>Вопрос</dt>
+        <dd>{{ entity.question }}</dd>
+        <dt>Тема</dt>
+        <dd>{{ entity.theme.name }}</dd>
+        <dt>Предмет</dt>
+        <dd>{{ entity.theme.subject.name }}</dd>
+    </dl>
 
         <ul class="record_actions">
     <li>
         <a href="{{ path('question') }}">
-            Back to the list
+            Вернуться к списку
         </a>
     </li>
     <li>
         <a href="{{ path('question_edit', { 'id': entity.id }) }}">
-            Edit
+            Редактировать
         </a>
     </li>
     <li>{{ form(delete_form) }}</li>

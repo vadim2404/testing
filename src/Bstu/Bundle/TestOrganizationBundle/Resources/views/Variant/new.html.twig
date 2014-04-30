@@ -1,14 +1,14 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Variant creation</h1>
+    <h1>Добавить вариант</h1>
 
     {{ form(form) }}
 
         <ul class="record_actions">
     <li>
         <a href="{{ path('variant', { 'id' : test.id }) }}">
-            Back to the list
+            Вернуться к списка
         </a>
     </li>
 </ul>

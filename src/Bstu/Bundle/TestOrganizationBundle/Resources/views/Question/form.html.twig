@@ -1,7 +1,10 @@
 {{ form_start(form) }}
 {{ form_errors(form) }}
+{{ form_row(form.question) }}
+{% if form.type is defined %}
+    {{ form_row(form.type) }}
+{% endif %}
 {% if form.variants is defined %}
-    {{ form_row(form.variants) }}
     <ul id="variants-field-list" data-prototype="{{ form_widget(form.variants.vars.prototype) | e }}">
     {% for variant in form.variants %}
         <li>
@@ -10,6 +13,7 @@
         </li>
     {% endfor %}
     </ul>
-    <a href="#" id="add-another-variant">Add another variant</a>
+    {{ form_row(form.variants) }}
+    <a href="#" id="add-another-variant">Добавить новый вариант</a>
 {% endif %}
 {{ form_end(form) }}

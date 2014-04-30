@@ -103,7 +103,7 @@ class VariantController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', array('label' => 'Создать'));
 
         return $form;
     }
@@ -183,7 +183,7 @@ class VariantController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', ['label' => 'Update']);
+        $form->add('submit', 'submit', ['label' => 'Обновить']);
 
         return $form;
     }
@@ -253,7 +253,7 @@ class VariantController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('variant_delete', ['id' => $id]))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', ['label' => 'Delete'])
+            ->add('submit', 'submit', ['label' => 'Удалить'])
             ->getForm()
         ;
     }

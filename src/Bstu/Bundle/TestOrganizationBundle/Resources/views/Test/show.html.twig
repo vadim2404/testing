@@ -1,47 +1,42 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Test</h1>
+    <h1>Тест</h1>
 
-    <table class="record_properties">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ entity.id }}</td>
-            </tr>
-            <tr>
-                <th>Type</th>
-                <td>{{ entity.type }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ entity.title }}</td>
-            </tr>
-            <tr>
-                <th>Maxquestions</th>
-                <td>{{ entity.maxQuestions }}</td>
-            </tr>
-            <tr>
-                <th>Complexity</th>
-                <td>{{ entity.complexity }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <dl class="dl-horizontal">
+        <dt>Название</dt>
+        <dd>{{ entity.title }}</dd>
+        <dt>Предмет</dt>
+        <dd>{{ entity.subject.name }}</dd>
+        <dt>Темы</dt>
+        <dd>
+            {% if entity.themes|length %}
+                <ul>
+                    {% for theme in entity.themes %}
+                        <li>{{ theme.name }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </dd>
+    </dl>
 
         <ul class="record_actions">
     <li>
         <a href="{{ path('test') }}">
-            Back to the list
+            Вернуться к списку
         </a>
     </li>
     <li>
+        <a href="{{ path('plan_new', { 'testId' : entity.id }) }}">Запланировать</a>
+    </li>
+    <li>
         <a href="{{ path('test_edit', { 'id': entity.id }) }}">
-            Edit
+            Редактировать
         </a>
     </li>
     {% if entity.isTestByVariants() %}
     <li>
-        <a href="{{ path('variant', { 'id' : entity.id}) }}">Manage variants</a>
+        <a href="{{ path('variant', { 'id' : entity.id}) }}">Управлять вариантами</a>
     </li>
     {% endif %}
     <li>{{ form(delete_form) }}</li>

@@ -7,7 +7,7 @@
                 $list = $('#variants-field-list'),
                 node,
                 counter,
-                $deleteLink = $('<a class="variants-field-delete" href="#">Delete link</a>'),
+                $deleteLink = $('<a class="variants-field-delete" href="#">Удалить</a>'),
                 appendLink = function () {
                     $deleteLink.clone().appendTo(this);
                 },

@@ -32,30 +32,32 @@ class QuestionType extends AbstractType
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
-    {
-        $classConstants = (new \ReflectionClass('Bstu\Bundle\TestOrganizationBundle\Entity\Question'))->getConstants();
-        $constants = [];
-        foreach ($classConstants as $name => $value) {
-            if (preg_match('/^TYPE_/', $name)) {
-                $constants[$value] = strtolower(preg_replace('/^TYPE_/', '', $name));
-            }
-        }
-        
+    {        
         $user = $this->user;
         $builder
             ->add('type', 'choice', [
+                'label' => 'Тип вопроса',
                 'multiple' => false,
                 'expanded' => true,
                 'required' => true,
-                'choices' => $constants,
+                'choices' => [
+                    Question::TYPE_TEXT => 'Однострочный ответ',
+                    Question::TYPE_TEXTAREA => 'Многострочный ответ',
+                    Question::TYPE_CHECKBOX => 'Выбор нескольких правильных ответов',
+                    Question::TYPE_RADIO => 'Выбор одного правильного ответа',
+                    Question::TYPE_LOGIC_SEQUENCE => 'Составление логической последовательности',
+                    Question::TYPE_PAIRED => 'Парное соответствие',
+                ],
                 'attr' => [
                     'onchange' => 'rerenderCreateForm()',
                 ],
             ])
             ->add('question', null, [
+                'label' => 'Вопрос',
                 'required' => true,
             ])
             ->add('rate', 'choice', [
+                'label' => 'Сложность',
                 'choices' => [
                     Question::COMPLEXITY_EASY => 'Простой',
                     Question::COMPLEXITY_MEDIUM => 'Средний',
@@ -66,6 +68,7 @@ class QuestionType extends AbstractType
                 'required' => true,
             ])
             ->add('theme', null, [
+                'label' => 'Тема',
                 'required' => true,
                 'property' => 'name',
                 'query_builder' => function (EntityRepository $er) use($user) {
@@ -80,6 +83,7 @@ class QuestionType extends AbstractType
 
         if (!in_array($options['data']->getType(), [Question::TYPE_TEXT, Question::TYPE_TEXTAREA])) {
             $builder->add('variants', 'collection', [
+                    'label' => 'Возможные варианты',
                     'required' => true,
                     'allow_delete' => true,
                     'allow_add' => true,
@@ -90,6 +94,7 @@ class QuestionType extends AbstractType
             ;
         } else {
             $builder->add('answer', 'text', [
+                'label' => 'Ответ',
                 'required' => true,
             ]);
         }

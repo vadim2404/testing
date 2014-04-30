@@ -35,6 +35,7 @@ class TestType extends AbstractType
     {
         $builder
             ->add('type', 'choice', [
+                'label' => 'Тип теста',
                 'required' => true,
                 'choices' => [
                     Test::TYPE_VARIANT => 'Тест по вариантам',
@@ -43,15 +44,19 @@ class TestType extends AbstractType
                 ],
             ])
             ->add('title', null, [
+                'label' => 'Название',
                 'required' => true,
             ])
             ->add('maxQuestions', 'integer', [
+                'label' => 'Максимальное число вопросов',
                 'required' => true,
             ])
             ->add('complexity', 'integer', [
+                'label' => 'Средняя сложность',
                 'required' => true,
             ])
             ->add('subject', 'entity', [
+                'label' => 'Предмет',
                 'required' => true,
                 'class' => 'BstuTestOrganizationBundle:Subject',
                 'property' => 'name',
@@ -62,6 +67,7 @@ class TestType extends AbstractType
                 ]
             ])
             ->add('themes', null, [
+                'label' => 'Темы',
                 'required' => true,
                 'property' => 'name',
             ])

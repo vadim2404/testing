@@ -34,8 +34,11 @@ class ThemeType extends AbstractType
     {
         $user = $this->user;
         $builder
-            ->add('name')
+            ->add('name', null, [
+                'label' => 'Название',
+            ])
             ->add('subject', null, [
+                'label' => 'Предмет',
                 'property' => 'name',
                 'required' => true,
                 'query_builder' => function (EntityRepository $er) use($user) {

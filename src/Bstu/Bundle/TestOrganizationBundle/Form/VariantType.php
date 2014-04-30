@@ -19,8 +19,11 @@ class VariantType extends AbstractType
         $test = $options['data']->getTest();
         
         $builder
-            ->add('number')
+            ->add('number', null, [
+                'label' => 'Номер варианта',
+            ])
             ->add('questions', 'entity', [
+                'label' => 'Вопросы',
                 'property' => 'question',
                 'class' => 'Bstu\Bundle\TestOrganizationBundle\Entity\Question',
                 'multiple' => true,

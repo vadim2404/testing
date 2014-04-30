@@ -1,30 +1,36 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Variant</h1>
+    <h1>Вариант</h1>
 
-    <table class="record_properties">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ entity.id }}</td>
-            </tr>
-            <tr>
-                <th>Number</th>
-                <td>{{ entity.number }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <dl class="dl-horizontal">
+        <dt>Тест</dt>
+        <dd>{{ entity.test.title }}</dd>
+        <dt>Номер</dt>
+        <dd>{{ entity.number }}</dd>
+        <dt>Предмет</dt>
+        <dd>{{ entity.test.subject.name }}</dd>
+        <dt>Вопросы</dt>
+        <dd>
+            {% if entity.questions|length %}
+                <ul>
+                    {% for question in entity.questions %}
+                        <li>{{ question.question|raw }}
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </dd>
+    </dl>
 
         <ul class="record_actions">
     <li>
         <a href="{{ path('variant', { 'id' : entity.test.id }) }}">
-            Back to the list
+            Вернуться к списку
         </a>
     </li>
     <li>
         <a href="{{ path('variant_edit', { 'id': entity.id }) }}">
-            Edit
+            Редактировать
         </a>
     </li>
     <li>{{ form(delete_form) }}</li>

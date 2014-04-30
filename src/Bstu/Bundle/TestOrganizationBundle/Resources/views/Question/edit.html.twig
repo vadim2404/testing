@@ -1,25 +1,13 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Question edit</h1>
-    {{ form_start(edit_form) }}
-        {% if edit_form.variants is defined %}
-        <ul id="variants-field-list" data-prototype="{{ form_widget(edit_form.variants.vars.prototype) | e }}">
-        {% for variant in edit_form.variants %}
-            <li>
-                {{ form_errors(variant) }}
-                {{ form_widget(variant) }}
-            </li>
-        {% endfor %}
-        </ul>
-        <a href="#" id="add-another-variant">Add another variant</a>
-    {% endif %}
-    {{ form_end(edit_form) }}
+    <h1>Редактирование вопроса</h1>
+    {{ include ('BstuTestOrganizationBundle:Question:form.html.twig', { 'form' : edit_form }) }}
 
         <ul class="record_actions">
     <li>
         <a href="{{ path('question') }}">
-            Back to the list
+            Вернуться к списку
         </a>
     </li>
     <li>{{ form(delete_form) }}</li>
