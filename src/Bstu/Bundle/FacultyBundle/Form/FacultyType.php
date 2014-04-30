@@ -17,6 +17,7 @@ class FacultyType extends AbstractType
         $builder
             ->add('name', null, [
                 'required'  => true,
+                'label' => 'Название',
             ])
         ;
     }

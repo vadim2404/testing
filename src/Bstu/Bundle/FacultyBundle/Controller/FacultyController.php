@@ -83,7 +83,7 @@ class FacultyController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', array('label' => 'Создать'));
 
         return $form;
     }
@@ -172,7 +172,7 @@ class FacultyController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', 'submit', array('label' => 'Обновить'));
 
         return $form;
     }
@@ -247,7 +247,7 @@ class FacultyController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('faculty_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', 'submit', array('label' => 'Удалить'))
             ->getForm()
         ;
     }

@@ -17,10 +17,12 @@ class PulpitType extends AbstractType
         $builder
             ->add('name', null, [
                 'required' => true,
+                'label' => 'Название',
             ])
             ->add('faculty', null, [
                 'property' => 'name',
                 'required'  => true,
+                'label' => 'Факультет',
             ])
         ;
     }
