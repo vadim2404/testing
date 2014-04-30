@@ -18,6 +18,7 @@ class ResultTestType extends AbstractType
     {
         $builder
             ->add('resultQuestions', 'collection', [
+                'label' => ' ',
                 'type' => static::RESULT_QUESTIONT_TYPE,
                 'options' => [
                     'items' => $options['data']->getResultQuestions(),

@@ -438,15 +438,12 @@
 {% endblock button_attributes %}
 
 {% block result_widget %}
-    <table>
-        <tr>
-            <th>Question</th>
-            <td>{{ question|raw }}</td>
-        </tr>
+    <dl class="dl-horizontal">
+        <dt>Вопрос</dt>
+        <dd>{{ question|raw }}</dd>
         {% if question_type in [constant('Bstu\\Bundle\\TestOrganizationBundle\\Entity\\Question::TYPE_RADIO'), constant('Bstu\\Bundle\\TestOrganizationBundle\\Entity\\Question::TYPE_CHECKBOX')] %}
-        <tr>
-            <th>Real answer</th>
-            <td>
+            <dt>Правильный ответ</dt>
+            <dd>
                 <ul>
                 {% set splitedRealAnswer = real_answer|split(',') %}
                 {% for index, variant in variants %}
@@ -459,54 +456,42 @@
                     </li>
                 {% endfor %}
                 </ul>
-            </td>
-        </tr>
-        <tr>
-            <th>Student answer</th>
-            <td>
+            </dd>
+            <dt>Ответ студента</dt>
+            <dd>
                 <ul>
                 {% set splitedStudentAnswer = student_answer|split(',') %}
                 {% for variant in splitedStudentAnswer %}
                     <li>{{ variants[variant] }}</li>
                 {% endfor %}
                 </ul>
-            </td>
-        </tr>
+            </dd>
         {% elseif question_type in [constant('Bstu\\Bundle\\TestOrganizationBundle\\Entity\\Question::TYPE_TEXT'), constant('Bstu\\Bundle\\TestOrganizationBundle\\Entity\\Question::TYPE_TEXTAREA')] %}
-        <tr>
-            <th>Real answer</th>
-            <td>{{ real_answer }}</td>
-        </tr>
-        <tr>
-            <th>Student answer</th>
-            <td>{{ student_answer }}</td>
-        </tr>
+            <dt>Правильный ответ</dt>
+            <dd>{{ real_answer }}</dd>
+            <dt>Student answer</dt>
+            <dd>{{ student_answer }}</dd>
         {% elseif question_type == constant('Bstu\\Bundle\\TestOrganizationBundle\\Entity\\Question::TYPE_LOGIC_SEQUENCE') %}
-        <tr>
-            <th>Real answer</th>
-            <td>
+            <dt>Правильный ответ</dt>
+            <dd>
                 <ul>
                 {% for variant in variants %}
                     <li>{{ variant }}</li>
                 {% endfor %}
                 </ul>
-            </td>
-        </tr>
-        <tr>
-            <th>Student answer</th>
+            </dd>
+            <dt>Ответ студента</dt>
             {% set studentDecode = student_answer|json_decode %}
-            <td>
+            <dd>
                 <ul>
                     {% for answer in studentDecode %}
                         <li>{{ answer }}</li>
                     {% endfor %}
                 </ul>
-            </td>
-        </tr> 
+            </dd>
         {% elseif question_type == constant('Bstu\\Bundle\\TestOrganizationBundle\\Entity\\Question::TYPE_PAIRED') %}
-        <tr>
-            <th>Real answer</th>
-            <td>
+            <dt>Правильный ответ</dt>
+            <dd>
                 <ul>
                 {% for variant in variants %}
                     {% set item = variant|json_decode %}
@@ -515,20 +500,17 @@
                     {% endfor %}
                 {% endfor %}
                 </ul>
-            </td>
-        </tr>
-        <tr>
-            <th>Student answer</th>
-            <td>
+            </dd>
+            <dt>Ответ студента</dt>
+            <dd>
                 <ul>
                 {% set studentDecode = student_answer|json_decode %}
                 {% for idx, key in studentDecode.keys %}
                     <li>{{ key }} - {{ studentDecode.values[idx] }}</li>
                 {% endfor %}
                 </ul>
-            </td>
-        </tr>
+            </dd>
         {% endif %}
-    </table>
+    </dl>
     {{ block('percent_widget') }}
 {% endblock %}

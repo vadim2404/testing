@@ -37,6 +37,7 @@ class ResultQuestionType extends BaseResultQuestionType
         $question = $item->getQuestion();
         $builder
             ->add('result', 'result', [
+                'label' => ' ',
                 'question' => $question->getQuestion(),
                 'real_answer' => $question->getAnswer(),
                 'variants' => empty($question->getVariants()) ? null : $question->getVariants(),

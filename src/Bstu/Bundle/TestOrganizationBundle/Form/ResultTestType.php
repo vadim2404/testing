@@ -37,7 +37,7 @@ class ResultTestType extends BaseResultTestType
                 'id' => $options['data']->getId(),
             ]))
             ->add('submit', 'submit', [
-                'label' => 'Verify',
+                'label' => 'Проверить',
             ])
             ->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
                 $resultTest = $event->getData();
