@@ -9,12 +9,31 @@
 
 #variants-field-list li {
     clear: both;
+    margin: 3px;
+    padding: 0.4em;
+    font-size: 1.4em;
 }
 
 #variants-field-list:after {
     content:"";
     display:block;
     clear:both;
+}
+
+#variants-field-list .ui-selecting { 
+    background: #FECA40;
+}
+
+#variants-field-list .ui-selected {
+    background: #F39814;
+    color: #FFFFFF;
+}
+
+#variants-field-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 60%;
 }
 
 .form-control.col-md-1 {
@@ -25,3 +44,8 @@
 .float_left {
     float: left;
 }
+
+.b-paired {
+    display: inline-block;
+}
+

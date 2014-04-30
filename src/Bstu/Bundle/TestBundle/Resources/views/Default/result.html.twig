@@ -1,21 +1,21 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-    <table>
+    <table class="table-bordered">
         <tr>
-            <th>Test</th>
-            <th>Date</th>
-            <th>Details</th>
-            <th>Summary result</th>
+            <th>Тест</th>
+            <th>Дата</th>
+            <th>Подробнее</th>
+            <th>Общий результат</th>
         </tr>
         {% for result in results %}
             <tr>
                 <td>{{ result.test.title }}</td>
                 <td>{{ result.plan.start|date('Y-m-d H:i') }}-{{ result.plan.end|date('Y-m-d H:i') }}</td>
                 <td>
-                    <table>
+                    <table class="table table-hover">
                         <tr>
-                            <th>Question #</th><th>Result</th>
+                            <th>Вопрос №</th><th>Результат</th>
                         </tr>
                         {% for idx, answer in result.resultQuestions %}
                             <tr>

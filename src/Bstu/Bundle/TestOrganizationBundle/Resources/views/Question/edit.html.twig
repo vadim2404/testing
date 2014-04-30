@@ -20,10 +20,3 @@
         <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
 {% endblock %}
-
-{% block stylesheets %}
-    {{ parent() }}
-    {% stylesheets '@BstuTestOrganizationBundle/Resources/public/css/question-type.css' filter='cssrewrite' %}
-        <link rel="stylesheet" type="text/css" href="{{ asset_url }}" />
-    {% endstylesheets %}
-{% endblock %}

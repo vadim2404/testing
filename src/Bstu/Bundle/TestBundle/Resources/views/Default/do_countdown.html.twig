@@ -1,0 +1,24 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    <h1>Тест начнется...</h1>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts '@BstuTestBundle/Resources/public/js/countdown.js' %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    <script type="text/javascript">
+        var timer = new Countdown({
+            time: {{ date }},
+            style: 'flip',
+            onComplete: function () {
+                document.location.reload();
+            },
+            width: 300, 
+            height: 50
+        });
+        timer.imageFolder = '/bundles/bstutest/images/';
+    </script>
+{% endblock %}

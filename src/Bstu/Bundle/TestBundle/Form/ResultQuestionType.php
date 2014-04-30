@@ -110,6 +110,7 @@ class ResultQuestionType extends AbstractType
         }         
         
         $builder ->add('send', 'button', [
+            'label' => 'Отправить',
             'attr' => [
                 'class' => 'js-answer-button',
             ]

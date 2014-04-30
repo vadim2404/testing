@@ -1,4 +1,4 @@
-(function ($, document) {
+(function ($, document, window) {
     $(document).ready(function () {
         $('.js-logic-sequence').each(function () {
             var $this = $(this),
@@ -25,8 +25,8 @@
         $('.js-paired').each(function () {
             var $this = $(this),
                 items = $.parseJSON($this.val()),
-                $keysHolder = $('<ul/>').insertAfter($this),
-                $valuesHolder = $('<ul/>').insertAfter($keysHolder),
+                $keysHolder = $('<ul class="b-paired"/>').insertAfter($this),
+                $valuesHolder = $('<ul class="b-paired"/>').insertAfter($keysHolder),
                 onUpdateListener = function () {
                     var items = {
                         keys: [],
@@ -40,6 +40,11 @@
                     });
                     $this.val(JSON.stringify(items));
                 };
+            
+            $this.siblings('label').css({
+                display: 'block',
+                textAlign: 'left'
+            });
             
             $this.attr('type', 'hidden');
             
@@ -61,8 +66,12 @@
             var $form = $(this).closest('form');
             e.preventDefault();
             $.post($form.attr('action'), $form.serializeArray(), function (data) {
-                console.log(data);
             });
         });
+//        
+//        var $jsCountdown = $('.js-countdown');
+//        if ($jsCountdown.length) {
+//           
+//        }
     });
-})(jQuery, document);
+})(jQuery, document, window);

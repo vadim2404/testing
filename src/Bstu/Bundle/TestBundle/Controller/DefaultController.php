@@ -51,7 +51,9 @@ class DefaultController extends Controller
     {
         $now = new \DateTime('now');
         if ($plan->getStart() > $now) {
-            throw $this->createNotFoundException('Test will start at future');
+            return $this->render('BstuTestBundle:Default:do_countdown.html.twig', [
+                'date' => $plan->getStart()->getTimestamp() - $now->getTimestamp(),
+            ]);
         }
         if ($plan->isFinished()) {
             throw $this->createNotFoundException('Test has been finished');
