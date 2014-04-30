@@ -17,9 +17,11 @@ class PlanType extends AbstractType
         $builder
             ->add('start', 'datetime', [
                 'data' => new \DateTime('now'),
+                'label' => 'Начало теста',
             ])
             ->add('end', 'datetime', [
-                'data' => (new \DateTime('now'))->modify('+15 minute')
+                'data' => (new \DateTime('now'))->modify('+15 minute'),
+                'label' => 'Конец теста',
             ])
         ;
     }

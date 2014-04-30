@@ -1,34 +1,32 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Plan</h1>
-
-    <table class="record_properties">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ entity.id }}</td>
-            </tr>
-            <tr>
-                <th>Start</th>
-                <td>{{ entity.start|date('Y-m-d H:i:s') }}</td>
-            </tr>
-            <tr>
-                <th>End</th>
-                <td>{{ entity.end|date('Y-m-d H:i:s') }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <h1>План</h1>
+            
+    <dl class="dl-horizontal">
+        <dt>Дата начала</dt>
+        <dd>{{ entity.start|date('Y-m-d H:i:s') }}</dd>
+        <dt>Дата окончания</dt>
+        <dd>{{ entity.end|date('Y-m-d H:i:s') }}</dd>
+        <dt>Тест</dt>
+        <dd>{{ entity.test.title }}</dd>
+        <dt>Предмет</dt>
+        <dd>{{ entity.test.subject.name }}</dd>
+        <dt>Автор теста</dt>
+        <dd>{{ entity.test.teacher.firstName }}&nbsp;{{ entity.test.teacher.lastName }}&nbsp;{{ entity.test.teacher.middleName|default('') }}</dd>
+        <dt>Оператор, запланировавший данный тест</dt>
+        <dd>{{ entity.planedBy.firstName }}&nbsp;{{ entity.planedBy.lastName }}&nbsp;{{ entity.planedBy.middleName|default('') }}</dd>
+    </dl>
 
         <ul class="record_actions">
     <li>
         <a href="{{ path('plan') }}">
-            Back to the list
+            Назад к списку
         </a>
     </li>
     <li>
         <a href="{{ path('plan_edit', { 'id': entity.id }) }}">
-            Edit
+            Редактировать
         </a>
     </li>
     <li>{{ form(delete_form) }}</li>

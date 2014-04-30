@@ -1,30 +1,36 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Plan list</h1>
-
-    <table class="records_list">
+    <h1>Список запланированных тестов</h1>
+    
+    <table class="table table-hover">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Start</th>
-                <th>End</th>
-                <th>Actions</th>
+                <th>Дата начала</th>
+                <th>Дата окончания</th>
+                <th>Название теста</th>
+                <th>Предмет</th>
+                <th>ФИО преподавателя</th>
+                <th>ФИО оператора</th>
+                <th>Действия</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('plan_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{% if entity.start %}{{ entity.start|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{% if entity.end %}{{ entity.end|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.test.title }}</td>
+                <td>{{ entity.test.subject.name }}</td>
+                <td>{{ entity.test.teacher.firstName }}&nbsp;{{ entity.test.teacher.lastName }}&nbsp;{{ entity.test.teacher.middleName|default('') }}</td>
+                <td>{{ entity.planedBy.firstName }}&nbsp;{{ entity.planedBy.lastName }}&nbsp;{{ entity.planedBy.middleName|default('') }}</td>
                 <td>
                 <ul>
                     <li>
-                        <a href="{{ path('plan_show', { 'id': entity.id }) }}">show</a>
+                        <a href="{{ path('plan_show', { 'id': entity.id }) }}">Показать</a>
                     </li>
                     <li>
-                        <a href="{{ path('plan_edit', { 'id': entity.id }) }}">edit</a>
+                        <a href="{{ path('plan_edit', { 'id': entity.id }) }}">Редактировать</a>
                     </li>
                 </ul>
                 </td>

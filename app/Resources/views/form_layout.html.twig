@@ -72,7 +72,7 @@
     {% if required and empty_value is none and not empty_value_in_choices and not multiple %}
         {% set required = false %}
     {% endif %}
-    {% set attr = attr|merge({ 'class' : attr.class|default('') ~ ' form-control'}) %}
+    {% set attr = attr|merge({ 'class' : 'form-control ' ~ attr.class|default('') }) %}
     <select {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
         {% if empty_value is not none %}
             <option value=""{% if required and value is empty %} selected="selected"{% endif %}>{{ empty_value|trans({}, translation_domain) }}</option>
@@ -143,9 +143,9 @@
     {% else %}
         <div {{ block('widget_container_attributes') }}>
             {{ date_pattern|replace({
-                '{{ year }}':  form_widget(form.year),
-                '{{ month }}': form_widget(form.month),
-                '{{ day }}':   form_widget(form.day),
+                '{{ year }}':  form_widget(form.year, { 'attr': { 'class' : 'col-md-1' } }),
+                '{{ month }}': form_widget(form.month, { 'attr': { 'class' : 'col-md-1' } }),
+                '{{ day }}':   form_widget(form.day, { 'attr': { 'class' : 'col-md-1' } }),
             })|raw }}
         </div>
     {% endif %}
@@ -157,9 +157,9 @@
     {% if widget == 'single_text' %}
         {{ block('form_widget_simple') }}
     {% else %}
-        {% set vars = widget == 'text' ? { 'attr': { 'size': 1 }} : {} %}
+        {% set vars = widget == 'text' ? { 'attr': { 'size': 1 , 'class' : 'col-md-1' } } : { 'attr' : { 'class' : 'col-md-1' } } %}
         <div {{ block('widget_container_attributes') }}>
-            {{ form_widget(form.hour, vars) }}{% if with_minutes %}:{{ form_widget(form.minute, vars) }}{% endif %}{% if with_seconds %}:{{ form_widget(form.second, vars) }}{% endif %}
+            {{ form_widget(form.hour, vars) }}{% if with_minutes %}<span class="float_left">:</span>{{ form_widget(form.minute, vars) }}{% endif %}{% if with_seconds %}<span class="float_left">:</span>{{ form_widget(form.second, vars) }}{% endif %}
         </div>
     {% endif %}
 {% endspaceless %}

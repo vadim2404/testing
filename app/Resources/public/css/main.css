@@ -16,3 +16,12 @@
     display:block;
     clear:both;
 }
+
+.form-control.col-md-1 {
+    width: 8.3%;
+    margin: 5px;
+}
+
+.float_left {
+    float: left;
+}
