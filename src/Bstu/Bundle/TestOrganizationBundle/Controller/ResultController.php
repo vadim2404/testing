@@ -117,7 +117,25 @@ class ResultController extends Controller
             ->getRepository('BstuTestOrganizationBundle:ResultTest')
         ;
 
+        $form = $this->createForm('bstu_bundle_testorganizationbundle_filter');
+        $form->handleRequest($request);
+        
         $query = $repo->findVerifiedTestsByTeacher($this->getUser());
+        
+        if ($form->isValid()) {
+            $data = $form->getData();
+            if (!empty($data['test'])) {
+                $query->andWhere('rt.test = :test')
+                    ->setParameter('test', $data['test'])
+                ;
+            }
+            if (!empty($data['student'])) {
+                $query->andWhere('rt.student = :student')
+                    ->setParameter('student', $data['student'])
+                ;
+            }
+        }
+        
         $paginator  = $this->get('knp_paginator');
         
         $results = $paginator->paginate(
@@ -128,6 +146,7 @@ class ResultController extends Controller
         
         return [
             'results' => $results,
+            'form' => $form->createView(),
         ];
     }
     

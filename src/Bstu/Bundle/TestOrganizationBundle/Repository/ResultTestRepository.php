@@ -12,7 +12,7 @@ class ResultTestRepository extends EntityRepository
      * 
      * @param \Bstu\Bundle\UserBundle\Entity\User $user
      * @param boo $verified
-     * @return \Doctrine\ORM\Query
+     * @return \Doctrine\ORM\QueryBuilder
      */
     protected function findTestsByTeacher(User $user, $verified = false)
     {
@@ -22,7 +22,6 @@ class ResultTestRepository extends EntityRepository
             ->where('t.teacher = :teacher')
             ->andWhere('rt.verified = :verified')
             ->andWhere('p.end < :now')
-            ->getQuery()
             ->setParameters([
                 'teacher' => $user,
                 'verified' => $verified,
@@ -35,7 +34,7 @@ class ResultTestRepository extends EntityRepository
      * Find unverified tests
      *
      * @param \Bstu\Bundle\UserBundle\Entity\User $user
-     * @return \Doctrine\ORM\Query
+     * @return \Doctrine\ORM\QueryBuilder
      */
     public function findUnverfiedTestsByTeacher(User $user)
     {
@@ -46,7 +45,7 @@ class ResultTestRepository extends EntityRepository
      * Find verified tests
      *
      * @param \Bstu\Bundle\UserBundle\Entity\User $user
-     * @return \Doctrine\ORM\Query
+     * @return \Doctrine\ORM\QueryBuilder
      */
     public function findVerifiedTestsByTeacher(User $user)
     {

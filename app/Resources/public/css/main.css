@@ -49,3 +49,8 @@
     display: inline-block;
 }
 
+.b-teacher-filter-block {
+    text-align: center;
+    margin: 0 auto;
+    padding: 15px;
+}

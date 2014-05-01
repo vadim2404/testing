@@ -1,6 +1,12 @@
 {% extends "::base.html.twig" %}
 
 {% block body %}
+    <div id="js-teacher-filters" class="hidden">
+        {{ form(form) }}
+    </div>
+    <div class="b-teacher-filter-block">
+        <button type="submit" id="js-teacher-filters-btn" class="btn btn-default">Фильтры</button>
+    </div>
     <table class="table-bordered">
         <tr><th>Студент</th><th>Тест</th><th>Результат</th><th>Детально</th><th>Действия</th></tr>
     {% for result in results %}
@@ -92,4 +98,11 @@
     {{ knp_pagination_render(results) }}
 </div>
     
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts '@BstuTestOrganizationBundle/Resources/public/js/result.js' filter='jsminplus' %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
 {% endblock %}
