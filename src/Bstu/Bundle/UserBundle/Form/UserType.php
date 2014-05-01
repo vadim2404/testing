@@ -14,15 +14,23 @@ class UserType extends BaseType
     {
         parent::buildForm($builder, $options);
 
-        $builder->add('firstName')
-            ->add('lastName')
-            ->add('middleName')
+        $builder->add('firstName', null, [
+                'label' => 'Фамилия:',
+            ])
+            ->add('lastName', null, [
+                'label' => 'Имя:',
+            ])
+            ->add('middleName', null, [
+                'label' => 'Отчество:',
+            ])
             ->add('pulpit', null, [
+                'label' => 'Кафедра:',
                 'property' => 'name',
                 'required' => true,
                 'group_by' => 'faculty.name',
             ])
             ->add('group', null, [
+                'label' => 'Роль:',
                 'property' => 'name',
                 'required' => true,
             ]);

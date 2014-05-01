@@ -54,6 +54,7 @@ class FilterType extends AbstractType
                     ;
                 },
                 'label' => 'Тест',
+                'group_by' => 'subject.name',
                 'required' => false,
             ])
             ->add('student', 'genemu_jqueryautocomplete_text', [
