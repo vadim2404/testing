@@ -35,7 +35,8 @@
         "predis/predis": "0.8.*",
         "knplabs/knp-menu-bundle": "1.1.*",
         "mrclay/minify": "2.2.*",
-        "stfalcon/tinymce-bundle": "0.3.*"
+        "stfalcon/tinymce-bundle": "0.3.*",
+        "genemu/form-bundle": "2.2.*"
     },
     "suggest": {
         "ext-twig": "1.15.*"

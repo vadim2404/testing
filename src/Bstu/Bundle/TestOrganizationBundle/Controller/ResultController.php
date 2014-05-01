@@ -4,6 +4,7 @@ namespace Bstu\Bundle\TestOrganizationBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -124,13 +125,16 @@ class ResultController extends Controller
         
         if ($form->isValid()) {
             $data = $form->getData();
+
             if (!empty($data['test'])) {
                 $query->andWhere('rt.test = :test')
                     ->setParameter('test', $data['test'])
                 ;
             }
+            
             if (!empty($data['student'])) {
-                $query->andWhere('rt.student = :student')
+                $query->join('rt.student', 's')
+                    ->andWhere('s.firstName = :student')
                     ->setParameter('student', $data['student'])
                 ;
             }
@@ -174,4 +178,21 @@ class ResultController extends Controller
         ]));
     }
 
+    /**
+     * @Route("/students", name="user_students")
+     * @Method("GET")
+     */
+    public function studentAction(Request $request)
+    {
+        $name = $request->query->get('term');
+
+        $users = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('BstuUserBundle:User')
+            ->findStudentsWithNameFiltering($name)
+            ->execute()
+        ;
+
+        return new JsonResponse(array_column($users, 'firstName'));
+    }
 }

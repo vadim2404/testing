@@ -124,3 +124,6 @@ knp_menu:
 
 stfalcon_tinymce:
    language: ru
+
+genemu_form:
+        autocomplete: ~

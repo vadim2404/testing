@@ -9,8 +9,10 @@ use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity
- * @ORM\Table(name="user")
+ * @ORM\Entity(repositoryClass="Bstu\Bundle\UserBundle\Repository\UserRepository")
+ * @ORM\Table(name="user", indexes={
+ *   @ORM\Index(name="first_name_idx", columns={"first_name"})
+ * })
  */
 class User extends BaseUser
 {

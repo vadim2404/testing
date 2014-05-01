@@ -24,6 +24,7 @@ class AppKernel extends Kernel
             new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            new Genemu\Bundle\FormBundle\GenemuFormBundle(),
             new Bstu\Bundle\FacultyBundle\BstuFacultyBundle(),
             new Bstu\Bundle\UserBundle\BstuUserBundle(),
             new Bstu\Bundle\TestOrganizationBundle\BstuTestOrganizationBundle(),

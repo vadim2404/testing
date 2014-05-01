@@ -56,16 +56,8 @@ class FilterType extends AbstractType
                 'label' => 'Тест',
                 'required' => false,
             ])
-            ->add('student', 'entity', [
-                'class' => 'Bstu\Bundle\UserBundle\Entity\User',
-                'property' => 'firstName',
-                'query_builder' => function (EntityRepository $er) {
-                    return $er->createQueryBuilder('u')
-                        ->join('u.group', 'g')
-                        ->where('g.name = :name')
-                        ->setParameter('name', 'Студент')
-                    ;
-                },
+            ->add('student', 'genemu_jqueryautocomplete_text', [
+                'route_name' => 'user_students',
                 'label' => 'Студент',
                 'required' => false,
             ])
