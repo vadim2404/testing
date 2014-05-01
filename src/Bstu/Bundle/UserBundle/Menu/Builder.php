@@ -11,6 +11,8 @@ class Builder extends ContainerAware
     public function mainMenu(FactoryInterface $factory, array $options)
     {
         $menu = $factory->createItem('root');
+
+        $menu->setCurrentUri($this->container->get('request_stack')->getMasterRequest()->getRequestUri());
         
         $security = $this->container->get('security.context');
         
