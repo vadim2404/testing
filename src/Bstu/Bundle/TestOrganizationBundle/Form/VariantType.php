@@ -39,6 +39,7 @@ class VariantType extends AbstractType
                         ])
                     ;
                 },
+                'group_by' => 'theme.name',
             ])
         ;
     }
