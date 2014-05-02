@@ -15,11 +15,13 @@
         {{ tinymce_init() }}
     </head>
     <body>
-        <nav class="navbar navbar-default" role="navigation">
-            <div class="collapse navbar-collapse">
-                {{ knp_menu_render('BstuUserBundle:Builder:mainMenu') }}
-            </div>
-        </nav>
+        {% block menu %}
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="collapse navbar-collapse">
+                    {{ knp_menu_render('BstuUserBundle:Builder:mainMenu') }}
+                </div>
+            </nav>
+        {% endblock %}
         {% for flashMessage in app.session.flashbag.get('notice') %}
             <div class="alert alert-info">
                 {{ flashMessage }}
