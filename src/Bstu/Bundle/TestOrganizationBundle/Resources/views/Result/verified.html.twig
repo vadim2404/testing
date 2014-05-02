@@ -36,16 +36,18 @@
                                     </ul>
                                 </td>
                                 <td>
-                                    <ul>
-                                    {% set splitedStudentAnswer = resultQuestion.answer|split(',') %}
-                                    {% for variant in splitedStudentAnswer %}
-                                        <li>{{ resultQuestion.question.variants[variant] }}</li>
-                                    {% endfor %}
-                                    </ul>
+                                    {% if resultQuestion.answer %}
+                                        <ul>
+                                        {% set splitedStudentAnswer = resultQuestion.answer|split(',') %}
+                                        {% for variant in splitedStudentAnswer %}
+                                            <li>{{ resultQuestion.question.variants[variant] }}</li>
+                                        {% endfor %}
+                                        </ul>
+                                    {% endif %}
                                 </td>
                             {% elseif resultQuestion.question.type in [constant('Bstu\\Bundle\\TestOrganizationBundle\\Entity\\Question::TYPE_TEXT'), constant('Bstu\\Bundle\\TestOrganizationBundle\\Entity\\Question::TYPE_TEXTAREA')] %}
                                 <td>{{ resultQuestion.question.answer }}</td>
-                                <td>{{ resultQuestion.answer }}</td>
+                                <td>{{ resultQuestion.answer|default('') }}</td>
                             {% elseif resultQuestion.question.type == constant('Bstu\\Bundle\\TestOrganizationBundle\\Entity\\Question::TYPE_LOGIC_SEQUENCE') %}
                                 <td>
                                     <ul>
@@ -54,13 +56,15 @@
                                     {% endfor %}
                                     </ul>
                                 </td>
-                                {% set studentDecode = resultQuestion.answer|json_decode %}
                                 <td>
-                                    <ul>
-                                        {% for answer in studentDecode %}
-                                            <li>{{ answer }}</li>
-                                        {% endfor %}
-                                    </ul
+                                    {% if resultQuestion.answer %}
+                                        {% set studentDecode = resultQuestion.answer|json_decode %}
+                                        <ul>
+                                            {% for answer in studentDecode %}
+                                                <li>{{ answer }}</li>
+                                            {% endfor %}
+                                        </ul
+                                    {% endif %}
                                 </td>
                             {% elseif resultQuestion.question.type == constant('Bstu\\Bundle\\TestOrganizationBundle\\Entity\\Question::TYPE_PAIRED') %}
                                 <td>
@@ -75,12 +79,14 @@
                                 </td>
 
                                 <td>
-                                    <ul>
-                                    {% set studentDecode = resultQuestion.answer|json_decode %}
-                                    {% for idx, key in studentDecode.keys %}
-                                        <li>{{ key }} - {{ studentDecode.values[idx] }}</li>
-                                    {% endfor %}
-                                    </ul>
+                                    {% if resultQuestion.answer %}
+                                        <ul>
+                                        {% set studentDecode = resultQuestion.answer|json_decode %}
+                                        {% for idx, key in studentDecode.keys %}
+                                            <li>{{ key }} - {{ studentDecode.values[idx] }}</li>
+                                        {% endfor %}
+                                        </ul>
+                                    {% endif %}
                                 </td>
                                     
                             {% endif %}

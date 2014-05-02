@@ -37,6 +37,10 @@ class QuestionVerifier
         $question = $resultQuestion->getQuestion();
         $realAnswer = $question->getAnswer();
         
+        if (!$studentAnswer) {
+            return 0.0;
+        }
+        
         switch ($question->getType()) {
             case Question::TYPE_TEXT:
                 $distance = $this->dld->calculate($realAnswer, $studentAnswer);
@@ -45,7 +49,7 @@ class QuestionVerifier
                     return 1 - $distance / $realAnswerLength;
                 }
                 return 0.0;
-                
+
             case Question::TYPE_LOGIC_SEQUENCE:
                 $result = 0;
                 $variants = array_values($question->getVariants());
@@ -53,7 +57,7 @@ class QuestionVerifier
                     $result += intval($answer === $variants[$id]);
                 }
                 return $result / intval($realAnswer);
-                
+
             case Question::TYPE_CHECKBOX:
                 $realAnswerArray = explode(',', $question->getAnswer());
                 $studentAnswerArray = explode(',', $studentAnswer);
@@ -68,7 +72,7 @@ class QuestionVerifier
                     unset($realAnswerArray[$idx]);
                 }
                 return ($cntRealAnswer - count($realAnswerArray)) / $cntRealAnswer;
-                
+
             case Question::TYPE_PAIRED:
                 $variants = [];
                 foreach ($question->getVariants() as $variant) {

@@ -24,7 +24,7 @@ class ResultType extends AbstractType
         ])->setAllowedTypes([
             'question' => 'string',
             'real_answer' => 'string',
-            'student_answer' => 'string',
+            'student_answer' => ['null', 'string'],
             'variants' => ['null', 'array'],
             'question_type' => 'integer',
         ])->setDefaults([

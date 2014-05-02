@@ -459,18 +459,20 @@
             </dd>
             <dt>Ответ студента</dt>
             <dd>
-                <ul>
-                {% set splitedStudentAnswer = student_answer|split(',') %}
-                {% for variant in splitedStudentAnswer %}
-                    <li>{{ variants[variant] }}</li>
-                {% endfor %}
-                </ul>
+                {% if student_answer %}
+                    <ul>
+                    {% set splitedStudentAnswer = student_answer|split(',') %}
+                    {% for variant in splitedStudentAnswer %}
+                        <li>{{ variants[variant] }}</li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
             </dd>
         {% elseif question_type in [constant('Bstu\\Bundle\\TestOrganizationBundle\\Entity\\Question::TYPE_TEXT'), constant('Bstu\\Bundle\\TestOrganizationBundle\\Entity\\Question::TYPE_TEXTAREA')] %}
             <dt>Правильный ответ</dt>
             <dd>{{ real_answer }}</dd>
-            <dt>Student answer</dt>
-            <dd>{{ student_answer }}</dd>
+            <dt>Ответ студента</dt>
+            <dd>{{ student_answer|default('') }}</dd>
         {% elseif question_type == constant('Bstu\\Bundle\\TestOrganizationBundle\\Entity\\Question::TYPE_LOGIC_SEQUENCE') %}
             <dt>Правильный ответ</dt>
             <dd>
@@ -481,13 +483,15 @@
                 </ul>
             </dd>
             <dt>Ответ студента</dt>
-            {% set studentDecode = student_answer|json_decode %}
             <dd>
-                <ul>
-                    {% for answer in studentDecode %}
-                        <li>{{ answer }}</li>
-                    {% endfor %}
-                </ul>
+                {% if student_answer %}
+                    {% set studentDecode = student_answer|json_decode %}
+                    <ul>
+                        {% for answer in studentDecode %}
+                            <li>{{ answer }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
             </dd>
         {% elseif question_type == constant('Bstu\\Bundle\\TestOrganizationBundle\\Entity\\Question::TYPE_PAIRED') %}
             <dt>Правильный ответ</dt>
@@ -503,12 +507,14 @@
             </dd>
             <dt>Ответ студента</dt>
             <dd>
-                <ul>
-                {% set studentDecode = student_answer|json_decode %}
-                {% for idx, key in studentDecode.keys %}
-                    <li>{{ key }} - {{ studentDecode.values[idx] }}</li>
-                {% endfor %}
-                </ul>
+                {% if student_answer %}
+                    <ul>
+                    {% set studentDecode = student_answer|json_decode %}
+                    {% for idx, key in studentDecode.keys %}
+                        <li>{{ key }} - {{ studentDecode.values[idx] }}</li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
             </dd>
         {% endif %}
     </dl>
