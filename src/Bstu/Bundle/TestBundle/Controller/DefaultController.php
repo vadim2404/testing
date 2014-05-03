@@ -75,6 +75,7 @@ class DefaultController extends Controller
         
         return [
             'form' => $form->createView(),
+            'date' => $plan->getEnd()->getTimestamp() - $now->getTimestamp(),
         ];
     }
 

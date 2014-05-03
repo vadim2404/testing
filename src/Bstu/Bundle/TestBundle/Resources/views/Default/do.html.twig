@@ -8,7 +8,19 @@
 
 {% block javascripts %}
     {{ parent() }}
-    {% javascripts '@BstuTestBundle/Resources/public/js/main.js' filter='jsminplus' %}
+    {% javascripts '@BstuTestBundle/Resources/public/js/main.js' '@BstuTestBundle/Resources/public/js/countdown.js' filter='jsminplus' %}
         <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
+    <script type="text/javascript">
+        var timer = new Countdown({
+            time: {{ date }},
+            style: 'flip',
+            onComplete: function () {
+                document.location.reload();
+            },
+            width: 300,
+            height: 50
+        });
+        timer.imageFolder = '/bundles/bstutest/images/';
+    </script>
 {% endblock %}
