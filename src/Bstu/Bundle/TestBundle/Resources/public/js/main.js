@@ -64,14 +64,10 @@
         
         $('.js-answer-button').click(function (e) {
             var $form = $(this).closest('form');
+            $form.find('.glyphicon').toggleClass('glyphicon-plus glyphicon-minus');
             e.preventDefault();
             $.post($form.attr('action'), $form.serializeArray(), function (data) {
             });
         });
-//        
-//        var $jsCountdown = $('.js-countdown');
-//        if ($jsCountdown.length) {
-//           
-//        }
     });
 })(jQuery, document, window);

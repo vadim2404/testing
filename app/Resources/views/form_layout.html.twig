@@ -288,6 +288,11 @@
 {% block form_row %}
 {% spaceless %}
     <div class="form-group">
+        {% if has_answer is defined %}
+            <div class="bs-glyphicons">
+                <span class="glyphicon glyphicon-{% if has_answer %}plus{% else %}minus{% endif %}"></span>
+            </div>
+        {% endif %}
         {{ form_label(form) }}
         {{ form_errors(form) }}
         {{ form_widget(form) }}

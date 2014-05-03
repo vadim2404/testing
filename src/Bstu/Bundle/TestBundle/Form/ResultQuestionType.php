@@ -41,48 +41,46 @@ class ResultQuestionType extends AbstractType
         $item = $this->getItem($options);
         
         $question = $item->getQuestion();
+
+        $defaultOptions = [
+            'label' => $question->getQuestion(),
+            'has_answer' => !is_null($item->getAnswer()),
+        ];
         
         switch ($question->getType()) {
             case Question::TYPE_TEXT:
-                $builder->add('answer', 'text', [
-                    'label' => $question->getQuestion(),
-                ]);
+                $builder->add('answer', 'text', $defaultOptions);
                 break;
             
             case Question::TYPE_TEXTAREA:
-                $builder->add('answer', 'textarea', [
-                    'label' => $question->getQuestion(),
-                ]);
+                $builder->add('answer', 'textarea', $defaultOptions);
                 break;
                 
             case Question::TYPE_CHECKBOX:
-                $builder->add('answer', 'choice', [
-                    'label' => $question->getQuestion(),
+                $builder->add('answer', 'choice', array_merge($defaultOptions, [
                     'choices' => $question->getVariants(),
                     'multiple' => true,
                     'expanded' => true,
-                ]);
+                ]));
                 break;
             
             case Question::TYPE_RADIO:
-                $builder->add('answer', 'choice', [
-                    'label' => $question->getQuestion(),
+                $builder->add('answer', 'choice', array_merge($defaultOptions, [
                     'choices' => $question->getVariants(),
                     'multiple' => false,
                     'expanded' => true,
-                ]);
+                ]));
                 break;
             
             case Question::TYPE_LOGIC_SEQUENCE:
                 $items = $question->getVariants();
                 shuffle($items);
-                $builder->add('answer', 'text', [
-                    'label' => $question->getQuestion(),
+                $builder->add('answer', 'text', array_merge($defaultOptions, [
                     'data' => $item->getAnswer() ? $item->getAnswer() : json_encode($items),
                     'attr' => [
                         'class' => 'js-logic-sequence',
                     ],
-                ]);
+                ]));
                 break;
             
             case Question::TYPE_PAIRED:
@@ -99,13 +97,12 @@ class ResultQuestionType extends AbstractType
                     'keys' => $keys,
                     'values' => $values,
                 ];
-                $builder->add('answer', 'text', [
-                    'label' => $question->getQuestion(),
+                $builder->add('answer', 'text', array_merge($defaultOptions, [
                     'data' => $item->getAnswer() ? $item->getAnswer() : json_encode($items),
                     'attr' => [
                         'class' => 'js-paired',
                     ],    
-                ]);
+                ]));
                 break;
         }         
         

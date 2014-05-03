@@ -1,6 +1,7 @@
 parameters:
     bstu_test.question_shuffle.class: Bstu\Bundle\TestBundle\Shuffle\QuestionShuffle
     bstu_test.form.result_question_type.class: Bstu\Bundle\TestBundle\Form\ResultQuestionType
+    bstu_test.form.extension.has_answer_extension.class: Bstu\Bundle\TestBundle\Form\Extension\HasAnswerExtension
 
 services:
     bstu_test.question_shuffle:
@@ -13,3 +14,8 @@ services:
         class: %bstu_test.form.result_question_type.class%
         tags:
             - { name: form.type, alias: bstu_bundle_testbundle_resultquestion }
+
+    bstu_test.form.extension.has_answer_extension:
+        class: %bstu_test.form.extension.has_answer_extension.class%
+        tags:
+            - { name: form.type_extension, alias: form }
