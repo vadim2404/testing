@@ -24,7 +24,7 @@ class VariantType extends AbstractType
             ])
             ->add('questions', 'entity', [
                 'label' => 'Вопросы',
-                'property' => 'question',
+                'property' => 'rateWithQuestions',
                 'class' => 'Bstu\Bundle\TestOrganizationBundle\Entity\Question',
                 'multiple' => true,
                 'query_builder' => function (EntityRepository $er) use ($test) {

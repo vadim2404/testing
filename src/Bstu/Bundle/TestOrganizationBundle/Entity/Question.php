@@ -268,4 +268,28 @@ class Question
 
         return $this;
     }
+
+    /**
+     * Get rate with questions
+     *
+     * @return string
+     */
+    public function getRateWithQuestions()
+    {
+        $rc = '';
+        switch ($this->rate) {
+            case self::COMPLEXITY_EASY:
+                $rc = '(Простой) ';
+                break;
+
+            case self::COMPLEXITY_MEDIUM:
+                $rc = '(Средний) ';
+                break;
+
+            case self::COMPLEXITY_HARD:
+                $rc = '(Сложный) ';
+                break;
+        }
+        return $rc . $this->question;
+    }
 }
