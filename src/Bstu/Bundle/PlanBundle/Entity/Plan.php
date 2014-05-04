@@ -174,22 +174,52 @@ class Plan
     }
 
     /**
-     * @Assert\Callback(message="Дата окончания теста должна быть больше даты начала теста минимум на 15 минут")
+     * @Assert\True(message="Дата окончания теста должна быть больше даты начала теста минимум на 15 минут")
      *
      * @return bool
      */
-    public function endGteStartAbove15()
+    public function isEndGteStartAbove15()
     {
         return 15 <= $this->end->diff($this->start)->i;
     }
 
     /**
-     * @Assert\Callback(message="Дата окончания теста должна быть больше даты начала теста максимум на 1,5 часа")
+     * @Assert\True(message="Дата окончания теста должна быть больше даты начала теста максимум на 1,5 часа")
      *
      * @return bool
      */
-    public function endGteStartBelow90()
+    public function isEndGteStartBelow90()
     {
         return 90 >= $this->end->diff($this->start)->i;
+    }
+    
+    /**
+     * @Assert\True(message="В тесте недостаточное число вопросов")
+     * 
+     * @return bool
+     */
+    public function isTestHasQuestions()
+    {
+        if (!$this->test->isTestByVariants()) {
+            $maxQuestions = $this->test->getMaxQuestions();
+            foreach ($this->test->getThemes() as $theme) {
+                $maxQuestions -= $theme->getQuestions()->count();
+            }
+            return 0 >= $maxQuestions;
+        }
+        return true;
+    }
+    
+    /**
+     * @Assert\True(message="В тесте нет вариантов")
+     * 
+     * @return bool
+     */
+    public function isTestHasVariants()
+    {
+        if ($this->test->isTestByVariants()) {
+            return !$this->test->getVariants()->isEmpty();
+        }
+        return true;
     }
 }

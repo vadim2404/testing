@@ -80,13 +80,14 @@ class PlanController extends Controller
      */
     public function createAction(Request $request, Test $test)
     {
-        $entity = new Plan();
+        $entity = (new Plan())
+            ->setTest($test)
+            ->setPlanedBy($this->getUser())
+        ;
         $form = $this->createCreateForm($entity, $test);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $entity->setTest($test);
-            $entity->setPlanedBy($this->getUser());
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
