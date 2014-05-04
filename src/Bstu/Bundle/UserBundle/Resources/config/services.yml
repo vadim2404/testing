@@ -1,9 +1,16 @@
 parameters:
-#    bstu_user.example.class: Bstu\Bundle\UserBundle\Example
+    bstu_user.registration.form.type.class: Bstu\Bundle\UserBundle\Form\UserType
+    bstu_user.profile.form.type.class: Bstu\Bundle\UserBundle\Form\ProfileFormType
 
 services:
    bstu_user.registration.form.type:
-        class: Bstu\Bundle\UserBundle\Form\UserType
+        class: %bstu_user.registration.form.type.class%
         arguments: [%fos_user.model.user.class%]
         tags:
             - { name: form.type, alias: bstu_bundle_userbundle_user }
+            
+   bstu_user.profile.form.type:
+        class: %bstu_user.profile.form.type.class%
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: bstu_bundle_userbundle_profile }

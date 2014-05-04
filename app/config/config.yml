@@ -93,6 +93,9 @@ fos_user:
     registration:
         form:
             type: bstu_bundle_userbundle_user
+    profile:
+        form:
+            type: bstu_bundle_userbundle_profile
             
 snc_redis:
     clients:
