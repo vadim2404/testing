@@ -27,7 +27,7 @@ Supervisor
 
 ```supervisor
 [program:bstu_autotest]
-command = /var/www/portal.iv/app/console bstu:test-org:verify
+command = /var/www/portal.iv/app/console bstu:test-org:verify --env=prod
 numprocs=1
 autostart=true
 autorestart=true
