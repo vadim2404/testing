@@ -8,7 +8,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class AutomaticVerifierCommand extends ContainerAwareCommand
 {
-    const INTERVAL_IN_SECONDS = 10;
+    const INTERVAL_IN_SECONDS = 60;
     
     /**
      * {@inheritDoc}
@@ -38,6 +38,9 @@ class AutomaticVerifierCommand extends ContainerAwareCommand
                 ->getQuery()
                 ->execute()
             ;
+            
+            $verified = 0;
+            
             foreach ($results as $result) {
                 $form = $formFactory->create('bstu_bundle_testorganizationbundle_resulttest', $result, [
                     'csrf_protection' => false,
@@ -56,10 +59,13 @@ class AutomaticVerifierCommand extends ContainerAwareCommand
                 $form->submit($input);
                 
                 if ($form->isValid()) {
+                    $verified++;
                     $em->persist($result);
                 }
             }
             $em->flush();
+            
+            $output->writeln(sprintf("%s: %d test has been verified", (new \DateTime('now'))->format('Y-m-d H:i:s'), $verified));
             
             sleep(self::INTERVAL_IN_SECONDS);
         }
