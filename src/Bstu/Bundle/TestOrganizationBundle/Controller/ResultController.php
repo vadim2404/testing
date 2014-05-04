@@ -55,6 +55,10 @@ class ResultController extends Controller
             throw new AccessDeniedException('Result is also verified');
         }   
         
+        if ($resultTest->getTest()->getAutomatic()) {
+            throw new AccessDeniedException('Result will be calculated automaticly');
+        }
+        
         return [
             'form' => $this->createForm('bstu_bundle_testorganizationbundle_resulttest', $resultTest)->createView(),
         ];
@@ -75,6 +79,10 @@ class ResultController extends Controller
         if ($resultTest->getVerified()) {
             throw new AccessDeniedException('Result is also verified');
         }   
+        
+        if ($resultTest->getTest()->getAutomatic()) {
+            throw new AccessDeniedException('Result will be calculated automaticly');
+        }
         
         $form = $this->createForm('bstu_bundle_testorganizationbundle_resulttest', $resultTest);
         $form->handleRequest($request);
@@ -161,7 +169,7 @@ class ResultController extends Controller
      * 
      * @param \Bstu\Bundle\TestOrganizationBundle\Entity\ResultTest $resultTest
      */
-    public function markAsUnverifiedAction(ResultTest $resultTest)
+    public function markAsUnverifiedAction(Request $request, ResultTest $resultTest)
     {
         $this->checkAccess($resultTest);
         
@@ -171,6 +179,10 @@ class ResultController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($resultTest);
             $em->flush();
+        }
+        
+        if ($resultTest->getTest()->getAutomatic()) {
+            return $this->redirect($request->headers->get('referer'));
         }
         
         return $this->redirect($this->generateUrl('teacher_result_verify_test', [

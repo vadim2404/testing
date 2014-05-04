@@ -18,6 +18,7 @@ app/console assetic:dump --force
 app/console cache:clear --env=prod
 app/console cache:warmup --env=prod
 echo "*/1 * * * * `pwd`/app/console swiftmailer:spool:send --env=prod" | crontab
+nohup app/console bstu:test-org:verify >/dev/null 2>&1 &
 sudo setfacl -Rn -m u:"www-data":rwX -m u:`whoami`:rwX app/cache app/logs
 sudo setfacl -dRn -m u:"www-data":rwX -m u:`whoami`:rwX app/cache app/logs
 ```
