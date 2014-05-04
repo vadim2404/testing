@@ -38,7 +38,10 @@ class ResultTestRepository extends EntityRepository
      */
     public function findUnverfiedTestsByTeacher(User $user)
     {
-        return $this->findTestsByTeacher($user);
+        return $this->findTestsByTeacher($user)
+            ->andWhere('t.automatic = :automatic')
+            ->setParameter('automatic', false)
+        ;
     }
 
     /**
@@ -68,6 +71,27 @@ class ResultTestRepository extends EntityRepository
             ->setParameters([
                 'verified' => true,
                 'student' => $user,
+            ])
+        ;
+    }
+    
+    /**
+     * Find unverified results from automatic test
+     * 
+     * @return \Doctrine\ORM\Query
+     */
+    public function findUnverifiedAutomaticTest()
+    {
+        return $this->createQueryBuilder('rt')
+            ->join('rt.test', 't')
+            ->join('rt.plan', 'p')
+            ->where('t.automatic = :automatic')
+            ->andWhere('p.end < :now')
+            ->andWhere('rt.verified = :verified')
+            ->setParameters([
+                'automatic' => true,
+                'now' => new \DateTime('now'),
+                'verified' => false,
             ])
         ;
     }

@@ -47,6 +47,10 @@ class TestType extends AbstractType
                 'label' => 'Название',
                 'required' => true,
             ])
+            ->add('automatic', null, [
+                'label' => 'Тест будет проверен автоматически',
+                'required' => false,
+            ])
             ->add('maxQuestions', 'integer', [
                 'label' => 'Максимальное число вопросов',
                 'required' => true,

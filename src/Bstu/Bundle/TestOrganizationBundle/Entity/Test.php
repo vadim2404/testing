@@ -107,7 +107,38 @@ class Test
      * @ORM\ManyToOne(targetEntity="\Bstu\Bundle\UserBundle\Entity\User", inversedBy="tests")
      */
     private $teacher;
+    
+    /**
+     * @var bool $automatic
+     * 
+     * @ORM\Column(name="automatic", type="boolean")
+     */
+    private $automatic = false;
 
+    /**
+     * Get automatic
+     * 
+     * @return bool
+     */
+    public function getAutomatic()
+    {
+        return $this->automatic;
+    }
+
+    /**
+     * Set automatic
+     * 
+     * @param bool $automatic
+     * @return \Bstu\Bundle\TestOrganizationBundle\Entity\Test
+     */
+    public function setAutomatic($automatic)
+    {
+        $this->automatic = (bool) $automatic;
+        
+        return $this;
+    }
+
+        
     /**
      * Get id
      *
