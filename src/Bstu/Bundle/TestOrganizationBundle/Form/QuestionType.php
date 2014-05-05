@@ -77,7 +77,8 @@ class QuestionType extends AbstractType
                         ->where('s.teacher = ?1')
                         ->setParameter(1, $user)
                     ;
-                }
+                },
+                'group_by' => 'subject.name',
             ])
         ;
 

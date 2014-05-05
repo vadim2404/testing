@@ -64,7 +64,7 @@ class QuestionVerifier
                 if (count($studentAnswerArray) > $cntRealAnswer = count($realAnswerArray)) {
                     return 0.0;
                 }
-                foreach ($studentAnswer as $ans) {
+                foreach ($studentAnswerArray as $ans) {
                     $idx = array_search($ans, $realAnswerArray, true);
                     if (false === $idx) {
                         return 0.0;

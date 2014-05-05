@@ -63,8 +63,9 @@
         });
         
         $('.js-answer-button').click(function (e) {
-            var $form = $(this).closest('form');
-            $form.find('.glyphicon').toggleClass('glyphicon-plus glyphicon-minus');
+            var $this = $(this),
+                $form = $this.closest('form');
+            $this.closest('.form-group').find('.glyphicon').removeClass('glyphicon-minus').addClass('glyphicon-plus');
             e.preventDefault();
             $.post($form.attr('action'), $form.serializeArray(), function (data) {
             });

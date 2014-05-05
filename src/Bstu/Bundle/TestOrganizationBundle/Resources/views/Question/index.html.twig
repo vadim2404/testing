@@ -23,7 +23,7 @@
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td>{{ entity.question }}</td>
+                <td>{{ entity.question|raw }}</td>
                 <td>{{ entity.theme.name }}</td>
                 <td>{{ entity.theme.subject.name }}</td>
                 <td>

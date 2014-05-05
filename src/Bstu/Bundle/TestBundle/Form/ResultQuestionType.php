@@ -4,6 +4,8 @@ namespace Bstu\Bundle\TestBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -61,7 +63,11 @@ class ResultQuestionType extends AbstractType
                     'choices' => $question->getVariants(),
                     'multiple' => true,
                     'expanded' => true,
-                ]));
+                    'data' => !is_null($item->getAnswer()) ? explode(',', $item->getAnswer()) : [],
+                ]))->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
+                    $resultQuestion = $event->getData();
+                    $resultQuestion->setAnswer(implode(',', $resultQuestion->getAnswer()));
+                });
                 break;
             
             case Question::TYPE_RADIO:
@@ -69,6 +75,7 @@ class ResultQuestionType extends AbstractType
                     'choices' => $question->getVariants(),
                     'multiple' => false,
                     'expanded' => true,
+                    'data' => $item->getAnswer(),
                 ]));
                 break;
             
