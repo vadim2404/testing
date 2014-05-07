@@ -13,7 +13,7 @@ class ProfileFormType extends BaseProfileFormType
     protected function buildUserForm(FormBuilderInterface $builder, array $options)
     {
         parent::buildUserForm($builder, $options);
-        
+
         $builder->add('firstName', null, [
                 'label' => 'Фамилия:',
             ])
@@ -31,7 +31,7 @@ class ProfileFormType extends BaseProfileFormType
             ])
         ;
     }
-    
+
     /**
      * {@inheritDoc}
      */

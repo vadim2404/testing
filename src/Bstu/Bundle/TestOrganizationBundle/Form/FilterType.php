@@ -17,18 +17,18 @@ class FilterType extends AbstractType
      * @var \Bstu\Bundle\UserBundle\Entity\User $teacher
      */
     protected $teacher;
-    
+
     /**
      * Router
-     * 
+     *
      * @var \Symfony\Component\Routing\Generator\UrlGeneratorInterface $router
      */
     protected $router;
-    
+
     /**
      * Constructor
-     * 
-     * @param \Symfony\Component\Security\Core\SecurityContextInterface $security
+     *
+     * @param \Symfony\Component\Security\Core\SecurityContextInterface  $security
      * @param \Symfony\Component\Routing\Generator\UrlGeneratorInterface $router
      */
     public function __construct(SecurityContextInterface $security, UrlGeneratorInterface $router)
@@ -36,7 +36,7 @@ class FilterType extends AbstractType
         $this->teacher = $security->getToken()->getUser();
         $this->router = $router;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -47,7 +47,7 @@ class FilterType extends AbstractType
             ->add('test', 'entity', [
                 'class' => 'Bstu\Bundle\TestOrganizationBundle\Entity\Test',
                 'property' => 'title',
-                'query_builder' => function (EntityRepository $er) use($teacher){
+                'query_builder' => function (EntityRepository $er) use ($teacher) {
                     return $er->createQueryBuilder('t')
                         ->where('t.teacher = :teacher')
                         ->setParameter('teacher', $teacher)
@@ -67,7 +67,7 @@ class FilterType extends AbstractType
             ])
         ;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -79,7 +79,6 @@ class FilterType extends AbstractType
         ]);
     }
 
-    
     /**
      * {@inheritDoc}
      */

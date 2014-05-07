@@ -9,8 +9,8 @@ class TestRepository extends EntityRepository
 {
     /**
      * Find tests by teacher
-     * 
-     * @param \Bstu\Bundle\UserBundle\Entity\User $teacher
+     *
+     * @param  \Bstu\Bundle\UserBundle\Entity\User $teacher
      * @return \Doctrine\ORM\Query
      */
     public function findByTeacher(User $teacher)

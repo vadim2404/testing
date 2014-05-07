@@ -30,7 +30,7 @@ class TestController extends Controller
 
         $query = $em->getRepository('BstuTestOrganizationBundle:Test')->findByTeacher($this->getUser());
         $paginator  = $this->get('knp_paginator');
-        
+
         $entities = $paginator->paginate(
             $query,
             $request->query->get('page', 1),

@@ -19,7 +19,7 @@ class DoctrineEntityListenerPass implements CompilerPassInterface
                 ->addMethodCall('setEntityListenerResolver', [new Reference('bstu_plan.doctrine.entity_listener_resolver')])
             ;
         }
-        
+
         $definition = $container->getDefinition('bstu_plan.doctrine.entity_listener_resolver');
         $services = $container->findTaggedServiceIds('doctrine.entity_listener');
 

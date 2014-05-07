@@ -12,24 +12,24 @@ class TestType extends AbstractType
 {
     /**
      * Teacher object
-     * 
+     *
      * @var \Bstu\Bundle\UserBundle\Entity\User $user
      */
     private $teacher;
-    
+
     /**
      * Constructor
-     * 
+     *
      * @param \Symfony\Component\Security\Core\SecurityContextInterface $security
      */
     public function __construct(SecurityContextInterface $security)
     {
         $this->teacher = $security->getToken()->getUser();
     }
-    
+
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -77,7 +77,7 @@ class TestType extends AbstractType
             ])
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */

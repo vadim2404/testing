@@ -30,7 +30,7 @@ class ResultController extends Controller
 
         $query = $repo->findUnverfiedTestsByTeacher($this->getUser());
         $paginator  = $this->get('knp_paginator');
-        
+
         $results = $paginator->paginate(
             $query,
             $request->query->get('page', 1),
@@ -41,7 +41,7 @@ class ResultController extends Controller
             'results' => $results,
         ];
     }
-    
+
     /**
      * @Route("/verify/{id}", name="teacher_result_verify_test")
      * @Method("GET")
@@ -50,70 +50,70 @@ class ResultController extends Controller
     public function verifyTestAction(ResultTest $resultTest)
     {
         $this->checkAccess($resultTest);
-        
+
         if ($resultTest->getVerified()) {
             throw new AccessDeniedException('Result is also verified');
-        }   
-        
+        }
+
         if ($resultTest->getTest()->getAutomatic()) {
             throw new AccessDeniedException('Result will be calculated automaticly');
         }
-        
+
         return [
             'form' => $this->createForm('bstu_bundle_testorganizationbundle_resulttest', $resultTest)->createView(),
         ];
     }
-    
+
     /**
      * @Route("/verify/{id}/submit", name="teacher_submit_result_verify_test")
      * @Method("POST")
      * @Template("BstuTestOrganizationBundle:Result:verifyTest.html.twig")
-     * 
-     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @param \Symfony\Component\HttpFoundation\Request             $request
      * @param \Bstu\Bundle\TestOrganizationBundle\Entity\ResultTest $resultTest
      */
     public function submitVerifyTestAction(Request $request, ResultTest $resultTest)
     {
         $this->checkAccess($resultTest);
-        
+
         if ($resultTest->getVerified()) {
             throw new AccessDeniedException('Result is also verified');
-        }   
-        
+        }
+
         if ($resultTest->getTest()->getAutomatic()) {
             throw new AccessDeniedException('Result will be calculated automaticly');
         }
-        
+
         $form = $this->createForm('bstu_bundle_testorganizationbundle_resulttest', $resultTest);
         $form->handleRequest($request);
-        
+
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            
+
             $em->persist($resultTest);
             $em->flush();
-            
+
             return $this->redirect($this->generateUrl('teacher_result_unverified'));
         }
-        
+
         return [
             'form' => $form->createView(),
         ];
     }
-    
+
     /**
      * Check access
-     * 
-     * @param \Bstu\Bundle\TestOrganizationBundle\Entity\ResultTest $resultTest
+     *
+     * @param  \Bstu\Bundle\TestOrganizationBundle\Entity\ResultTest $resultTest
      * @throws AccessDeniedException
      */
     protected function checkAccess(ResultTest $resultTest)
     {
         if ($resultTest->getTest()->getTeacher() !== $this->getUser()) {
             throw new AccessDeniedException('This test is not created by you');
-        } 
+        }
     }
-    
+
     /**
      * @Route("/verified", name="teacher_result_verified")
      * @Method({"GET"})
@@ -128,9 +128,9 @@ class ResultController extends Controller
 
         $form = $this->createForm('bstu_bundle_testorganizationbundle_filter');
         $form->handleRequest($request);
-        
+
         $query = $repo->findVerifiedTestsByTeacher($this->getUser());
-        
+
         if ($form->isValid()) {
             $data = $form->getData();
 
@@ -139,7 +139,7 @@ class ResultController extends Controller
                     ->setParameter('test', $data['test'])
                 ;
             }
-            
+
             if (!empty($data['student'])) {
                 $query->join('rt.student', 's')
                     ->andWhere('s.firstName = :student')
@@ -147,44 +147,44 @@ class ResultController extends Controller
                 ;
             }
         }
-        
+
         $paginator  = $this->get('knp_paginator');
-        
+
         $results = $paginator->paginate(
             $query,
             $request->query->get('page', 1),
             10
         );
-        
+
         return [
             'results' => $results,
             'form' => $form->createView(),
         ];
     }
-    
+
     /**
      * @Route("/unverify/{id}", name="teacher_result_unverify_test")
      * @Method("GET")
      * @Template()
-     * 
+     *
      * @param \Bstu\Bundle\TestOrganizationBundle\Entity\ResultTest $resultTest
      */
     public function markAsUnverifiedAction(Request $request, ResultTest $resultTest)
     {
         $this->checkAccess($resultTest);
-        
+
         if ($resultTest->getVerified()) {
             $resultTest->setVerified(false);
-            
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($resultTest);
             $em->flush();
         }
-        
+
         if ($resultTest->getTest()->getAutomatic()) {
             return $this->redirect($request->headers->get('referer'));
         }
-        
+
         return $this->redirect($this->generateUrl('teacher_result_verify_test', [
             'id' => $resultTest->getId(),
         ]));

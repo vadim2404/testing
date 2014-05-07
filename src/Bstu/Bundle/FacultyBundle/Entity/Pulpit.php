@@ -36,10 +36,10 @@ class Pulpit
      * @var \Bstu\Bundle\FacultyBundle\Entity\Faculty $faculty
     */
     private $faculty;
-    
+
     /**
      * Get faculty
-     * 
+     *
      * @return \Bstu\Bundle\FacultyBundle\Entity\Faculty
      */
     public function getFaculty()
@@ -50,7 +50,7 @@ class Pulpit
     /**
      * Set faculty
      *
-     * @param \Bstu\Bundle\FacultyBundle\Entity\Faculty $faculty
+     * @param  \Bstu\Bundle\FacultyBundle\Entity\Faculty $faculty
      * @return \Bstu\Bundle\FacultyBundle\Entity\Pulpit
      */
     public function setFaculty($faculty)
@@ -63,7 +63,7 @@ class Pulpit
         /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -73,25 +73,24 @@ class Pulpit
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string $name
      * @return Pulpit
      */
     public function setName($name)
     {
         $this->name = $name;
-    
+
         return $this;
     }
 
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
         return $this->name;
     }
-
 
 }

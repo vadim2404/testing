@@ -32,7 +32,7 @@ class ThemeController extends Controller
         $query = $em->getRepository('BstuTestOrganizationBundle:Theme')->findAllByTeacher($this->getUser());
 
         $paginator  = $this->get('knp_paginator');
-        
+
         $entities = $paginator->paginate(
             $query,
             $request->query->get('page', 1),

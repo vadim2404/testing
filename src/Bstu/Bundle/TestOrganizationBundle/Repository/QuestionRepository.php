@@ -9,8 +9,8 @@ class QuestionRepository extends EntityRepository
 {
     /**
      * Find questions by teacher
-     * 
-     * @param \Bstu\Bundle\UserBundle\Entity\User $teacher
+     *
+     * @param  \Bstu\Bundle\UserBundle\Entity\User $teacher
      * @return \Doctrine\ORM\Query
      */
     public function findByTeacher(User $teacher)

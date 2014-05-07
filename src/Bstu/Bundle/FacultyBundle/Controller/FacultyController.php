@@ -31,7 +31,7 @@ class FacultyController extends Controller
 
         $query = $em->getRepository('BstuFacultyBundle:Faculty')->createQueryBuilder('f');
         $paginator  = $this->get('knp_paginator');
-        
+
         $entities = $paginator->paginate(
             $query,
             $request->query->get('page', 1),

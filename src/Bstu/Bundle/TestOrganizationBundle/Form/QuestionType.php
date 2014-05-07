@@ -29,10 +29,10 @@ class QuestionType extends AbstractType
 
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
-    {        
+    {
         $user = $this->user;
         $builder
             ->add('type', 'choice', [
@@ -71,7 +71,7 @@ class QuestionType extends AbstractType
                 'label' => 'Тема',
                 'required' => true,
                 'property' => 'name',
-                'query_builder' => function (EntityRepository $er) use($user) {
+                'query_builder' => function (EntityRepository $er) use ($user) {
                     return $er->createQueryBuilder('t')
                         ->join('t.subject', 's')
                         ->where('s.teacher = ?1')
@@ -100,7 +100,7 @@ class QuestionType extends AbstractType
             ]);
         }
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */

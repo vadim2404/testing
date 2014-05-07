@@ -56,7 +56,7 @@ class Faculty
     /**
      * Set pulpits
      *
-     * @param \Doctrine\Common\Collections\Collection $pulpits
+     * @param  \Doctrine\Common\Collections\Collection   $pulpits
      * @return \Bstu\Bundle\TestingBundle\Entity\Faculty
      */
     public function setPulpits(Collection $pulpits)
@@ -69,7 +69,7 @@ class Faculty
         /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -79,20 +79,20 @@ class Faculty
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string  $name
      * @return Faculty
      */
     public function setName($name)
     {
         $this->name = $name;
-    
+
         return $this;
     }
 
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {

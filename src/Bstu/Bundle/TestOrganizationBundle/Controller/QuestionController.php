@@ -31,7 +31,7 @@ class QuestionController extends Controller
 
         $query = $em->getRepository('BstuTestOrganizationBundle:Question')->findByTeacher($this->getUser());
         $paginator  = $this->get('knp_paginator');
-        
+
         $entities = $paginator->paginate(
             $query,
             $request->query->get('page', 1),
@@ -50,15 +50,15 @@ class QuestionController extends Controller
      * @Template("BstuTestOrganizationBundle:Question:new.html.twig")
      */
     public function createAction(Request $request, $questionType)
-    {        
+    {
         $entity = (new Question())->setType(intval($questionType));
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
-        
+
         if ($request->isXmlHttpRequest()) {
             return $this->render('BstuTestOrganizationBundle:Question:form.html.twig', ['form' => $form->createView()]);
         }
-        
+
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $entity->setTeacher($this->getUser());
@@ -67,7 +67,7 @@ class QuestionController extends Controller
 
             return $this->redirect($this->generateUrl('question_show', array('id' => $entity->getId())));
         }
-        
+
         return array(
             'entity' => $entity,
             'form'   => $form->createView(),
@@ -104,7 +104,7 @@ class QuestionController extends Controller
     {
         $entity = (new Question())->setType(intval($questionType));
         $form   = $this->createCreateForm($entity)->createView();
-        
+
         $templateParams = [
             'entity' => $entity,
             'form'   => $form,
@@ -113,7 +113,7 @@ class QuestionController extends Controller
         if (!$request->isXmlHttpRequest()) {
             return $templateParams;
         }
-        
+
         return $this->render('BstuTestOrganizationBundle:Question:form.html.twig', $templateParams);
     }
 

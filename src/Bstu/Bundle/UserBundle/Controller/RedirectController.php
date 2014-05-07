@@ -20,28 +20,28 @@ class RedirectController extends Controller
     {
         $user = $this->getUser();
         $security = $this->container->get('security.context');
-        
+
         if (!$user) {
             return $this->redirect($this->generateUrl('fos_user_security_login'));
         }
-        
+
         if ($security->isGranted('ROLE_TEACHER')) {
             return $this->redirect($this->generateUrl('subject'));
         }
-        
+
         if ($security->isGranted('ROLE_OPERATOR')) {
             return $this->redirect($this->generateUrl('plan'));
         }
-        
+
         if ($security->isGranted('ROLE_STUDENT')) {
             return $this->redirect($this->generateUrl('student_test_list'));
         }
-        
+
         if ($security->isGranted('ROLE_SUPER_ADMIN')) {
             return $this->redirect($this->generateUrl('faculty'));
         }
-        
+
         throw new AccessDeniedException();
     }
-    
+
 }

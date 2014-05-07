@@ -12,26 +12,26 @@ use Bstu\Bundle\TestBundle\Form\ResultTestType as BaseResultTestType;
 class ResultTestType extends BaseResultTestType
 {
     const RESULT_QUESTIONT_TYPE = 'bstu_bundle_testorganizationbundle_resultquestion';
-    
+
     protected $router;
-    
+
     /**
      * Constructor
-     * 
+     *
      * @param \Symfony\Component\Routing\Generator\UrlGeneratorInterface $router
      */
     public function __construct(UrlGeneratorInterface $router)
     {
         $this->router = $router;
     }
-    
+
     /**
      * {@inheritDoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         parent::buildForm($builder, $options);
-        
+
         $builder
             ->setAction($this->router->generate('teacher_submit_result_verify_test', [
                 'id' => $options['data']->getId(),
@@ -52,20 +52,20 @@ class ResultTestType extends BaseResultTestType
             })
         ;
     }
-    
+
     /**
      * {@inheritDoc}
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         parent::setDefaultOptions($resolver);
-        
+
         $resolver->setDefaults([
             'csrf_protection' => true,
             'method' => 'POST',
         ]);
     }
-    
+
     /**
      * {@inheritDoc}
      */

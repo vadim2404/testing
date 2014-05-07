@@ -31,7 +31,7 @@ class ResultType extends AbstractType
             'variants' => null,
         ]);
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -43,7 +43,7 @@ class ResultType extends AbstractType
         $view->vars['variants'] = $options['variants'];
         $view->vars['question_type'] = $options['question_type'];
     }
-    
+
     /**
      * {@inheritDoc}
      */

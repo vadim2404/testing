@@ -17,7 +17,7 @@ use Bstu\Bundle\UserBundle\Entity\User;
 class UserController extends Controller
 {
     const DEFAULT_PASSWORD = '1234';
-    
+
     /**
      * @Route("/", name="user")
      */
@@ -27,7 +27,7 @@ class UserController extends Controller
 
         $query = $em->getRepository('BstuUserBundle:User')->createQueryBuilder('u');
         $paginator  = $this->get('knp_paginator');
-        
+
         $entities = $paginator->paginate(
             $query,
             $request->query->get('page', 1),
@@ -37,9 +37,9 @@ class UserController extends Controller
         return [
             'entities' => $entities,
         ];
-        
+
     }
-    
+
     /**
      * @Route("/{id}", name="user_reset")
      * @Method("GET")
@@ -47,11 +47,11 @@ class UserController extends Controller
     public function resetAction(Request $request, User $user)
     {
         $user->setPlainPassword(self::DEFAULT_PASSWORD);
-        
+
         $this->get('fos_user.user_manager')->updateUser($user);
-        
+
         $request->getSession()->getFlashBag()->add('notice', 'Пароль для пользователя "' . $user->getUsername() . '" стал "' . self::DEFAULT_PASSWORD . '"');
-        
+
         return $this->redirect($this->generateUrl('user'));
     }
 }

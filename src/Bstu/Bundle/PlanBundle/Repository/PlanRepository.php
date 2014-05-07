@@ -8,7 +8,7 @@ class PlanRepository extends EntityRepository
 {
     /**
      * Find plans that not finished now
-     * 
+     *
      * @return \Doctrine\ORM\Query
      */
     public function findUnfinishedPlans()

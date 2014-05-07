@@ -20,11 +20,11 @@ class Question
     const TYPE_RADIO = 4;
     const TYPE_LOGIC_SEQUENCE = 5;
     const TYPE_PAIRED = 6;
-    
+
     const COMPLEXITY_EASY = 1;
     const COMPLEXITY_MEDIUM = 2;
     const COMPLEXITY_HARD = 3;
-    
+
     /**
      * @var integer
      *
@@ -100,7 +100,7 @@ class Question
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -110,20 +110,20 @@ class Question
     /**
      * Set question
      *
-     * @param string $question
+     * @param  string   $question
      * @return Question
      */
     public function setQuestion($question)
     {
         $this->question = $question;
-    
+
         return $this;
     }
 
     /**
      * Get question
      *
-     * @return string 
+     * @return string
      */
     public function getQuestion()
     {
@@ -133,20 +133,20 @@ class Question
     /**
      * Set variants
      *
-     * @param array $variants
+     * @param  array    $variants
      * @return Question
      */
     public function setVariants(array $variants)
     {
         $this->variants = $variants;
-    
+
         return $this;
     }
 
     /**
      * Get variants
      *
-     * @return array 
+     * @return array
      */
     public function getVariants()
     {
@@ -156,20 +156,20 @@ class Question
     /**
      * Set answer
      *
-     * @param string $answer
+     * @param  string   $answer
      * @return Question
      */
     public function setAnswer($answer)
     {
         $this->answer = $answer;
-    
+
         return $this;
     }
 
     /**
      * Get answer
      *
-     * @return string 
+     * @return string
      */
     public function getAnswer()
     {
@@ -179,20 +179,20 @@ class Question
     /**
      * Set rate
      *
-     * @param integer $rate
+     * @param  integer  $rate
      * @return Question
      */
     public function setRate($rate)
     {
         $this->rate = $rate;
-    
+
         return $this;
     }
 
     /**
      * Get rate
      *
-     * @return integer 
+     * @return integer
      */
     public function getRate()
     {
@@ -212,7 +212,7 @@ class Question
     /**
      * Set theme
      *
-     * @param \Bstu\Bundle\TestOrganizationBundle\Entity\Theme $theme
+     * @param  \Bstu\Bundle\TestOrganizationBundle\Entity\Theme    $theme
      * @return \Bstu\Bundle\TestOrganizationBundle\Entity\Question
      */
     public function setTheme($theme)
@@ -236,10 +236,10 @@ class Question
      * Set teacher
      *
      *
-     * @param \Bstu\Bundle\UserBundle\Entity\User $teacher
+     * @param  \Bstu\Bundle\UserBundle\Entity\User                 $teacher
      * @return \Bstu\Bundle\TestOrganizationBundle\Entity\Question
      */
-    public function setTeacher( $teacher)
+    public function setTeacher($teacher)
     {
         $this->teacher = $teacher;
 
@@ -259,7 +259,7 @@ class Question
     /**
      * Set type
      *
-     * @param integer $type
+     * @param  integer                                             $type
      * @return \Bstu\Bundle\TestOrganizationBundle\Entity\Question
      */
     public function setType($type)
@@ -290,6 +290,7 @@ class Question
                 $rc = '(Сложный) ';
                 break;
         }
+
         return $rc . $this->question;
     }
 }

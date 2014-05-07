@@ -29,13 +29,13 @@ class DefaultController extends Controller
         ;
 
         $paginator  = $this->get('knp_paginator');
-        
+
         $plans = $paginator->paginate(
             $query,
             $request->query->get('page', 1),
             10
         );
-        
+
         return [
             'plans' => $plans,
         ];
@@ -72,7 +72,7 @@ class DefaultController extends Controller
         }
 
         $form = $this->createResultForm($result);
-        
+
         return [
             'form' => $form->createView(),
             'date' => $plan->getEnd()->getTimestamp() - $now->getTimestamp(),
@@ -111,7 +111,7 @@ class DefaultController extends Controller
     /**
      * Create result form
      *
-     * @param \Bstu\Bundle\TestOrganizationBundle\Entity\ResultTest $result
+     * @param  \Bstu\Bundle\TestOrganizationBundle\Entity\ResultTest $result
      * @return \Symfony\Component\Form\FormInterface
      */
     protected function createResultForm(ResultTest $result)
@@ -121,7 +121,7 @@ class DefaultController extends Controller
             'method' => 'POST',
         ]);
     }
-    
+
     /**
      * @Route("/result")
      * @Method("GET")
@@ -134,15 +134,15 @@ class DefaultController extends Controller
             ->getRepository('BstuTestOrganizationBundle:ResultTest')
             ->findVerifiedTestsByStudent($this->getUser())
         ;
-        
+
         $paginator  = $this->get('knp_paginator');
-        
+
         $results = $paginator->paginate(
             $query,
             $request->query->get('page', 1),
             10
         );
-        
+
         return [
             'results' => $results,
         ];

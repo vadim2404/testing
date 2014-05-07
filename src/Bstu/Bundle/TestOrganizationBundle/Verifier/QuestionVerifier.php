@@ -14,21 +14,21 @@ class QuestionVerifier
      * @var \Bstu\Bundle\TestOrganizationBundle\Distance\DistanceCalculatorInterface $dld
      */
     protected $dld;
-    
+
     /**
      * Constructor
-     * 
+     *
      * @param \Bstu\Bundle\TestOrganizationBundle\Distance\DistanceCalculatorInterface $dld
      */
     public function __construct(DistanceCalculatorInterface $dld)
     {
         $this->dld = $dld;
     }
-    
+
     /**
      * check the answer
-     * 
-     * @param \Bstu\Bundle\TestOrganizationBundle\Entity\ResultQuestion $resultQuestion
+     *
+     * @param  \Bstu\Bundle\TestOrganizationBundle\Entity\ResultQuestion $resultQuestion
      * @return real
      */
     public function verify(ResultQuestion $resultQuestion)
@@ -36,11 +36,11 @@ class QuestionVerifier
         $studentAnswer = $resultQuestion->getAnswer();
         $question = $resultQuestion->getQuestion();
         $realAnswer = $question->getAnswer();
-        
+
         if (!$studentAnswer) {
             return 0.0;
         }
-        
+
         switch ($question->getType()) {
             case Question::TYPE_TEXT:
                 $distance = $this->dld->calculate($realAnswer, $studentAnswer);
@@ -48,6 +48,7 @@ class QuestionVerifier
                 if ($distance < $realAnswerLength && $distance / $realAnswerLength <= 0.3) {
                     return 1 - $distance / $realAnswerLength;
                 }
+
                 return 0.0;
 
             case Question::TYPE_LOGIC_SEQUENCE:
@@ -56,6 +57,7 @@ class QuestionVerifier
                 foreach (json_decode($studentAnswer) as $id => $answer) {
                     $result += intval($answer === $variants[$id]);
                 }
+
                 return $result / intval($realAnswer);
 
             case Question::TYPE_CHECKBOX:
@@ -68,9 +70,10 @@ class QuestionVerifier
                     $idx = array_search($ans, $realAnswerArray, true);
                     if (false === $idx) {
                         return 0.0;
-                    }              
+                    }
                     unset($realAnswerArray[$idx]);
                 }
+
                 return ($cntRealAnswer - count($realAnswerArray)) / $cntRealAnswer;
 
             case Question::TYPE_PAIRED:
@@ -84,9 +87,10 @@ class QuestionVerifier
                 foreach ($studentAnswerDecoded['keys'] as $idx => $key) {
                     $result += intval($variants[$key] === $studentAnswerDecoded['values'][$idx]);
                 }
+
                 return $result / count($variants);
         }
-        
+
         return floatval($studentAnswer === $realAnswer);
     }
 }

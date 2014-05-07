@@ -13,7 +13,7 @@ use Bstu\Bundle\TestOrganizationBundle\Entity\ResultQuestion;
 class QuestionShuffle
 {
     const COMPLEXITY_ITERATIONS = 10;
-    
+
     /**
      * Security context
      *
@@ -32,7 +32,7 @@ class QuestionShuffle
      * Constructor
      *
      * @param \Symfony\Component\Security\Core\SecurityContextInterface $security
-     * @param \Doctrine\ORM\EntityManagerInterface $em
+     * @param \Doctrine\ORM\EntityManagerInterface                      $em
      */
     public function __construct(SecurityContextInterface $security, EntityManagerInterface $em)
     {
@@ -40,11 +40,10 @@ class QuestionShuffle
         $this->em = $em;
     }
 
-
     /**
      * shuffle questions from test
      *
-     * @param \Bstu\Bundle\TestOrganizationBundle\Entity\Plan $plan
+     * @param  \Bstu\Bundle\TestOrganizationBundle\Entity\Plan       $plan
      * @return \Bstu\Bundle\TestOrganizationBundle\Entity\ResultTest
      * @throws AccessDeniedException
      */
@@ -61,7 +60,7 @@ class QuestionShuffle
                 $questions[] = $question;
             }
         }
-        
+
         $result = new ResultTest();
         $result->setStudent($this->securityContext->getToken()->getUser())
             ->setTest($test)
@@ -79,7 +78,7 @@ class QuestionShuffle
                     $result->addResultQuestion($resultQuestion);
                 }
                 break;
-                
+
             case Test::TYPE_RANDOM_WITH_COMPLEXITY:
                 $heap = new \SplMinHeap();
                 $saved = [];
@@ -102,7 +101,7 @@ class QuestionShuffle
                     $result->addResultQuestion($resultQuestion);
                 }
                 break;
-                
+
             case Test::TYPE_VARIANT:
                 $variants = $test->getVariants()->toArray();
                 shuffle($variants);

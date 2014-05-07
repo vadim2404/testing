@@ -10,12 +10,12 @@ class EntityListenerResolver extends DefaultEntityListenerResolver
     /**
      * Service container
      *
-     * @var \Symfony\Component\DependencyInjection\ContainerInterface 
+     * @var \Symfony\Component\DependencyInjection\ContainerInterface
      */
     private $container;
-    
+
     /**
-     * Mapping 
+     * Mapping
      *
      * @var array
      */
@@ -23,7 +23,7 @@ class EntityListenerResolver extends DefaultEntityListenerResolver
 
     /**
      * Constructor
-     * 
+     *
      * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
      */
     public function __construct(ContainerInterface $container)
@@ -33,7 +33,7 @@ class EntityListenerResolver extends DefaultEntityListenerResolver
 
     /**
      * Add mapping
-     * 
+     *
      * @param string $className
      * @param string $service
      */

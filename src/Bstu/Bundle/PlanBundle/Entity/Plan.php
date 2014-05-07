@@ -48,14 +48,14 @@ class Plan
 
     /**
      * @var \Bstu\Bundle\TestOrganizationBundle\Entity\Test
-     * 
+     *
      * @ORM\ManyToOne(targetEntity="\Bstu\Bundle\TestOrganizationBundle\Entity\Test", inversedBy="plans")
      */
     private $test;
-    
+
     /**
      * @var \Bstu\Bundle\UserBundle\Entity\User
-     * 
+     *
      * @ORM\ManyToOne(targetEntity="\Bstu\Bundle\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="planedby_id", referencedColumnName="id")
      */
@@ -64,7 +64,7 @@ class Plan
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -74,7 +74,7 @@ class Plan
     /**
      * Set start
      *
-     * @param \DateTime $start
+     * @param  \DateTime $start
      * @return Plan
      */
     public function setStart(\DateTime $start)
@@ -87,7 +87,7 @@ class Plan
     /**
      * Get start
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getStart()
     {
@@ -97,7 +97,7 @@ class Plan
     /**
      * Set end
      *
-     * @param \DateTime $end
+     * @param  \DateTime $end
      * @return Plan
      */
     public function setEnd($end)
@@ -116,10 +116,10 @@ class Plan
     {
         return $this->end;
     }
-    
+
     /**
      * Get test
-     * 
+     *
      * @return \Bstu\Bundle\TestOrganizationBundle\Entity\Test
      */
     public function getTest()
@@ -129,21 +129,21 @@ class Plan
 
     /**
      * Set Test
-     * 
-     * @param \Bstu\Bundle\TestOrganizationBundle\Entity\Test $test
+     *
+     * @param  \Bstu\Bundle\TestOrganizationBundle\Entity\Test $test
      * @return \Bstu\Bundle\TestOrganizationBundle\Entity\Plan
      */
     public function setTest(Test $test)
     {
         $this->test = $test;
-        
+
         return $this;
     }
 
     /**
      * Set planedBy
      *
-     * @param \Bstu\Bundle\UserBundle\Entity\User $planedBy
+     * @param  \Bstu\Bundle\UserBundle\Entity\User             $planedBy
      * @return \Bstu\Bundle\TestOrganizationBundle\Entity\Plan
      */
     public function setPlanedBy(User $planedBy)
@@ -156,7 +156,7 @@ class Plan
     /**
      * Get planedBy
      *
-     * @return \Bstu\Bundle\UserBundle\Entity\User 
+     * @return \Bstu\Bundle\UserBundle\Entity\User
      */
     public function getPlanedBy()
     {
@@ -192,10 +192,10 @@ class Plan
     {
         return 90 >= $this->end->diff($this->start)->i;
     }
-    
+
     /**
      * @Assert\True(message="В тесте недостаточное число вопросов")
-     * 
+     *
      * @return bool
      */
     public function isTestHasQuestions()
@@ -205,14 +205,16 @@ class Plan
             foreach ($this->test->getThemes() as $theme) {
                 $maxQuestions -= $theme->getQuestions()->count();
             }
+
             return 0 >= $maxQuestions;
         }
+
         return true;
     }
-    
+
     /**
      * @Assert\True(message="В тесте нет вариантов")
-     * 
+     *
      * @return bool
      */
     public function isTestHasVariants()
@@ -220,6 +222,7 @@ class Plan
         if ($this->test->isTestByVariants()) {
             return !$this->test->getVariants()->isEmpty();
         }
+
         return true;
     }
 }

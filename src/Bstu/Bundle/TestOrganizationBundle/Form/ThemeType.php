@@ -11,7 +11,7 @@ class ThemeType extends AbstractType
 {
     /**
      * User
-     * 
+     *
      * @var \Bstu\Bundle\UserBundle\Entity\User $user
      */
     private $user;
@@ -28,7 +28,7 @@ class ThemeType extends AbstractType
 
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -41,7 +41,7 @@ class ThemeType extends AbstractType
                 'label' => 'Предмет',
                 'property' => 'name',
                 'required' => true,
-                'query_builder' => function (EntityRepository $er) use($user) {
+                'query_builder' => function (EntityRepository $er) use ($user) {
                     return $er->createQueryBuilder('s')
                         ->where('s.teacher = ?1')
                         ->setParameter(1, $user)
@@ -50,7 +50,7 @@ class ThemeType extends AbstractType
             ])
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */

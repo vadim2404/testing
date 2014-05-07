@@ -42,7 +42,7 @@ class ResultQuestion
 
     /**
      * @var \Bstu\Bundle\TestOrganizationBundle\Entity\ResultTest $resultTest
-     * 
+     *
      * @ORM\ManyToOne(targetEntity="ResultTest", inversedBy="resultQuestions")
      * @ORM\JoinColumn(name="result_test_id", referencedColumnName="id")
      */
@@ -59,7 +59,7 @@ class ResultQuestion
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -69,7 +69,7 @@ class ResultQuestion
     /**
      * Set resultTest
      *
-     * @param \Bstu\Bundle\TestOrganizationBundle\Entity\ResultTest $resultTest
+     * @param  \Bstu\Bundle\TestOrganizationBundle\Entity\ResultTest $resultTest
      * @return ResultQuestion
      */
     public function setResultTest(ResultTest $resultTest = null)
@@ -82,7 +82,7 @@ class ResultQuestion
     /**
      * Get resultTest
      *
-     * @return \Bstu\Bundle\TestOrganizationBundle\Entity\ResultTest 
+     * @return \Bstu\Bundle\TestOrganizationBundle\Entity\ResultTest
      */
     public function getResultTest()
     {
@@ -92,7 +92,7 @@ class ResultQuestion
     /**
      * Set answer
      *
-     * @param string $answer
+     * @param  string         $answer
      * @return ResultQuestion
      */
     public function setAnswer($answer)
@@ -105,7 +105,7 @@ class ResultQuestion
     /**
      * Get answer
      *
-     * @return string 
+     * @return string
      */
     public function getAnswer()
     {
@@ -115,7 +115,7 @@ class ResultQuestion
     /**
      * Set result
      *
-     * @param float $result
+     * @param  float          $result
      * @return ResultQuestion
      */
     public function setResult($result)
@@ -128,7 +128,7 @@ class ResultQuestion
     /**
      * Get result
      *
-     * @return float 
+     * @return float
      */
     public function getResult()
     {
@@ -138,7 +138,7 @@ class ResultQuestion
     /**
      * Set question
      *
-     * @param \Bstu\Bundle\TestOrganizationBundle\Entity\Question $question
+     * @param  \Bstu\Bundle\TestOrganizationBundle\Entity\Question $question
      * @return ResultQuestion
      */
     public function setQuestion(Question $question = null)
@@ -151,7 +151,7 @@ class ResultQuestion
     /**
      * Get question
      *
-     * @return \Bstu\Bundle\TestOrganizationBundle\Entity\Question 
+     * @return \Bstu\Bundle\TestOrganizationBundle\Entity\Question
      */
     public function getQuestion()
     {

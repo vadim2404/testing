@@ -7,7 +7,7 @@ class JsonDecodeExtension extends \Twig_Extension
     /**
      * {@inheritDoc}
      */
-    public function getName() 
+    public function getName()
     {
         return 'json_decode.extension';
     }
@@ -24,8 +24,8 @@ class JsonDecodeExtension extends \Twig_Extension
 
     /**
      * json_decode
-     * 
-     * @param string $str
+     *
+     * @param  string $str
      * @return mixed
      */
     public function jsonDecode($str)

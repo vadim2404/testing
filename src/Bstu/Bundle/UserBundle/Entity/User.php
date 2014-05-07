@@ -76,7 +76,7 @@ class User extends BaseUser
       * @var \Doctrine\Common\Collections\Collection
       */
     private $subjects;
-    
+
     /**
      * Questions
      *
@@ -84,7 +84,7 @@ class User extends BaseUser
      * @var \Doctrine\Common\Collections\Collection $questions
      */
     private $questions;
-    
+
     /**
      * Tests
      *
@@ -116,7 +116,7 @@ class User extends BaseUser
     /**
      * Set subjects
      *
-     * @param \Doctrine\Common\Collections\Collection $subjects
+     * @param  \Doctrine\Common\Collections\Collection $subjects
      * @return \Bstu\Bundle\UserBundle\Entity\User
      */
     public function setSubjects(Collection $subjects)
@@ -125,7 +125,6 @@ class User extends BaseUser
 
         return $this;
     }
-
 
     /**
      * Get first name
@@ -140,7 +139,7 @@ class User extends BaseUser
     /**
      * Set first name
      *
-     * @param string $firstName
+     * @param  string                              $firstName
      * @return \Bstu\Bundle\UserBundle\Entity\User
      */
     public function setFirstName($firstName)
@@ -163,7 +162,7 @@ class User extends BaseUser
     /**
      * Set last name
      *
-     * @param string $lastName
+     * @param  string                              $lastName
      * @return \Bstu\Bundle\UserBundle\Entity\User
      */
     public function setLastName($lastName)
@@ -186,7 +185,7 @@ class User extends BaseUser
     /**
      * Set middle name
      *
-     * @param string $middleName
+     * @param  string                              $middleName
      * @return \Bstu\Bundle\UserBundle\Entity\User
      */
     public function setMiddleName($middleName)
@@ -222,7 +221,7 @@ class User extends BaseUser
     /**
      * Set pulpit
      *
-     * @param \Bstu\Bundle\FacultyBundle\Entity\Pulpit $pulpit
+     * @param  \Bstu\Bundle\FacultyBundle\Entity\Pulpit $pulpit
      * @return \Bstu\Bundle\UserBundle\Entity\User
      */
     public function setPulpit($pulpit)
@@ -254,7 +253,7 @@ class User extends BaseUser
     /**
      * Set group
      *
-     * @param \Bstu\Bundle\UserBundle\Entity\Group $group
+     * @param  \Bstu\Bundle\UserBundle\Entity\Group $group
      * @return \Bstu\Bundle\UserBundle\Entity\User
      */
     public function setGroup($group)
@@ -279,7 +278,7 @@ class User extends BaseUser
     {
         return $this->group ? new ArrayCollection([$this->group->getName()]) : new ArrayCollection();
     }
-    
+
     /**
      * Get questions
      *
@@ -293,7 +292,7 @@ class User extends BaseUser
     /**
      * Set questions
      *
-     * @param \Doctrine\Common\Collections\Collection $questions
+     * @param  \Doctrine\Common\Collections\Collection $questions
      * @return \Bstu\Bundle\UserBundle\Entity\User
      */
     public function setQuestions(Collection $questions)
@@ -302,10 +301,10 @@ class User extends BaseUser
 
         return $this;
     }
-    
+
     /**
      * Get tests
-     * 
+     *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getTests()
@@ -315,14 +314,14 @@ class User extends BaseUser
 
     /**
      * Set tests
-     * 
-     * @param \Doctrine\Common\Collections\Collection $tests
+     *
+     * @param  \Doctrine\Common\Collections\Collection $tests
      * @return \Bstu\Bundle\UserBundle\Entity\User
      */
     public function setTests(Collection $tests)
     {
         $this->tests = $tests;
-        
+
         return $this;
     }
 }

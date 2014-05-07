@@ -9,7 +9,7 @@ class ThemeRepository extends EntityRepository
     /**
      * Find all themes through subjects that relates to teacher
      *
-     * @param \Bstu\Bundle\UserBundle\Entity\User $teacher
+     * @param  \Bstu\Bundle\UserBundle\Entity\User $teacher
      * @return \Doctrine\ORM\Query
      */
     public function findAllByTeacher($teacher)

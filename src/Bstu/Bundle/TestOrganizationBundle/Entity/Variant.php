@@ -24,7 +24,7 @@ class Variant
     {
         $this->questions = new ArrayCollection();
     }
-    
+
     /**
      * @var integer
      *
@@ -44,14 +44,14 @@ class Variant
 
     /**
      * @var \Bstu\Bundle\TestOrganizationBundle\Entity\Test
-     * 
+     *
      * @ORM\ManyToOne(targetEntity="Test", inversedBy="variants")
      */
     private $test;
-    
+
     /**
-     * @var \Doctrine\Common\Collections\Collection $questions 
-     * 
+     * @var \Doctrine\Common\Collections\Collection $questions
+     *
      * @ORM\ManyToMany(targetEntity="Question")
      * @ORM\JoinTable(name="variant_question")
      */
@@ -60,7 +60,7 @@ class Variant
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -70,7 +70,7 @@ class Variant
     /**
      * Set number
      *
-     * @param integer $number
+     * @param  integer $number
      * @return Variant
      */
     public function setNumber($number)
@@ -83,16 +83,16 @@ class Variant
     /**
      * Get number
      *
-     * @return integer 
+     * @return integer
      */
     public function getNumber()
     {
         return $this->number;
     }
-    
+
     /**
      * Get test
-     * 
+     *
      * @return \Bstu\Bundle\TestOrganizationBundle\Entity\Test
      */
     public function getTest()
@@ -102,21 +102,21 @@ class Variant
 
     /**
      * Set Test
-     * 
-     * @param \Bstu\Bundle\TestOrganizationBundle\Entity\Test $test
+     *
+     * @param  \Bstu\Bundle\TestOrganizationBundle\Entity\Test    $test
      * @return \Bstu\Bundle\TestOrganizationBundle\Entity\Variant
      */
     public function setTest(Test $test)
     {
         $this->test = $test;
-        
+
         return $this;
     }
 
     /**
      * Add question
      *
-     * @param \Bstu\Bundle\TestOrganizationBundle\Entity\Question $questions
+     * @param  \Bstu\Bundle\TestOrganizationBundle\Entity\Question $questions
      * @return Variant
      */
     public function addQuestion(Question $question)
@@ -139,7 +139,7 @@ class Variant
     /**
      * Get questions
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getQuestions()
     {
@@ -148,17 +148,17 @@ class Variant
 
     /**
      * Set questions
-     * 
-     * @param \Doctrine\Common\Collections\Collection $questions
+     *
+     * @param  \Doctrine\Common\Collections\Collection            $questions
      * @return \Bstu\Bundle\TestOrganizationBundle\Entity\Variant
      */
     public function setQuestions(Collection $questions)
     {
         $this->questions = $questions;
-        
+
         return $this;
     }
-    
+
     /**
      * @Assert\True(message="Число выбранных вопросов не соответствует тому, что указано в тесте")
      */

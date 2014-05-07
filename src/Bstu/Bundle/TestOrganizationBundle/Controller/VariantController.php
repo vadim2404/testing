@@ -21,8 +21,8 @@ class VariantController extends Controller
 {
     /**
      * Check test
-     * 
-     * @param \Bstu\Bundle\TestOrganizationBundle\Entity\Test $test
+     *
+     * @param  \Bstu\Bundle\TestOrganizationBundle\Entity\Test                  $test
      * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
      */
     protected function checkTest(Test $test)
@@ -30,12 +30,12 @@ class VariantController extends Controller
         if ($test->getTeacher() !== $this->getUser()) {
             throw new AccessDeniedException('This test is not created by you');
         }
-        
+
         if (Test::TYPE_VARIANT !== $test->getType()) {
             throw new AccessDeniedException('This functionality is available only for test with variants');
         }
     }
-    
+
     /**
      * Lists all Variant entities.
      *
@@ -46,7 +46,7 @@ class VariantController extends Controller
     public function indexAction(Test $test)
     {
         $this->checkTest($test);
-        
+
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('BstuTestOrganizationBundle:Variant')->findByTest($test);
@@ -56,7 +56,7 @@ class VariantController extends Controller
             'test' => $test,
         ];
     }
-    
+
     /**
      * Creates a new Variant entity.
      *
@@ -67,7 +67,7 @@ class VariantController extends Controller
     public function createAction(Request $request, Test $test)
     {
         $this->checkTest($test);
-        
+
         $entity = (new Variant())->setTest($test);
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
@@ -118,7 +118,7 @@ class VariantController extends Controller
     public function newAction(Test $test)
     {
         $this->checkTest($test);
-        
+
         $entity = (new Variant())->setTest($test);
         $form   = $this->createCreateForm($entity);
 
@@ -137,7 +137,7 @@ class VariantController extends Controller
      * @Template()
      */
     public function showAction(Variant $variant)
-    {        
+    {
         $this->checkTest($variant->getTest());
 
         $deleteForm = $this->createDeleteForm($variant->getId());
@@ -187,7 +187,7 @@ class VariantController extends Controller
 
         return $form;
     }
-    
+
     /**
      * Edits an existing Variant entity.
      *
@@ -217,7 +217,7 @@ class VariantController extends Controller
             'delete_form' => $deleteForm->createView(),
         ];
     }
-    
+
     /**
      * Deletes a Variant entity.
      *
@@ -227,7 +227,7 @@ class VariantController extends Controller
     public function deleteAction(Request $request, Variant $variant)
     {
         $this->checkTest($test = $variant->getTest());
-        
+
         $form = $this->createDeleteForm($variant->getId());
         $form->handleRequest($request);
 

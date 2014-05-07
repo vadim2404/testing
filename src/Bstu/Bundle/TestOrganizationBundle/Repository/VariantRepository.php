@@ -9,8 +9,8 @@ class VariantRepository extends EntityRepository
 {
     /**
      * Find variants by test
-     * 
-     * @param \Bstu\Bundle\TestOrganizationBundle\Entity\Test $test
+     *
+     * @param  \Bstu\Bundle\TestOrganizationBundle\Entity\Test $test
      * @return array
      */
     public function findByTest(Test $test)

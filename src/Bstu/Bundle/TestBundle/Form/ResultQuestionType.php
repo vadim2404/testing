@@ -14,7 +14,7 @@ use Bstu\Bundle\TestOrganizationBundle\Entity\Question;
 class ResultQuestionType extends AbstractType
 {
     protected $accessor;
-    
+
     /**
      * Constructor
      */
@@ -22,42 +22,42 @@ class ResultQuestionType extends AbstractType
     {
         $this->accessor = new PropertyAccessor();
     }
-    
+
     /**
      * Get Result question
-     * 
-     * @param array $options
+     *
+     * @param  array                                                     $options
      * @return \Bstu\Bundle\TestOrganizationBundle\Entity\ResultQuestion
      */
     protected function getItem(array $options)
     {
         return $this->accessor->getValue($options['items'], $options['property_path']);
     }
-    
+
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $item = $this->getItem($options);
-        
+
         $question = $item->getQuestion();
 
         $defaultOptions = [
             'label' => $question->getQuestion(),
             'has_answer' => !is_null($item->getAnswer()),
         ];
-        
+
         switch ($question->getType()) {
             case Question::TYPE_TEXT:
                 $builder->add('answer', 'text', $defaultOptions);
                 break;
-            
+
             case Question::TYPE_TEXTAREA:
                 $builder->add('answer', 'textarea', $defaultOptions);
                 break;
-                
+
             case Question::TYPE_CHECKBOX:
                 $builder->add('answer', 'choice', array_merge($defaultOptions, [
                     'choices' => $question->getVariants(),
@@ -69,7 +69,7 @@ class ResultQuestionType extends AbstractType
                     $resultQuestion->setAnswer(implode(',', $resultQuestion->getAnswer()));
                 });
                 break;
-            
+
             case Question::TYPE_RADIO:
                 $builder->add('answer', 'choice', array_merge($defaultOptions, [
                     'choices' => $question->getVariants(),
@@ -78,7 +78,7 @@ class ResultQuestionType extends AbstractType
                     'data' => $item->getAnswer(),
                 ]));
                 break;
-            
+
             case Question::TYPE_LOGIC_SEQUENCE:
                 $items = $question->getVariants();
                 shuffle($items);
@@ -89,7 +89,7 @@ class ResultQuestionType extends AbstractType
                     ],
                 ]));
                 break;
-            
+
             case Question::TYPE_PAIRED:
                 $variants = $question->getVariants();
                 $keys = $values = [];
@@ -108,11 +108,11 @@ class ResultQuestionType extends AbstractType
                     'data' => $item->getAnswer() ? $item->getAnswer() : json_encode($items),
                     'attr' => [
                         'class' => 'js-paired',
-                    ],    
+                    ],
                 ]));
                 break;
-        }         
-        
+        }
+
         $builder ->add('send', 'button', [
             'label' => 'Отправить',
             'attr' => [
@@ -120,7 +120,7 @@ class ResultQuestionType extends AbstractType
             ]
         ]);
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */

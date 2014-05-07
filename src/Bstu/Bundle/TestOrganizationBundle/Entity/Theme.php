@@ -70,7 +70,7 @@ class Theme
     /**
      * Set subject
      *
-     * @param \Bstu\Bundle\TestOrganizationBundle\Entity\Subject $subject
+     * @param  \Bstu\Bundle\TestOrganizationBundle\Entity\Subject $subject
      * @return \Bstu\Bundle\TestOrganizationBundle\Entity\Theme
      */
     public function setSubject($subject)
@@ -90,11 +90,10 @@ class Theme
         return $this->getSubject()->getTeacher();
     }
 
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -104,20 +103,20 @@ class Theme
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string $name
      * @return Theme
      */
     public function setName($name)
     {
         $this->name = $name;
-    
+
         return $this;
     }
 
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -137,7 +136,7 @@ class Theme
     /**
      * Set questions
      *
-     * @param \Doctrine\Common\Collections\Collection $questions
+     * @param  \Doctrine\Common\Collections\Collection          $questions
      * @return \Bstu\Bundle\TestOrganizationBundle\Entity\Theme
      */
     public function setQuestions(Collection $questions)
@@ -150,7 +149,7 @@ class Theme
     /**
      * Add questions
      *
-     * @param \Bstu\Bundle\TestOrganizationBundle\Entity\Question $question
+     * @param  \Bstu\Bundle\TestOrganizationBundle\Entity\Question $question
      * @return Theme
      */
     public function addQuestion(Question $question)

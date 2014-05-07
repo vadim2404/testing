@@ -53,10 +53,10 @@ class Subject
      * @var \Doctrine\Common\Collections\Collection
      */
     private $themes;
-    
+
     /**
      * @var \Doctrine\Common\Collections\Collection
-     * 
+     *
      * @ORM\OneToMany(targetEntity="Test", mappedBy="subject", cascade={"all"})
      */
     private $tests;
@@ -74,7 +74,7 @@ class Subject
     /**
      * Set themes
      *
-     * @param \Doctrine\Common\Collections\Collection $themes
+     * @param  \Doctrine\Common\Collections\Collection            $themes
      * @return \Bstu\Bundle\TestOrganizationBundle\Entity\Subject
      */
     public function setThemes(Collection $themes)
@@ -83,27 +83,27 @@ class Subject
 
         return $this;
     }
-    
+
     /**
      * Get tests
-     * 
+     *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getTests() 
+    public function getTests()
     {
         return $this->tests;
     }
 
     /**
      * Set tests
-     * 
-     * @param \Doctrine\Common\Collections\Collection $tests
+     *
+     * @param  \Doctrine\Common\Collections\Collection            $tests
      * @return \Bstu\Bundle\TestOrganizationBundle\Entity\Subject
      */
-    public function setTests(Collection $tests) 
+    public function setTests(Collection $tests)
     {
         $this->tests = $tests;
-        
+
         return $this;
     }
 
@@ -120,7 +120,7 @@ class Subject
     /**
      * Set teacher
      *
-     * @param \Bstu\Bundle\UserBundle\Entity\User $teacher
+     * @param  \Bstu\Bundle\UserBundle\Entity\User                $teacher
      * @return \Bstu\Bundle\TestOrganizationBundle\Entity\Subject
      */
     public function setTeacher($teacher)
@@ -130,11 +130,10 @@ class Subject
         return $this;
     }
 
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -144,20 +143,20 @@ class Subject
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string  $name
      * @return Subject
      */
     public function setName($name)
     {
         $this->name = $name;
-    
+
         return $this;
     }
 
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -167,7 +166,7 @@ class Subject
     /**
      * Add themes
      *
-     * @param \Bstu\Bundle\TestOrganizationBundle\Entity\Theme $theme
+     * @param  \Bstu\Bundle\TestOrganizationBundle\Entity\Theme $theme
      * @return Subject
      */
     public function addTheme(Theme $theme)
@@ -190,7 +189,7 @@ class Subject
     /**
      * Add tests
      *
-     * @param \Bstu\Bundle\TestOrganizationBundle\Entity\Test $test
+     * @param  \Bstu\Bundle\TestOrganizationBundle\Entity\Test $test
      * @return Subject
      */
     public function addTest(Test $test)

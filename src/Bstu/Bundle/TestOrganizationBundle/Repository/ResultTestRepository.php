@@ -9,9 +9,9 @@ class ResultTestRepository extends EntityRepository
 {
     /**
      * Find tests by teacher
-     * 
-     * @param \Bstu\Bundle\UserBundle\Entity\User $user
-     * @param boo $verified
+     *
+     * @param  \Bstu\Bundle\UserBundle\Entity\User $user
+     * @param  boo                                 $verified
      * @return \Doctrine\ORM\QueryBuilder
      */
     protected function findTestsByTeacher(User $user, $verified = false)
@@ -33,7 +33,7 @@ class ResultTestRepository extends EntityRepository
     /**
      * Find unverified tests
      *
-     * @param \Bstu\Bundle\UserBundle\Entity\User $user
+     * @param  \Bstu\Bundle\UserBundle\Entity\User $user
      * @return \Doctrine\ORM\QueryBuilder
      */
     public function findUnverfiedTestsByTeacher(User $user)
@@ -47,18 +47,18 @@ class ResultTestRepository extends EntityRepository
     /**
      * Find verified tests
      *
-     * @param \Bstu\Bundle\UserBundle\Entity\User $user
+     * @param  \Bstu\Bundle\UserBundle\Entity\User $user
      * @return \Doctrine\ORM\QueryBuilder
      */
     public function findVerifiedTestsByTeacher(User $user)
     {
         return $this->findTestsByTeacher($user, true);
     }
-    
+
     /**
      * Find verified tests by student
-     * 
-     * @param \Bstu\Bundle\UserBundle\Entity\User $user
+     *
+     * @param  \Bstu\Bundle\UserBundle\Entity\User $user
      * @return \Doctrine\ORM\Query
      */
     public function findVerifiedTestsByStudent(User $user)
@@ -74,10 +74,10 @@ class ResultTestRepository extends EntityRepository
             ])
         ;
     }
-    
+
     /**
      * Find unverified results from automatic test
-     * 
+     *
      * @return \Doctrine\ORM\Query
      */
     public function findUnverifiedAutomaticTest()

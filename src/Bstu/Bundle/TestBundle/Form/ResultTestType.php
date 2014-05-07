@@ -9,10 +9,10 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class ResultTestType extends AbstractType
 {
     const RESULT_QUESTIONT_TYPE = 'bstu_bundle_testbundle_resultquestion';
-    
+
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -26,7 +26,7 @@ class ResultTestType extends AbstractType
             ])
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */

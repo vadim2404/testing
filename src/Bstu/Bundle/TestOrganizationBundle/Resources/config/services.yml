@@ -7,7 +7,7 @@ parameters:
     bstu_test_organization.distance.dld.class: Bstu\Bundle\TestOrganizationBundle\Distance\DamerauLevenshteinDistance
     bstu_test_organization.verifier.question_verifier.class: Bstu\Bundle\TestOrganizationBundle\Verifier\QuestionVerifier
     bstu_test_organization.twig.json_decode.class: Bstu\Bundle\TestOrganizationBundle\Twig\Extension\JsonDecodeExtension
-    
+
 services:
     bstu_test_organization.testtype:
         class: %bstu_test_organization.testtype.class%
@@ -15,34 +15,34 @@ services:
             - '@security.context'
         tags:
             - { name: form.type, alias: bstu_bundle_testorganizationbundle_test }
-                         
+
     bstu_test_organization.distance.dld:
         class: %bstu_test_organization.distance.dld.class%
-        
+
     bstu_test_organization.verifier.question_verifier:
         class: %bstu_test_organization.verifier.question_verifier.class%
         arguments:
             - '@bstu_test_organization.distance.dld'
-            
+
     bstu_test_organization.resulttype:
         class: %bstu_test_organization.resulttype.class%
         tags:
             - { name: form.type, alias: result }
-            
+
     bstu_test_organization.resultquestiontype:
         class: %bstu_test_organization.resultquestiontype.class%
         arguments:
             - '@bstu_test_organization.verifier.question_verifier'
         tags:
             - { name: form.type, alias: bstu_bundle_testorganizationbundle_resultquestion }
-            
+
     bstu_test_organization.resulttesttype:
         class: %bstu_test_organization.resulttesttype.class%
         arguments:
             - '@router'
         tags:
             - { name: form.type, alias: bstu_bundle_testorganizationbundle_resulttest }
-            
+
     bstu_test_organization.filtertype:
         class: %bstu_test_organization.filtertype.class%
         arguments:
@@ -50,7 +50,7 @@ services:
             - '@router'
         tags:
             - { name: form.type, alias: bstu_bundle_testorganizationbundle_filter }
-            
+
     bstu_test_organization.twig.json_decode:
         class: %bstu_test_organization.twig.json_decode.class%
         tags:

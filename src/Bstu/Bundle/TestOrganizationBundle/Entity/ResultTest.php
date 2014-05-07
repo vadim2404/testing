@@ -67,7 +67,7 @@ class ResultTest
 
     /**
      * @var float $rating
-     * 
+     *
      * @Assert\Range(
      *  min = 0,
      *  max = 1
@@ -86,7 +86,7 @@ class ResultTest
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -96,7 +96,7 @@ class ResultTest
     /**
      * Add resultQuestions
      *
-     * @param \Bstu\Bundle\TestOrganizationBundle\Entity\ResultQuestion $resultQuestions
+     * @param  \Bstu\Bundle\TestOrganizationBundle\Entity\ResultQuestion $resultQuestions
      * @return ResultTest
      */
     public function addResultQuestion(ResultQuestion $resultQuestions)
@@ -119,18 +119,17 @@ class ResultTest
     /**
      * Get resultQuestions
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getResultQuestions()
     {
         return $this->resultQuestions;
     }
 
-
     /**
      * Set test
      *
-     * @param \Bstu\Bundle\TestOrganizationBundle\Entity\Test $test
+     * @param  \Bstu\Bundle\TestOrganizationBundle\Entity\Test $test
      * @return ResultTest
      */
     public function setTest(Test $test = null)
@@ -143,7 +142,7 @@ class ResultTest
     /**
      * Get test
      *
-     * @return \Bstu\Bundle\TestOrganizationBundle\Entity\Test 
+     * @return \Bstu\Bundle\TestOrganizationBundle\Entity\Test
      */
     public function getTest()
     {
@@ -153,7 +152,7 @@ class ResultTest
     /**
      * Set student
      *
-     * @param \Bstu\Bundle\UserBundle\Entity\User $student
+     * @param  \Bstu\Bundle\UserBundle\Entity\User $student
      * @return ResultTest
      */
     public function setStudent(User $student = null)
@@ -166,17 +165,17 @@ class ResultTest
     /**
      * Get student
      *
-     * @return \Bstu\Bundle\UserBundle\Entity\User 
+     * @return \Bstu\Bundle\UserBundle\Entity\User
      */
     public function getStudent()
     {
         return $this->student;
     }
-    
+
     /**
      * Set plan
      *
-     * @param \Bstu\Bundle\PlanBundle\Entity\Plan $plan
+     * @param  \Bstu\Bundle\PlanBundle\Entity\Plan $plan
      * @return ResultTest
      */
     public function setPlan(Plan $plan = null)
@@ -189,7 +188,7 @@ class ResultTest
     /**
      * Get plan
      *
-     * @return \Bstu\Bundle\PlanBundle\Entity\Plan 
+     * @return \Bstu\Bundle\PlanBundle\Entity\Plan
      */
     public function getPlan()
     {
@@ -199,7 +198,7 @@ class ResultTest
     /**
      * Set rating
      *
-     * @param float $rating
+     * @param  float      $rating
      * @return ResultTest
      */
     public function setRating($rating)
@@ -212,7 +211,7 @@ class ResultTest
     /**
      * Get rating
      *
-     * @return float 
+     * @return float
      */
     public function getRating()
     {
@@ -222,7 +221,7 @@ class ResultTest
     /**
      * Set verified
      *
-     * @param bool $verified
+     * @param  bool       $verified
      * @return ResultTest
      */
     public function setVerified($verified)

@@ -7,7 +7,7 @@ services:
         class: %bstu_plan.doctrine.entity_listener_resolver.class%
         arguments:
             - '@service_container'
-            
+
     bstu_plan.listener.plan_listener:
         class: %bstu_plan.listener.plan_listener.class%
         arguments:

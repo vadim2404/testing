@@ -34,7 +34,7 @@ class SubjectController extends Controller
         $subjects = $this->getUser()->getSubjects();
 
         $paginator  = $this->get('knp_paginator');
-        
+
         $entities = $paginator->paginate(
             $subjects,
             $request->query->get('page', 1),
@@ -255,11 +255,11 @@ class SubjectController extends Controller
             ->getForm()
         ;
     }
-    
+
     /**
      * Ajax method. Get themes by subjects
-     * 
-     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @param \Symfony\Component\HttpFoundation\Request          $request
      * @param \Bstu\Bundle\TestOrganizationBundle\Entity\Subject $subject
      * @Route("/{id}/themes", name="subject_themes", options={"expose" = true})
      * @Method({"GET"})
@@ -289,6 +289,7 @@ class SubjectController extends Controller
             $entity['selected'] = $selected->contains($theme);
             $json[] = $entity;
         }
+
         return new JsonResponse($json);
     }
 }

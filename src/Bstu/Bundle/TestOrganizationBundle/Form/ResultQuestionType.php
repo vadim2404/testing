@@ -14,20 +14,19 @@ class ResultQuestionType extends BaseResultQuestionType
      * @var \Bstu\Bundle\TestOrganizationBundle\Verifier\QuestionVerifier $verifier
      */
     protected $verifier;
-    
+
     /**
      * Constructor
-     * 
+     *
      * @param \Bstu\Bundle\TestOrganizationBundle\Verifier\QuestionVerifier $verifier
      */
     public function __construct(QuestionVerifier $verifier)
     {
         parent::__construct();
-        
+
         $this->verifier = $verifier;
     }
 
-    
     /**
      * {@inheritDoc}
      */

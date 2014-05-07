@@ -12,12 +12,12 @@ class VariantType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $test = $options['data']->getTest();
-        
+
         $builder
             ->add('number', null, [
                 'label' => 'Номер варианта',
@@ -43,7 +43,7 @@ class VariantType extends AbstractType
             ])
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */
