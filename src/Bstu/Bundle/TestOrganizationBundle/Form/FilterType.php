@@ -12,7 +12,7 @@ use Symfony\Component\Security\Core\SecurityContextInterface;
 class FilterType extends AbstractType
 {
     const SEPTEMBER = 9;
-    
+
     /**
      * Teacher
      *
@@ -32,7 +32,7 @@ class FilterType extends AbstractType
      *
      * @param \Symfony\Component\Security\Core\SecurityContextInterface  $security
      * @param \Symfony\Component\Routing\Generator\UrlGeneratorInterface $router
-     * @param int $startedAt
+     * @param int                                                        $startedAt
      */
     public function __construct(SecurityContextInterface $security, UrlGeneratorInterface $router, $startedAt)
     {
@@ -47,16 +47,16 @@ class FilterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $teacher = $this->teacher;
-        
+
         $now = new \DateTime('now');
         $currentYear = (int) $now->format('Y');
-        
+
         $currentYear += (int) (self::SEPTEMBER <= (int) $now->format('m'));
-        
+
         for ($i = $this->startedAt, $years = []; $i < $currentYear; ++$i) {
             $years[sprintf('%d-01-01 00:00:00/%d-08-31 23:59:59', $i, 1 + $i)] = sprintf('%d-%d', $i, 1 + $i);
         }
-        
+
         $builder->setAction($this->router->generate('teacher_result_verified'))
             ->add('test', 'entity', [
                 'class' => 'Bstu\Bundle\TestOrganizationBundle\Entity\Test',

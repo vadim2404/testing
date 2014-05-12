@@ -146,7 +146,7 @@ class ResultController extends Controller
                     ->setParameter('student', $data['student'])
                 ;
             }
-            
+
             if (!empty($data['period'])) {
                 $date = explode('/', $data['period']);
                 $query->andWhere('p.start >= :started')

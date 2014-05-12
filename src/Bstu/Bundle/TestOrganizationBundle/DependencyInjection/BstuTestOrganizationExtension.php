@@ -21,7 +21,7 @@ class BstuTestOrganizationExtension extends Extension
     {
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
-        
+
         foreach ($config as $param => $value) {
             $container->setParameter($this->getAlias() . '.' . $param, $value);
         }
