@@ -14,13 +14,13 @@ class UserRepository extends EntityRepository
     public function findStudentsWithNameFiltering($name)
     {
         return $this->createQueryBuilder('u')
-            ->select('u.firstName')
+            ->select('u.lastName')
             ->join('u.group', 'g')
             ->where('g.name = :group_name')
-            ->andWhere('u.firstName LIKE :first_name')
+            ->andWhere('u.lastName LIKE :last_name')
             ->setParameters([
                 'group_name' => 'Студент',
-                'first_name' => $name . '%',
+                'last_name' => $name . '%',
             ])
             ->getQuery()
         ;

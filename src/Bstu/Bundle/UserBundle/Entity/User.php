@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="Bstu\Bundle\UserBundle\Repository\UserRepository")
  * @ORM\Table(name="user", indexes={
- *   @ORM\Index(name="first_name_idx", columns={"first_name"})
+ *   @ORM\Index(name="last_name_idx", columns={"last_name"})
  * })
  */
 class User extends BaseUser
@@ -202,8 +202,8 @@ class User extends BaseUser
      */
     public function getName()
     {
-        return ucfirst($this->firstName) . ' ' .
-            strtoupper($this->lastName[0]) . '. ' .
+        return ucfirst($this->lastName) . ' ' .
+            strtoupper($this->firstName[0]) . '. ' .
             ($this->middleName ? strtoupper($this->middleName[0]) . '.' : '')
         ;
     }

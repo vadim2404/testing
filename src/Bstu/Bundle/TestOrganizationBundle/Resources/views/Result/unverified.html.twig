@@ -17,7 +17,7 @@
             <tr>
                 <td>{{ result.test.title }}</td>
                 <td>{{ result.test.subject.name }}</td>
-                <td>{{ result.student.firstName }}&nbsp;{{ result.student.lastName }}&nbsp;{{ result.student.middleName|default('') }}</td>
+                <td>{{ result.student.lastName }}&nbsp;{{ result.student.firstName }}&nbsp;{{ result.student.middleName|default('') }}</td>
                 <td>
                 <ul>
                     <li><a href="{{ path('teacher_result_verify_test', { 'id' : result.id }) }}">Проверить</a></li>

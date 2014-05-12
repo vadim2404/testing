@@ -11,7 +11,7 @@
         <tr><th>Студент</th><th>Тест</th><th>Результат</th><th>Детально</th><th>Действия</th></tr>
     {% for result in results %}
         <tr>
-            <td>{{ result.student.firstName }} {{ result.student.lastName }} {{ result.student.middleName|default('') }}</td>
+            <td>{{ result.student.lastName }} {{ result.student.firstName }} {{ result.student.middleName|default('') }}</td>
             <td>{{ result.test.title }}</td>
             <td>{{ (100 * result.rating)|number_format(2) }} %</td>
             <td>

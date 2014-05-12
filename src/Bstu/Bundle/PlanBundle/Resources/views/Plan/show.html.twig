@@ -13,9 +13,9 @@
         <dt>Предмет</dt>
         <dd>{{ entity.test.subject.name }}</dd>
         <dt>Автор теста</dt>
-        <dd>{{ entity.test.teacher.firstName }}&nbsp;{{ entity.test.teacher.lastName }}&nbsp;{{ entity.test.teacher.middleName|default('') }}</dd>
+        <dd>{{ entity.test.teacher.lastName }}&nbsp;{{ entity.test.teacher.firstName }}&nbsp;{{ entity.test.teacher.middleName|default('') }}</dd>
         <dt>Оператор, запланировавший данный тест</dt>
-        <dd>{{ entity.planedBy.firstName }}&nbsp;{{ entity.planedBy.lastName }}&nbsp;{{ entity.planedBy.middleName|default('') }}</dd>
+        <dd>{{ entity.planedBy.lastName }}&nbsp;{{ entity.planedBy.firstName }}&nbsp;{{ entity.planedBy.middleName|default('') }}</dd>
     </dl>
 
         <ul class="record_actions">

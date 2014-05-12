@@ -22,8 +22,8 @@
                 <td>{% if entity.end %}{{ entity.end|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{{ entity.test.title }}</td>
                 <td>{{ entity.test.subject.name }}</td>
-                <td>{{ entity.test.teacher.firstName }}&nbsp;{{ entity.test.teacher.lastName }}&nbsp;{{ entity.test.teacher.middleName|default('') }}</td>
-                <td>{{ entity.planedBy.firstName }}&nbsp;{{ entity.planedBy.lastName }}&nbsp;{{ entity.planedBy.middleName|default('') }}</td>
+                <td>{{ entity.test.teacher.lastName }}&nbsp;{{ entity.test.teacher.firstName }}&nbsp;{{ entity.test.teacher.middleName|default('') }}</td>
+                <td>{{ entity.planedBy.lastName }}&nbsp;{{ entity.planedBy.firstName }}&nbsp;{{ entity.planedBy.middleName|default('') }}</td>
                 <td>
                 <ul>
                     <li>

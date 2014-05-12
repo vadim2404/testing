@@ -142,7 +142,7 @@ class ResultController extends Controller
 
             if (!empty($data['student'])) {
                 $query->join('rt.student', 's')
-                    ->andWhere('s.firstName = :student')
+                    ->andWhere('s.lastName = :student')
                     ->setParameter('student', $data['student'])
                 ;
             }
@@ -205,6 +205,6 @@ class ResultController extends Controller
             ->execute()
         ;
 
-        return new JsonResponse(array_column($users, 'firstName'));
+        return new JsonResponse(array_column($users, 'lastName'));
     }
 }

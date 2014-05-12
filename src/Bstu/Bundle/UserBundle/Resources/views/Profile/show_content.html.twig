@@ -6,7 +6,7 @@
     <dt>Логин</dt>
     <dd>{{ user.username }}</dd>
     <dt>ФИО</dt>
-    <dd>{{ user.firstName }}&nbsp;{{ user.lastName }}&nbsp;{{ user.middleName|default('') }}</dd>
+    <dd>{{ user.lastName }}&nbsp;{{ user.firstName }}&nbsp;{{ user.middleName|default('') }}</dd>
     <dt>Роль</dt>
     <dd>{% if user.group %}{{ user.group.name }}{% else %}Администратор{% endif %}</dd>
     <dt>Email</dt>

@@ -16,7 +16,7 @@
         {% for entity in entities %}
             <tr>
                 <td>{{ entity.username }}</td>
-                <td>{{ entity.firstName }} {{ entity.lastName }} {{ entity.middleName|default('') }}</td>
+                <td>{{ entity.lastName }}&nbsp;{{ entity.firstName }}&nbsp;{{ entity.middleName|default('') }}</td>
                 <td>{% if entity.group %}{{ entity.group.name }}{% else %}Администратор{% endif %}</td>
                 <td>
                     <ul>
