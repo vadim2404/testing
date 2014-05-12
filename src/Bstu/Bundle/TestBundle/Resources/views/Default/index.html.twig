@@ -19,7 +19,7 @@
             <tr>
                 <td>{{ plan.test.title }}</td>
                 <td>{{ plan.test.subject.name }}</td>
-                <td>{{ plan.test.teacher.lastName }}&nbsp;{{ plan.test.teacher.firsttName }}&nbsp;{{ plan.test.teacher.middleName|default('') }}</td>
+                <td>{{ plan.test.teacher.lastName }}&nbsp;{{ plan.test.teacher.firstName }}&nbsp;{{ plan.test.teacher.middleName|default('') }}</td>
                 <td>{{ plan.start|date('Y-m-d H:i:s') }}</td>
                 <td>{{ plan.end|date('Y-m-d H:i:s') }}</td>
                 <td>

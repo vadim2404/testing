@@ -7,3 +7,5 @@ parameters:
     secret:            ThisTokenIsNotSoSecretChangeIt
 
     redis_dsn: 'redis://localhost/1'
+
+    started_at: 2013

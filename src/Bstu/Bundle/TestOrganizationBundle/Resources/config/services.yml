@@ -48,6 +48,7 @@ services:
         arguments:
             - '@security.context'
             - '@router'
+            - %bstu_test_organization.started_at%
         tags:
             - { name: form.type, alias: bstu_bundle_testorganizationbundle_filter }
 

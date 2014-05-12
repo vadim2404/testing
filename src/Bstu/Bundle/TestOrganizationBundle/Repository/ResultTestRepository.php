@@ -22,6 +22,7 @@ class ResultTestRepository extends EntityRepository
             ->where('t.teacher = :teacher')
             ->andWhere('rt.verified = :verified')
             ->andWhere('p.end < :now')
+            ->orderBy('rt.id', 'desc')
             ->setParameters([
                 'teacher' => $user,
                 'verified' => $verified,

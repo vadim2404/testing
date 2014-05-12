@@ -146,6 +146,15 @@ class ResultController extends Controller
                     ->setParameter('student', $data['student'])
                 ;
             }
+            
+            if (!empty($data['period'])) {
+                $date = explode('/', $data['period']);
+                $query->andWhere('p.start >= :started')
+                    ->andWhere('p.start <= :ended')
+                    ->setParameter('started', \DateTime::createFromFormat('Y-m-d H:i:s', $date[0]))
+                    ->setParameter('ended', \DateTime::createFromFormat('Y-m-d H:i:s', $date[1]))
+                ;
+            }
         }
 
         $paginator  = $this->get('knp_paginator');
