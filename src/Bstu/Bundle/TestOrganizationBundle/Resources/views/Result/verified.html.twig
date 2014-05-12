@@ -19,7 +19,7 @@
                     <tr><th>Вопрос</th><th>Правильный ответ</th><th>Ответ студента</th><th>Результат</th></tr>
                     {% for resultQuestion in result.resultQuestions %}
                         <tr>
-                            <td>{{ resultQuestion.question.question }}</td>
+                            <td>{{ resultQuestion.question.question|raw }}</td>
                             {% if resultQuestion.question.type in [constant('Bstu\\Bundle\\TestOrganizationBundle\\Entity\\Question::TYPE_RADIO'), constant('Bstu\\Bundle\\TestOrganizationBundle\\Entity\\Question::TYPE_CHECKBOX')] %}
                                 <td>
                                     <ul>
