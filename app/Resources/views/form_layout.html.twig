@@ -61,7 +61,7 @@
     {% for child in form %}
         <div class="{{ multiple ? 'checkbox' : 'radio' }}">
             <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
-                {{ form_widget(child, { 'attr': {'class': attr.widget_class|default('') } }) }}
+                {{ form_widget(child, { 'attr': attr }) }}
                 {{ child.vars.label|trans({}, translation_domain) }}
             </label>
         </div>
