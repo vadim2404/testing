@@ -3,7 +3,7 @@
         $('.js-logic-sequence').each(function () {
             var $this = $(this),
                 items = $.parseJSON($this.val()),
-                $holder = $('<ul/>').insertAfter($this);
+                $holder = $('<ul class="b-draggable"/>').insertAfter($this);
                 
             $this.attr('type', 'hidden');
             
@@ -25,8 +25,8 @@
         $('.js-paired').each(function () {
             var $this = $(this),
                 items = $.parseJSON($this.val()),
-                $keysHolder = $('<ul class="b-paired"/>').insertAfter($this),
-                $valuesHolder = $('<ul class="b-paired"/>').insertAfter($keysHolder),
+                $keysHolder = $('<ul class="b-draggable b-paired"/>').insertAfter($this),
+                $valuesHolder = $('<ul class="b-draggable b-paired"/>').insertAfter($keysHolder),
                 onUpdateListener = function () {
                     var items = {
                         keys: [],
@@ -70,5 +70,14 @@
             $.post($form.attr('action'), $form.serializeArray(), function (data) {
             });
         });
+        
+        window.CountdownLabels = {
+            second 	: "СЕКУНДЫ",
+            minute 	: "МИНУТЫ",
+            hour	: "ЧАСЫ",
+            day 	: "ДНИ",
+            month 	: "МЕСЯЦЫ",
+            year 	: "ГОДЫ"	
+        };
     });
 })(jQuery, document, window);

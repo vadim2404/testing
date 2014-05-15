@@ -54,3 +54,20 @@
     margin: 0 auto;
     padding: 15px;
 }
+
+div[id^=Stage_] {
+    position: fixed !important;
+    top: 0 !important;
+    left: 80% !important;
+}
+
+.b-draggable {
+    list-style: none;
+    cursor: move;
+}
+
+.b-draggable li {
+    width: 150px;
+    border: 1px solid #000;
+    margin-top: 3px;
+}
