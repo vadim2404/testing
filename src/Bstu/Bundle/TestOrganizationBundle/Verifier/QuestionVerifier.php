@@ -37,7 +37,7 @@ class QuestionVerifier
         $question = $resultQuestion->getQuestion();
         $realAnswer = $question->getAnswer();
 
-        if (!$studentAnswer) {
+        if (is_null($studentAnswer)) {
             return 0.0;
         }
 

@@ -14,9 +14,9 @@
     <table class="table table-hover">
         <thead>
             <tr>
-                <th>Вопрос</th>
-                <th>Тема</th>
-                <th>Предмет</th>
+                <th>{{ knp_pagination_sortable(entities, 'Вопрос', 'q.question') }}</th>
+                <th>{{ knp_pagination_sortable(entities, 'Тема', 't.name') }}</th>
+                <th>{{ knp_pagination_sortable(entities, 'Предмет', 's.name') }}</th>
                 <th>Действия</th>
             </tr>
         </thead>

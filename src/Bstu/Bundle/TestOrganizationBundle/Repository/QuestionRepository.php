@@ -16,6 +16,8 @@ class QuestionRepository extends EntityRepository
     public function findByTeacher(User $teacher)
     {
         return $this->createQueryBuilder('q')
+            ->join('q.theme', 't')
+            ->join('t.subject', 's')
             ->where('q.teacher = :teacher')
             ->getQuery()
             ->setParameter('teacher', $teacher)

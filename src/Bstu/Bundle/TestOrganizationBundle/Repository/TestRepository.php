@@ -16,6 +16,7 @@ class TestRepository extends EntityRepository
     public function findByTeacher(User $teacher)
     {
         return $this->createQueryBuilder('t')
+            ->join('t.subject', 's')
             ->where('t.teacher = :teacher')
             ->getQuery()
             ->setParameter('teacher', $teacher)

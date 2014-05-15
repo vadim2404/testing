@@ -56,7 +56,13 @@ class PlanController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $query = $em->getRepository('BstuTestOrganizationBundle:Test')->createQueryBuilder('t');
+        $query = $em->getRepository('BstuTestOrganizationBundle:Test')
+            ->createQueryBuilder('t')
+            ->leftJoin('t.teacher', 'tt')
+            ->leftJoin('t.subject', 's')
+            ->leftJoin('tt.pulpit', 'p')
+            ->leftJoin('p.faculty', 'f')
+        ;
         $paginator  = $this->get('knp_paginator');
 
         $tests = $paginator->paginate(

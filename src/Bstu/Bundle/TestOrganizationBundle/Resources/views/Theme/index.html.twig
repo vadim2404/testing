@@ -14,8 +14,8 @@
     <table class="table table-hover">
         <thead>
             <tr>
-                <th>Название</th>
-                <th>Предмет</th>
+                <th>{{ knp_pagination_sortable(entities, 'Название', 't.name') }}</th>
+                <th>{{ knp_pagination_sortable(entities, 'Предмет', 's.name') }}</th>
                 <th>Действия</th>
             </tr>
         </thead>
