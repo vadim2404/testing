@@ -21,6 +21,7 @@ class ResultTestType extends AbstractType
                 'label' => ' ',
                 'type' => static::RESULT_QUESTIONT_TYPE,
                 'options' => [
+                    'label' => false,
                     'items' => $options['data']->getResultQuestions(),
                 ],
             ])

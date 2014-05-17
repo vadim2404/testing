@@ -56,7 +56,7 @@ class DefaultController extends Controller
             ]);
         }
         if ($plan->isFinished()) {
-            throw $this->createNotFoundException('Test has been finished');
+            throw $this->createNotFoundException('Тест закончился');
         }
 
         $em = $this->getDoctrine()
@@ -86,11 +86,11 @@ class DefaultController extends Controller
     public function catchAnswerAction(Request $request, ResultTest $resultTest)
     {
         if (!$request->isXmlHttpRequest()) {
-            throw $this->createNotFoundException('Undefined method');
+            throw $this->createNotFoundException();
         }
 
         if ($resultTest->getPlan()->isFinished()) {
-            throw $this->createNotFoundException('Test has been finished');
+            throw $this->createNotFoundException('Тест законкчился');
         }
 
         $form = $this->createResultForm($resultTest);
