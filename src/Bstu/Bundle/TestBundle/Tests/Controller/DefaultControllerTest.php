@@ -14,20 +14,20 @@ class DefaultControllerTest extends \PHPUnit_Framework_TestCase
     protected $em;
     protected $resultTest;
     protected $plan;
-    
+
     protected function setUp()
     {
         $this->container = $this->getMock('Symfony\Component\DependencyInjection\ContainerInterface');
-        
+
         $this->request = $this->getMockBuilder('Symfony\Component\HttpFoundation\Request')
             ->disableOriginalConstructor()
             ->getMock()
         ;
-        
+
         $this->form = $this->getMock('Symfony\Component\Form\FormInterface');
 
         $this->doctrine = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
-        
+
         $this->em = $this->getMock('Doctrine\Common\Persistence\ObjectManager');
 
         $this->resultTest = $this->getMockBuilder('Bstu\Bundle\TestOrganizationBundle\Entity\ResultTest')
@@ -40,16 +40,15 @@ class DefaultControllerTest extends \PHPUnit_Framework_TestCase
             ->getMock()
         ;
 
-
         $this->controller = $this->getMockBuilder('Bstu\Bundle\TestBundle\Controller\DefaultController')
             ->setMethods(['createResultForm'])
             ->disableOriginalConstructor()
             ->getMock()
         ;
-        
+
         $this->controller->setContainer($this->container);
     }
-    
+
     public function testCatchAnswerAction()
     {
         $this->request->expects($this->once())
