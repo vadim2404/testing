@@ -90,7 +90,7 @@ class DefaultController extends Controller
         }
 
         if ($resultTest->getPlan()->isFinished()) {
-            throw $this->createNotFoundException('Тест законкчился');
+            throw $this->createNotFoundException('Тест закончился');
         }
 
         $form = $this->createResultForm($resultTest);
