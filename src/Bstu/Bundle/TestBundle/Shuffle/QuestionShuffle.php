@@ -70,7 +70,7 @@ class QuestionShuffle
         switch ($test->getType()) {
             case Test::TYPE_RANDOM:
                 shuffle($questions);
-                for ($i = 0; $i < $test->getMaxQuestions(); ++$i) {
+                for ($i = 0, $cm = $test->getMaxQuestions(); $i < $cm; ++$i) {
                     $resultQuestion = new ResultQuestion();
                     $resultQuestion->setQuestion($questions[$i])
                         ->setResultTest($result)
@@ -86,7 +86,7 @@ class QuestionShuffle
                     shuffle($questions);
                     $complexity = 0;
                     $saved[$iteration] = [];
-                    for ($i = 0; $i < $test->getMaxQuestions(); ++$i) {
+                    for ($i = 0, $cm = $test->getMaxQuestions(); $i < $cm; ++$i) {
                         $complexity += $questions[$i]->getRate();
                         $saved[$iteration][] = $questions[$i];
                     }
