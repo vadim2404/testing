@@ -77,9 +77,6 @@ doctrine:
 # Swiftmailer Configuration
 swiftmailer:
     transport: mail
-    host:      ~
-    username:  ~
-    password:  ~
     spool:
         type: service
         id: snc_redis.swiftmailer.spool
