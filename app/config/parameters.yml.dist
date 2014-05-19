@@ -9,3 +9,5 @@ parameters:
     redis_dsn: 'redis://localhost/1'
 
     started_at: 2013
+
+    snc_redis_swiftmailer_key: swiftmailer

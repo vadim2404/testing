@@ -117,7 +117,7 @@ snc_redis:
             
     swiftmailer:
         client: default
-        key: swiftmailer
+        key: %snc_redis_swiftmailer_key%
         
 knp_menu:
     twig:
