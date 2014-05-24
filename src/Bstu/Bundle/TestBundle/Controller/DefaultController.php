@@ -64,7 +64,7 @@ class DefaultController extends Controller
         ;
 
         $result = $em->getRepository('BstuTestOrganizationBundle:ResultTest')
-            ->findOneByPlan($plan)
+            ->findOneByPlanAndStudent($plan, $this->getUser())
         ;
 
         if (!$result) {

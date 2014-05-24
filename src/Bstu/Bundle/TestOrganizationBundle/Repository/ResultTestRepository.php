@@ -3,6 +3,7 @@
 namespace Bstu\Bundle\TestOrganizationBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Bstu\Bundle\PlanBundle\Entity\Plan;
 use Bstu\Bundle\UserBundle\Entity\User;
 
 class ResultTestRepository extends EntityRepository
@@ -95,5 +96,22 @@ class ResultTestRepository extends EntityRepository
                 'verified' => false,
             ])
         ;
+    }
+
+    public function findOneByPlanAndStudent(Plan $plan, User $student)
+    {
+        $result = $this->createQueryBuilder('rt')
+            ->setMaxResults(1)
+            ->where('rt.plan = :plan')
+            ->andWhere('rt.student = :student')
+            ->setParameters([
+                'plan' => $plan,
+                'student' => $student,
+            ])
+            ->getQuery()
+            ->execute()
+        ;
+
+        return empty($result) ? null : $result[0];
     }
 }
