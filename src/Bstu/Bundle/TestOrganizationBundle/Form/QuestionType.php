@@ -52,9 +52,13 @@ class QuestionType extends AbstractType
                     'onchange' => 'rerenderCreateForm()',
                 ],
             ])
-            ->add('question', null, [
+            ->add('question', 'textarea', [
                 'label' => 'Вопрос',
                 'required' => true,
+                'attr' => [
+                    'class' => 'tinymce',
+                    'data-theme' => 'advanced',
+                ],
             ])
             ->add('rate', 'choice', [
                 'label' => 'Сложность',
