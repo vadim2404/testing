@@ -63,18 +63,18 @@ class QuestionVerifier
             case Question::TYPE_CHECKBOX:
                 $realAnswerArray = explode(',', $question->getAnswer());
                 $studentAnswerArray = explode(',', $studentAnswer);
-                if (count($studentAnswerArray) > $cntRealAnswer = count($realAnswerArray)) {
-                    return 0.0;
-                }
+                $cntRightAnswer = count($realAnswerArray);
+                $cntWrongAnswer = count($question->getVariants()) - $cntRightAnswer;
+                $wrong = $right = 0;
                 foreach ($studentAnswerArray as $ans) {
-                    $idx = array_search($ans, $realAnswerArray, true);
-                    if (false === $idx) {
-                        return 0.0;
+                    if (in_array($ans, $realAnswerArray, true)) {
+                        ++$right;
+                    } else {
+                        ++$wrong;
                     }
-                    unset($realAnswerArray[$idx]);
                 }
-
-                return ($cntRealAnswer - count($realAnswerArray)) / $cntRealAnswer;
+                $tmpResult = $right / $cntRightAnswer - $wrong / $cntWrongAnswer;
+                return 0 > $tmpResult ? 0 : $tmpResult;
 
             case Question::TYPE_PAIRED:
                 $variants = [];
