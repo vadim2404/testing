@@ -73,6 +73,15 @@ class QuestionVerifier
                         ++$wrong;
                     }
                 }
+                if (!$cntRightAnswer && !$cntWrongAnswer) {
+                    return 1;
+                }
+                if (!$cntRightAnswer) {
+                    return $wrong ? 0 : 1;
+                }
+                if (!$cntWrongAnswer) {
+                    return $right / $cntRightAnswer;
+                }
                 $tmpResult = $right / $cntRightAnswer - $wrong / $cntWrongAnswer;
                 return 0 > $tmpResult ? 0 : $tmpResult;
 
